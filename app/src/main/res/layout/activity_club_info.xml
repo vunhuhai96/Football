@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background_color">
+
+        <ImageView android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:padding="16dp"
+            android:id="@+id/btn_club_info_back"
+            android:src="@drawable/ic_back"/>
+
+    </TableRow>
+
+    <android.support.design.widget.TabLayout
+        android:background="#558B2F"
+        android:layout_alignParentTop="true"
+        android:id="@+id/tab_layout_club_info"
+        android:layout_width="match_parent"
+        app:tabTextColor="@android:color/white"
+        android:layout_height="?attr/actionBarSize"
+        app:tabSelectedTextColor="#33691E">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/club_info_viewpager"
+        android:layout_weight="1">
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

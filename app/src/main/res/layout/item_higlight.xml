@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:id="@+id/img_highlight"/>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Ngoại hạng anh - Vòng 8"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MU 1-2 Chelsea"
+                android:layout_marginTop="5dp"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <ImageView android:layout_width="?attr/actionBarSize"
+            android:padding="16dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:id="@+id/btn_star"
+            android:src="@drawable/ic_star_1"/>
+        <ImageView android:layout_width="?attr/actionBarSize"
+            android:padding="16dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:id="@+id/btn_share"
+            android:src="@drawable/ic_share"/>
+
+
+    </TableRow>
+
+
+
+
+</LinearLayout>

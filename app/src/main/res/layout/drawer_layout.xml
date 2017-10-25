@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_gravity="left"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="@drawable/bg_menu">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/img_account"
+            android:src="@drawable/ic_account"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Đăng nhập"
+            android:textSize="20dp"
+            android:id="@+id/tv_name_account"
+           android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trang chủ"
+        android:textSize="@dimen/text_size"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_home_1"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:id="@+id/btn_menu_home"
+        android:textAllCaps="false"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
+        android:id="@+id/btn_menu_live"
+        android:textAllCaps="false"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_stream"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:text="Trực tiếp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HighLights"
+        android:textAllCaps="false"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_menu_highlight"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:id="@+id/btn_menu_higlight"
+        android:textSize="@dimen/text_size"/>
+
+    <Button
+        android:id="@+id/btn_menu_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_table"
+        android:drawablePadding="16dp"
+        android:gravity="center|left"
+        android:paddingLeft="46dp"
+        android:text="Bảng xếp hạng"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kết quả"
+        android:textSize="@dimen/text_size"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_soccer"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:textAllCaps="false"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lịch thi đấu"
+        android:textSize="@dimen/text_size"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:textAllCaps="false"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Video yêu thích"
+        android:textAllCaps="false"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_menu_star"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:textSize="@dimen/text_size"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cài đặt"
+        android:gravity="center|left"
+        android:drawableLeft="@drawable/ic_settings"
+        android:drawablePadding="16dp"
+        android:paddingLeft="46dp"
+        android:id="@+id/btn_menu_settings"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"
+        android:textSize="@dimen/text_size"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp">
+
+        <include layout="@layout/layout_home_live" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg4"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:text="Video nổi bật"
+                android:textAllCaps="false"
+                android:textSize="14dp"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/ic_video"
+                android:textColor="@android:color/white"
+                android:background="@android:color/transparent"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:text="Xem thêm"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:drawablePadding="2dp"
+                android:drawableRight="@drawable/ic_double_right"
+                android:background="@android:color/transparent"/>
+
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="5dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/item_video"
+                    android:id="@+id/video_1"/>
+                <include layout="@layout/item_video"
+                    android:id="@+id/video_2"/>
+                <include layout="@layout/item_video"
+                    android:id="@+id/video_3"/>
+                <include layout="@layout/item_video"
+                    android:id="@+id/video_4"/>
+                <include layout="@layout/item_video"
+                    android:id="@+id/video_5"/>
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_ball"
+                android:drawablePadding="5dp"
+                android:gravity="center|left"
+                android:text="Đội bóng"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14dp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawablePadding="2dp"
+                android:drawableRight="@drawable/ic_double_right"
+                android:gravity="center|right"
+                android:text="Xem thêm"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:id="@+id/btn_view_club"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <include layout="@layout/item_club" />
+
+                <include layout="@layout/item_club" />
+
+                <include layout="@layout/item_club" />
+
+                <include layout="@layout/item_club" />
+
+                <include layout="@layout/item_club" />
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
