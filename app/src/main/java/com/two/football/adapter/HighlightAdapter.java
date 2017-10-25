@@ -1,17 +1,17 @@
 package com.two.football.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.two.football.Item.Highlight;
+import com.two.football.model.Highlight;
 import com.two.football.R;
 
 import java.util.List;
@@ -58,6 +58,7 @@ public class HighlightAdapter extends BaseAdapter {
             holder.imageView = (ImageView) convertView.findViewById(R.id.img_highlight);
             holder.imgStar = (ImageView) convertView.findViewById(R.id.btn_star);
             holder.imgShare = (ImageView) convertView.findViewById(R.id.btn_share);
+            holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title_highlight);
 
             convertView.setTag(holder);
         } else {
@@ -66,7 +67,8 @@ public class HighlightAdapter extends BaseAdapter {
 
         Highlight highlight = list.get(position);
 
-        Picasso.with(context).load(highlight.getLink()).into(holder.imageView);
+        Picasso.with(context).load(highlight.getThumbnail()).into(holder.imageView);
+        holder.tvTitle.setText(highlight.getTitle());
 
         final ViewHolder finalHolder = holder;
 
@@ -92,6 +94,7 @@ public class HighlightAdapter extends BaseAdapter {
         ImageView imageView;
         ImageView imgStar;
         ImageView imgShare;
+        TextView tvTitle;
     }
 
 }

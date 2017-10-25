@@ -1,4 +1,4 @@
-package com.two.football.activity;
+package com.two.football.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.two.football.R;
 import com.two.football.adapter.InfoClubAdapter;
-import com.two.football.adapter.MainAdapter;
 
 /**
  * Created by TWO on 10/25/2017.

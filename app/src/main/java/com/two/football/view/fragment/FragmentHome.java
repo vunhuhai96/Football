@@ -1,10 +1,6 @@
-package com.two.football.fragment;
+package com.two.football.view.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,15 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-import com.two.football.Item.Match;
+import com.two.football.model.Match;
 import com.two.football.R;
-import com.two.football.activity.ClubActivity;
+import com.two.football.view.activity.ClubActivity;
 import com.two.football.adapter.MatchAdapter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;

@@ -1,24 +1,27 @@
-package com.two.football.activity;
+package com.two.football.view.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 
-import com.two.football.Item.Match;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.two.football.model.Match;
 import com.two.football.R;
 import com.two.football.adapter.MainAdapter;
-import com.two.football.fragment.FragmentHighlight;
-import com.two.football.fragment.FragmentHome;
-import com.two.football.fragment.FragmentLive;
+import com.two.football.model.Video;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TabLayout tabLayout;
     private Button btnMenuHome, btnMenuLive, btnMenuHighlight;
     private MainAdapter mainAdapter;
+    DatabaseReference mReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        mReference = FirebaseDatabase.getInstance().getReference();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         btnNavigation = (ImageView) findViewById(R.id.btn_navigation);
@@ -70,6 +76,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
         btnMenuHighlight.setOnClickListener(this);
+        mReference.child("High Light").child("Error 2016").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+              Video video= dataSnapshot.getValue(Video.class);
+                Log.e("video",video.getId());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

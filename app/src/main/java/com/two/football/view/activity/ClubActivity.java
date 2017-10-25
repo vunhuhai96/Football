@@ -1,16 +1,14 @@
-package com.two.football.activity;
+package com.two.football.view.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.two.football.Item.Club;
+import com.two.football.model.Club;
 import com.two.football.R;
 import com.two.football.adapter.ClubAdapter;
 

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.two.football.Item.Club;
+import com.two.football.model.Club;
 import com.two.football.R;
 
 import java.util.List;

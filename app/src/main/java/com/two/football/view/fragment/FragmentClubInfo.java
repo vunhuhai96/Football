@@ -1,4 +1,4 @@
-package com.two.football.fragment;
+package com.two.football.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

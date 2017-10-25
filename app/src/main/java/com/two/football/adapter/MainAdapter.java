@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.two.football.fragment.FragmentHighlight;
-import com.two.football.fragment.FragmentHome;
-import com.two.football.fragment.FragmentLive;
+import com.two.football.view.fragment.FragmentHighlight;
+import com.two.football.view.fragment.FragmentHome;
+import com.two.football.view.fragment.FragmentLive;
 
 /**
  * Created by TWO on 10/23/2017.

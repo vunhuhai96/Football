@@ -1,4 +1,4 @@
-package com.two.football.fragment;
+package com.two.football.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.two.football.Item.Live;
+import com.two.football.model.Live;
 import com.two.football.R;
 import com.two.football.adapter.LiveAdapter;
 
