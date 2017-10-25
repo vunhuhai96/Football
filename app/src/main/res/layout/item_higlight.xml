@@ -22,12 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Ngoại hạng anh - Vòng 8"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="MU 1-2 Chelsea"
-                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:id="@+id/tv_title_highlight"
                 android:textSize="20dp"/>
 

@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.two.football.model.Club;
 import com.two.football.R;
@@ -24,6 +28,7 @@ public class ClubActivity extends Activity implements View.OnClickListener {
     private ListView listView;
     private List<Club> list;
     private ClubAdapter adapter;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +41,37 @@ public class ClubActivity extends Activity implements View.OnClickListener {
     private void initView() {
         listView = (ListView) findViewById(R.id.lv_club);
         findViewById(R.id.btn_club_back).setOnClickListener(this);
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+
+        initSpiner();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ClubActivity.this, InfoClubActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void initSpiner() {
+        final List<String> listText = new ArrayList<>();
+        listText.add("a");
+        listText.add("b");
+
+        final ArrayAdapter<String> adapterSpinner = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listText);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner.setAdapter(adapterSpinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(ClubActivity.this,listText.get(i), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }

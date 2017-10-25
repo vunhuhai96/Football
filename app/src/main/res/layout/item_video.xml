@@ -9,16 +9,16 @@
         android:layout_width="160dp"
         android:layout_height="90dp"
         android:scaleType="fitXY"
-        android:src="@drawable/match"
         android:id="@+id/img_home_video" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:text="Hightlight MU 1-1 MC"
+        android:textSize="14dp"
         android:gravity="center"
         android:layout_marginTop="5dp"
+        android:id="@+id/tv_home_title_video"
         android:textColor="@android:color/white"/>
+
 
 </LinearLayout>

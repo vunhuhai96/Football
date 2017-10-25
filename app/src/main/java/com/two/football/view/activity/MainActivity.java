@@ -76,33 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
         btnMenuHighlight.setOnClickListener(this);
-        mReference.child("High Light").child("Error 2016").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-              Video video= dataSnapshot.getValue(Video.class);
-                Log.e("video",video.getId());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override
