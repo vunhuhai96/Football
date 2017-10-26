@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
         btnMenuHighlight.setOnClickListener(this);
+<<<<<<< HEAD
         btnResults.setOnClickListener(this);
         mReference.child("High Light").child("Error 2016").addChildEventListener(new ChildEventListener() {
             @Override
@@ -106,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+=======
+>>>>>>> 3bdc0c8e2401cbe0a796e924a1b83da6911ec586
     }
 
     @Override

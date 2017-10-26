@@ -6,18 +6,29 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.two.football.adapter.HomeVideoAdapter;
+import com.two.football.model.Highlight;
 import com.two.football.model.Match;
 import com.two.football.R;
+import com.two.football.model.Video;
 import com.two.football.view.activity.ClubActivity;
 import com.two.football.adapter.MatchAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -38,6 +49,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private Handler handler;
     private int delay = 3000;
     private int page = 0;
+    private RecyclerView recyclerVideo;
+    private List<Video> videos;
+    private HomeVideoAdapter videoAdapter;
+    private DatabaseReference mReference;
 
     Runnable runnable = new Runnable() {
         public void run() {
@@ -61,8 +76,48 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.home_layout, container, false);
         initView();
         initMatch();
+        initVideo();
         return view;
 
+    }
+
+    public void initVideo(){
+        videos = new ArrayList<>();
+
+        mReference = FirebaseDatabase.getInstance().getReference();
+        mReference.child("Video").child("High Light").child("Ngoại Hạng Anh").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Video video = dataSnapshot.getValue(Video.class);
+                videos.add(video);
+                videoAdapter = new HomeVideoAdapter(getContext(), videos);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+                recyclerVideo.setLayoutManager(layoutManager);
+                recyclerVideo.setAdapter(videoAdapter);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void initMatch() {
@@ -79,14 +134,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         indicator = (CircleIndicator) view.findViewById(R.id.idicator);
 
-
-        int img[] = new int[]{R.id.video_1, R.id.video_2, R.id.video_3, R.id.video_4, R.id.video_5};
-
-        String a[] = new String[]{"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThe-G0rm3kCgKN9c7bnyEiFZGNS5Mn-SNkhQMV3qhuwofggw6o",
-                "http://www.extralucha.com/wwe-fotos-images-smackdown-raw/2014/03/Real-Madrid-vs-Barcelona-Clasico-de-Espa%C3%B1a.jpg",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDFFjMYuipDW368ltyCBTkC4faK221MvXMuy1keGh6xZMqcucW",
-                "http://www.biztek.vn/images/Inter%20Milan%20vs%20AC%20Milan.jpg",
-                "http://www.biztek.vn/images/Inter%20Milan%20vs%20AC%20Milan.jpg"};
+        recyclerVideo = (RecyclerView) view.findViewById(R.id.recycle_video);
 
         btnLeft = (ImageView) view.findViewById(R.id.btn_left);
         btnRight = (ImageView) view.findViewById(R.id.btn_right);

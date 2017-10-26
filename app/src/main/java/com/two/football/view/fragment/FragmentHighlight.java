@@ -2,13 +2,17 @@ package com.two.football.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -35,6 +39,7 @@ public class FragmentHighlight extends Fragment {
     private HighlightAdapter adapter;
     private ImageView imgStar;
     private DatabaseReference mReference;
+    private Spinner spinner;
 
     public FragmentHighlight() {
 
@@ -45,16 +50,25 @@ public class FragmentHighlight extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.highlight_layout, container, false);
+        mReference = FirebaseDatabase.getInstance().getReference();
         initView();
-        initHiglight();
+        getGiaiDau();
+        initHiglight("Ngoại Hạng Anh");
+
         return view;
     }
 
-    private void initHiglight() {
-        mReference = FirebaseDatabase.getInstance().getReference();
+    private void initHiglight(String giaiDau) {
         list = new ArrayList<>();
+        initData(giaiDau);
+        adapter = new HighlightAdapter(getContext(), list);
+        listView.setAdapter(adapter);
 
-        mReference.child("Video").child("High Light").child("Error 2016").addChildEventListener(new ChildEventListener() {
+    }
+
+    public void initData(String giaiDau){
+        list.clear();
+        mReference.child("Video").child("High Light").child(giaiDau).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Highlight highlight = dataSnapshot.getValue(Highlight.class);
@@ -82,15 +96,60 @@ public class FragmentHighlight extends Fragment {
 
             }
         });
-
-        adapter = new HighlightAdapter(getContext(), list);
-        listView.setAdapter(adapter);
-
     }
 
     private void initView() {
         listView = (ListView) view.findViewById(R.id.lv_highlight);
 
+        spinner = (Spinner) view.findViewById(R.id.spinner);
+    }
+
+    private void getGiaiDau(){
+        final List<String> listText = new ArrayList<>();
+        mReference.child("Video").child("High Light").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String a =  dataSnapshot.getKey();
+                listText.add(a);
+                final ArrayAdapter<String> adapterSpinner = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listText);
+                adapterSpinner.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                spinner.setAdapter(adapterSpinner);
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        Toast.makeText(adapterView.getContext(),listText.get(i), Toast.LENGTH_SHORT).show();
+                        Log.e("spinner", i+"");
+                        initHiglight(listText.get(i));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        Toast.makeText(getContext(),"hgh", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
+
 }
