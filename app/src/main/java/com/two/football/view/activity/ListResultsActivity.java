@@ -17,7 +17,7 @@ public class ListResultsActivity extends AppCompatActivity {
     TextView table;
     ListView listResults;
     ArrayList<Results> list;
-    private static ListResultsAdapter adapter;
+    private static ListResultsAdapter adapterRe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class ListResultsActivity extends AppCompatActivity {
         list.add(new Results("Chelsea", "24", "6", "13","5", "23/55", "31"));
         list.add(new Results("Chelsea", "24", "6", "13","5", "23/55", "31"));
 
-        adapter = new ListResultsAdapter(list, getApplicationContext());
-        listResults.setAdapter(adapter);
+        adapterRe = new ListResultsAdapter(list, getApplicationContext());
+        listResults.setAdapter(adapterRe);
 
     }
 

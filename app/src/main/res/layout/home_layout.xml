@@ -91,11 +91,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-<<<<<<< HEAD
         android:background="@drawable/bgf"
-=======
-        android:background="@drawable/bg3"
->>>>>>> 3bdc0c8e2401cbe0a796e924a1b83da6911ec586
         android:orientation="vertical">
 
         <LinearLayout
