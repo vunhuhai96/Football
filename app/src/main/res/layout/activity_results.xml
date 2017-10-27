@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#BBBBBB"
+    android:background="#EFEBE9"
     tools:context="com.two.football.view.activity.ResultsActivity">
 
     <android.support.v7.widget.Toolbar
@@ -17,11 +17,11 @@
 
         <Spinner
             android:id="@+id/spinResults"
-            android:layout_marginLeft="90dp"
-            android:layout_marginRight="70dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
             android:textAlignment="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         </Spinner>
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:background="#BBBBBB">
+        android:background="#EFEBE9">
 
         <ImageView
             android:layout_width="35dp"

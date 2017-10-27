@@ -70,7 +70,7 @@ public class ResultsActivity extends AppCompatActivity {
         listRo.add("Vòng 2");
         listRo.add("Vòng 3");
 
-        ArrayAdapter<String> adapterRe = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listRo);
+        ArrayAdapter<String> adapterRe = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listRo);
         spinRo.setAdapter(adapterRe);
     }
 }

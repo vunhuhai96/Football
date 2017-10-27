@@ -1,19 +1,19 @@
 package com.two.football.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.two.football.R;
 import com.two.football.model.Results;
 
 import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ADMIN on 10/25/2017.
  */
@@ -51,7 +51,7 @@ public class ListResultsAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.item_results, parent, false);
+            view = inflater.inflate(R.layout.item_results, null, false);
 
             viewHolder = new ViewHolder();
 //            viewHolder.teamImg = (ImageView) view.findViewById(R.id.teamImg);
@@ -80,6 +80,7 @@ public class ListResultsAdapter extends BaseAdapter {
 
         return view;
     }
+
 
     private class ViewHolder{
         TextView battle;

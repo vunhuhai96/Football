@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.two.football.R;
@@ -60,17 +61,27 @@ public class ResultsAdapter extends BaseAdapter {
             view.tLose = (TextView) convertView.findViewById(R.id.titleLose);
             view.tOffset = (TextView) convertView.findViewById(R.id.titleOff);
             view.tTotal = (TextView) convertView.findViewById(R.id.titleTotal);
+            view.listView = (ListView) convertView.findViewById(R.id.listRe);
 
             convertView.setTag(view);
         }else{
             view = (ViewHolder) convertView.getTag();
         }
 
-        convertView.setMinimumHeight(800);
-
         Results re = relist.get(position);
 
         view.table.setText(re.getTable());
+
+        ArrayList<Results> list = new ArrayList<>();
+
+        list.add(new Results("Chelsea", "28", "7", "13","5", "23/55", "31"));
+        list.add(new Results("Chelsea", "27", "6", "13","5", "23/55", "31"));
+        list.add(new Results("Chelsea", "26", "6", "13","5", "23/55", "31"));
+        list.add(new Results("Chelsea", "21", "6", "13","5", "23/55", "31"));
+
+        ListResultsAdapter adapterRe = new ListResultsAdapter(list, context.getApplicationContext());
+        view.listView.setAdapter(adapterRe);
+
 
         return convertView;
     }
@@ -83,5 +94,6 @@ public class ResultsAdapter extends BaseAdapter {
         TextView tLose;
         TextView tOffset;
         TextView tTotal;
+        ListView listView;
     }
 }
