@@ -26,15 +26,6 @@ public class ListResultsActivity extends AppCompatActivity {
 
         init();
 
-        list = new ArrayList<>();
-
-        list.add(new Results("Chelsea", "24", "6", "13","5", "23/55", "31"));
-        list.add(new Results("Chelsea", "24", "6", "13","5", "23/55", "31"));
-        list.add(new Results("Chelsea", "24", "6", "13","5", "23/55", "31"));
-        list.add(new Results("Chelsea", "24", "6", "13","5", "23/55", "31"));
-
-        adapterRe = new ListResultsAdapter(list, getApplicationContext());
-        listResults.setAdapter(adapterRe);
 
     }
 

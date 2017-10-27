@@ -21,12 +21,19 @@
         <activity android:name=".view.activity.ClubActivity" />
         <activity android:name=".view.activity.InfoClubActivity" />
         <activity android:name=".view.activity.ResultsActivity" />
+<<<<<<< HEAD
         <activity android:name=".view.activity.ListResultsActivity"/>
         <activity android:name=".view.activity.VideoFavoriteActivity"/>
         <activity android:name=".view.activity.VideoPlusActivity"/>
         <activity android:name=".view.activity.PlayVideoActivity"
                   android:windowSoftInputMode="adjustPan|stateHidden"
                   android:isScrollContainer="true"  />
+=======
+        <activity android:name=".view.activity.ListResultsActivity" />
+        <activity android:name=".view.activity.VideoFavoriteActivity" />
+        <activity android:name=".view.activity.VideoPlusActivity" />
+        <activity android:name=".view.activity.ToolbarActivity"></activity>
+>>>>>>> c93f4f14ed10996a683254918379bb302d3a99ef
     </application>
 
 </manifest>

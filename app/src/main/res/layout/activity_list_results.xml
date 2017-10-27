@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#BBDEFB"
     tools:context="com.two.football.view.activity.ListResultsActivity">
 
     <TextView
@@ -13,9 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="Bảng A"
-        android:textSize="@dimen/text_size"
+        android:layout_marginTop="10dp"
         android:textColor="#000000"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,8 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
-            android:textColor="#000000"
             android:text="Trận"
+            android:textColor="#000000"
             android:textSize="@dimen/text_size" />
 
         <TextView
@@ -38,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="19dp"
-            android:textColor="#000000"
             android:text="T"
+            android:textColor="#000000"
             android:textSize="@dimen/text_size" />
 
         <TextView
@@ -47,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="18dp"
-            android:textColor="#000000"
             android:text="H"
+            android:textColor="#000000"
             android:textSize="@dimen/text_size" />
 
         <TextView
@@ -56,8 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="27dp"
-            android:textColor="#000000"
             android:text="B"
+            android:textColor="#000000"
             android:textSize="@dimen/text_size" />
 
         <TextView
@@ -65,8 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
-            android:textColor="#000000"
             android:text="HS"
+            android:textColor="#000000"
             android:textSize="@dimen/text_size" />
 
         <TextView
@@ -74,18 +76,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:textColor="#000000"
             android:text="Đ"
+            android:textColor="#000000"
             android:textSize="@dimen/text_size" />
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listRe"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="180dp">
 
-    </ListView>
+        <ListView
+            android:id="@+id/listRe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>
