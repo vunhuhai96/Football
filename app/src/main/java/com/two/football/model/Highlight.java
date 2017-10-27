@@ -6,7 +6,7 @@ package com.two.football.model;
 
 public class Highlight {
 
-    String id, title, thumbnail, linkVideo;
+    String id, title, thumbnail, link;
 
     public Highlight() {
     }
@@ -15,11 +15,11 @@ public class Highlight {
         this.thumbnail = thumbnail;
     }
 
-    public Highlight(String id, String title, String thumbnail, String linkVideo) {
+    public Highlight(String id, String title, String thumbnail, String link) {
         this.id = id;
         this.title = title;
         this.thumbnail = thumbnail;
-        this.linkVideo = linkVideo;
+        this.link = link;
     }
 
     public String getId() {
@@ -34,8 +34,8 @@ public class Highlight {
         return thumbnail;
     }
 
-    public String getLinkVideo() {
-        return linkVideo;
+    public String getLink() {
+        return link;
     }
 
     public void setId(String id) {
@@ -50,7 +50,7 @@ public class Highlight {
         this.thumbnail = thumbnail;
     }
 
-    public void setLinkVideo(String linkVideo) {
-        this.linkVideo = linkVideo;
+    public void setLinkVideo(String link) {
+        this.link = link;
     }
 }

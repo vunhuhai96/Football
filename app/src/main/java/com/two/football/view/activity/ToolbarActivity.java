@@ -20,8 +20,12 @@ public class ToolbarActivity extends AppCompatActivity {
 
         init();
 
+        toolBar();
+    }
+
+    private void toolBar() {
         setSupportActionBar(tool);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

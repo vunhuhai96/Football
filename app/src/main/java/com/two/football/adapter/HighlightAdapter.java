@@ -16,9 +16,7 @@ import com.two.football.R;
 
 import java.util.List;
 
-/**
- * Created by TWO on 10/23/2017.
- */
+
 
 public class HighlightAdapter extends BaseAdapter {
     private List<Highlight> list;
@@ -30,7 +28,6 @@ public class HighlightAdapter extends BaseAdapter {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
-
     }
 
     @Override

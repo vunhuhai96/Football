@@ -1,5 +1,6 @@
 package com.two.football.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
@@ -25,6 +26,7 @@ import com.two.football.model.Highlight;
 import com.two.football.R;
 import com.two.football.adapter.HighlightAdapter;
 import com.two.football.model.Video;
+import com.two.football.view.activity.PlayVideoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ import java.util.List;
  * Created by TWO on 10/23/2017.
  */
 
-public class FragmentHighlight extends Fragment {
+public class FragmentHighlight extends Fragment implements AdapterView.OnItemClickListener{
     private View view;
     private List<Highlight> list;
     private ListView listView;
@@ -41,6 +43,8 @@ public class FragmentHighlight extends Fragment {
     private ImageView imgStar;
     private DatabaseReference mReference;
     private Spinner spinner;
+    private Intent intent;
+
 
     public FragmentHighlight() {
 
@@ -63,6 +67,7 @@ public class FragmentHighlight extends Fragment {
         adapter = new HighlightAdapter(getContext(), list);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(this);
     }
 
     public void initData(String giaiDau){
@@ -149,4 +154,14 @@ public class FragmentHighlight extends Fragment {
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        intent = new Intent(getContext(), PlayVideoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("title",list.get(position).getTitle());
+        bundle.putString("link",list.get(position).getLink());
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
 }
