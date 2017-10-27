@@ -22,10 +22,6 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
     private List<Video> list;
     private Context context;
 
-    public HomeVideoAdapter(List<Video> list) {
-        this.list = list;
-    }
-
     public HomeVideoAdapter(Context context, List<Video> list){
         this.list = list;
         this.context = context;

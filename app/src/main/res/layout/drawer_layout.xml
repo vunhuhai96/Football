@@ -109,6 +109,7 @@
         android:drawableLeft="@drawable/ic_menu_star"
         android:drawablePadding="16dp"
         android:paddingLeft="46dp"
+        android:id="@+id/btn_video_favorite"
         android:textSize="@dimen/text_size"/>
 
     <Button

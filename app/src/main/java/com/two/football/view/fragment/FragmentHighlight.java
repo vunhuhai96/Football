@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,6 @@ public class FragmentHighlight extends Fragment {
         mReference = FirebaseDatabase.getInstance().getReference();
         initView();
         getGiaiDau();
-        initHiglight("Ngoại Hạng Anh");
-
         return view;
     }
 
@@ -106,25 +105,23 @@ public class FragmentHighlight extends Fragment {
 
     private void getGiaiDau(){
         final List<String> listText = new ArrayList<>();
+        listText.add("Mới nhất");
         mReference.child("Video").child("High Light").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String a =  dataSnapshot.getKey();
                 listText.add(a);
                 final ArrayAdapter<String> adapterSpinner = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listText);
-                adapterSpinner.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapterSpinner);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        Toast.makeText(adapterView.getContext(),listText.get(i), Toast.LENGTH_SHORT).show();
-                        Log.e("spinner", i+"");
                         initHiglight(listText.get(i));
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-                        Toast.makeText(getContext(),"hgh", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

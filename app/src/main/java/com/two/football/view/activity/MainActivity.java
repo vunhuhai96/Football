@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<Match> matches;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnResults;
+    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnResults, btnVideoFavorite;
     private MainAdapter mainAdapter;
-    DatabaseReference mReference;
 
 
     @Override
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        mReference = FirebaseDatabase.getInstance().getReference();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         btnNavigation = (ImageView) findViewById(R.id.btn_navigation);
@@ -74,38 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMenuLive = (Button) findViewById(R.id.btn_menu_live);
         btnMenuHighlight = (Button) findViewById(R.id.btn_menu_higlight);
         btnResults = (Button) findViewById(R.id.btn_menu_results);
+        btnVideoFavorite = (Button) findViewById(R.id.btn_video_favorite);
 
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
         btnMenuHighlight.setOnClickListener(this);
         btnResults.setOnClickListener(this);
-        mReference.child("High Light").child("Error 2016").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-              Video video= dataSnapshot.getValue(Video.class);
-                Log.e("video",video.getId());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        btnVideoFavorite.setOnClickListener(this);
     }
 
     @Override
@@ -132,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent inResults = new Intent(this,ResultsActivity.class);
                 startActivity(inResults);
                 break;
+
+            case R.id.btn_video_favorite:
+                Intent intent = new Intent(this, VideoFavoriteActivity.class);
+                startActivity(intent);
+
             default:
                 break;
         }

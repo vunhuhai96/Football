@@ -68,6 +68,7 @@
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:drawablePadding="2dp"
+                android:id="@+id/btn_video_plus"
                 android:drawableRight="@drawable/ic_double_right"
                 android:background="@android:color/transparent"/>
 
@@ -131,33 +132,13 @@
 
         </LinearLayout>
 
-        <HorizontalScrollView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <include layout="@layout/item_club" />
-
-                <include layout="@layout/item_club" />
-
-                <include layout="@layout/item_club" />
-
-                <include layout="@layout/item_club" />
-
-                <include layout="@layout/item_club" />
-
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:id="@+id/recycle_club"/>
 
     </LinearLayout>
 

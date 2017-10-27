@@ -19,13 +19,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.two.football.adapter.ClubRecycleAdapter;
 import com.two.football.adapter.HomeVideoAdapter;
+import com.two.football.model.Club;
 import com.two.football.model.Highlight;
 import com.two.football.model.Match;
 import com.two.football.R;
 import com.two.football.model.Video;
 import com.two.football.view.activity.ClubActivity;
 import com.two.football.adapter.MatchAdapter;
+import com.two.football.view.activity.VideoPlusActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +44,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private ArrayList<Match> matches;
     private ViewPager viewPager;
     private CircleIndicator indicator;
-    private ImageView imgVideo1, imgVideo2, imgVideo3, imgVideo4, imgVideo5;
     private ImageView btnLeft, btnRight;
     private int id;
-    private Button btnViewClub;
+    private Button btnViewClub, btnVideoPlus;
     private MatchAdapter adapter;
     private Handler handler;
     private int delay = 3000;
@@ -52,6 +54,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerVideo;
     private List<Video> videos;
     private HomeVideoAdapter videoAdapter;
+    private RecyclerView recyclerClub;
+    private List<Club> clubs;
+    private ClubRecycleAdapter clubAdapter;
     private DatabaseReference mReference;
 
     Runnable runnable = new Runnable() {
@@ -77,8 +82,22 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         initView();
         initMatch();
         initVideo();
+        initClub();
         return view;
 
+    }
+
+    private void initClub() {
+        clubs = new ArrayList<>();
+        for (int i=0;i<5;i++){
+            clubs.add(new Club());
+        }
+        clubAdapter = new ClubRecycleAdapter(getContext(), clubs);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        recyclerClub.setLayoutManager(layoutManager);
+        recyclerClub.setAdapter(clubAdapter);
     }
 
     public void initVideo(){
@@ -135,15 +154,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         indicator = (CircleIndicator) view.findViewById(R.id.idicator);
 
         recyclerVideo = (RecyclerView) view.findViewById(R.id.recycle_video);
+        recyclerClub = (RecyclerView) view.findViewById(R.id.recycle_club);
 
         btnLeft = (ImageView) view.findViewById(R.id.btn_left);
         btnRight = (ImageView) view.findViewById(R.id.btn_right);
 
         btnViewClub = (Button) view.findViewById(R.id.btn_view_club);
+        btnVideoPlus = (Button) view.findViewById(R.id.btn_video_plus);
 
         btnLeft.setOnClickListener(this);
         btnRight.setOnClickListener(this);
         btnViewClub.setOnClickListener(this);
+        btnVideoPlus.setOnClickListener(this);
 
     }
 
@@ -173,6 +195,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getContext(), ClubActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.btn_video_plus:
+                Intent intent1 = new Intent(getContext(), VideoPlusActivity.class);
+                startActivity(intent1);
             default:
                 break;
         }
