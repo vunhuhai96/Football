@@ -21,9 +21,10 @@
         <activity android:name=".view.activity.ClubActivity" />
         <activity android:name=".view.activity.InfoClubActivity" />
         <activity android:name=".view.activity.ResultsActivity" />
-        <activity android:name=".view.activity.ListResultsActivity"></activity>
-        <activity android:name=".view.activity.VideoFavoriteActivity"/>
-        <activity android:name=".view.activity.VideoPlusActivity"/>
+        <activity android:name=".view.activity.ListResultsActivity" />
+        <activity android:name=".view.activity.VideoFavoriteActivity" />
+        <activity android:name=".view.activity.VideoPlusActivity" />
+        <activity android:name=".view.activity.ToolbarActivity"></activity>
     </application>
 
 </manifest>

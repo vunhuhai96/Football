@@ -3,7 +3,9 @@ package com.two.football.view.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -18,6 +20,7 @@ import java.util.List;
 public class ResultsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private ImageView backRe;
     private Spinner spinRe, spinRo;
     private ListView lvResults;
     ArrayList<Results> listRe;
@@ -30,6 +33,13 @@ public class ResultsActivity extends AppCompatActivity {
         init();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        backRe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         SpinRe();
         SpinRo();
@@ -47,6 +57,8 @@ public class ResultsActivity extends AppCompatActivity {
 
     private void init(){
         toolbar = (Toolbar) findViewById(R.id.toolResults);
+
+        backRe = (ImageView) findViewById(R.id.backRe);
 
         spinRe = (Spinner) findViewById(R.id.spinResults);
         spinRo = (Spinner) findViewById(R.id.spinRound);

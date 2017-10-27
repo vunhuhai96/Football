@@ -15,6 +15,12 @@
         android:titleTextColor="#ffffff"
         android:background="@color/background_color">
 
+        <ImageView
+            android:id="@+id/backRe"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_left"/>
+
         <Spinner
             android:id="@+id/spinResults"
             android:layout_marginLeft="15dp"
