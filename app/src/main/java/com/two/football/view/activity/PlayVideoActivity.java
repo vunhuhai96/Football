@@ -59,9 +59,9 @@ public class PlayVideoActivity extends AppCompatActivity{
         tvDetail = (TextView) findViewById(R.id.tv_detail);
 
         controller = new MediaController(this);
-        toolbarActivity = new ToolbarActivity();
+        /*toolbarActivity = new ToolbarActivity();
         toolbar = (Toolbar) toolbarActivity.findViewById(R.id.tollbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);*/
     }
 
     private void playVideo() {

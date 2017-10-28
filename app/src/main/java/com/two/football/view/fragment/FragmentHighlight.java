@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.two.football.adapter.SpinnerHighlightAdapter;
 import com.two.football.model.Highlight;
 import com.two.football.R;
 import com.two.football.adapter.HighlightAdapter;
@@ -116,8 +117,11 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String a =  dataSnapshot.getKey();
                 listText.add(a);
-                final ArrayAdapter<String> adapterSpinner = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listText);
-                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                /*final ArrayAdapter<String> adapterSpinner = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listText);
+                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+
+                SpinnerHighlightAdapter adapterSpinner = new SpinnerHighlightAdapter(getContext(), listText);
+
                 spinner.setAdapter(adapterSpinner);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override

@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.two.football.view.fragment.FragmentClubInfo;
+import com.two.football.view.fragment.FragmentClubLTD;
+import com.two.football.view.fragment.FragmentClubVideo;
 import com.two.football.view.fragment.FragmentHighlight;
 import com.two.football.view.fragment.FragmentLive;
 
@@ -26,11 +28,11 @@ public class InfoClubAdapter extends FragmentStatePagerAdapter {
                 frag = new FragmentClubInfo();
                 break;
             case 1:
-                frag = new FragmentLive();
+                frag = new FragmentClubLTD();
                 break;
 
             case 2:
-                frag = new FragmentHighlight();
+                frag = new FragmentClubVideo();
                 break;
         }
         return frag;

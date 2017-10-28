@@ -1,5 +1,6 @@
 package com.two.football.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -19,11 +20,14 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
     private ViewPager pager;
     private TabLayout tabLayout;
     private InfoClubAdapter adapter;
+    private String key;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_info);
+        Intent intent = getIntent();
+        key = intent.getStringExtra("ID_CLUB");
         initView();
         initInfo();
     }
@@ -39,9 +43,6 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
 
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setTabsFromPagerAdapter(adapter);
-        /*tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_live);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_highlight);*/
 
     }
 
@@ -61,5 +62,9 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
             default:
                 break;
         }
+    }
+
+    public String getKey() {
+        return key;
     }
 }

@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.two.football.adapter.ClubAdapter;
 import com.two.football.adapter.ClubRecycleAdapter;
 import com.two.football.adapter.HomeVideoAdapter;
 import com.two.football.model.Club;
@@ -89,15 +90,40 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     private void initClub() {
         clubs = new ArrayList<>();
-        for (int i=0;i<5;i++){
-            clubs.add(new Club());
-        }
-        clubAdapter = new ClubRecycleAdapter(getContext(), clubs);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mReference.child("Club").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Club club = dataSnapshot.getValue(Club.class);
+                club.setId(dataSnapshot.getKey());
+                clubs.add(club);
+                clubAdapter = new ClubRecycleAdapter(getContext(), clubs);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        recyclerClub.setLayoutManager(layoutManager);
-        recyclerClub.setAdapter(clubAdapter);
+                recyclerClub.setLayoutManager(layoutManager);
+                recyclerClub.setAdapter(clubAdapter);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void initVideo(){

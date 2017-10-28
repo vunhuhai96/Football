@@ -44,7 +44,7 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

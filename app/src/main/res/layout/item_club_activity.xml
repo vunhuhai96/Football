@@ -8,6 +8,7 @@
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:id="@+id/img_logo_club_activity"
         android:src="@drawable/ic_arsenal"/>
 
     <TextView
@@ -17,6 +18,7 @@
         android:layout_gravity="center"
         android:text="Arsenal"
         android:textSize="20dp"
+        android:id="@+id/tv_name_club_activity"
         android:layout_marginLeft="16dp"
         android:textColor="@android:color/holo_green_dark"/>
 

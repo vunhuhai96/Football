@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:gravity="center"
     android:layout_marginBottom="5dp"
+    android:id="@+id/linear_club"
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="126dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_chel"
         android:padding="16dp"

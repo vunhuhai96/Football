@@ -10,11 +10,13 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:padding="26dp"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:src="@drawable/ic_mu"
             />
 
@@ -57,12 +59,14 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:padding="26dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:src="@drawable/ic_chel"
             />
 

@@ -7,25 +7,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.two.football.model.Club;
 import com.two.football.R;
+import com.two.football.model.Highlight;
+import com.two.football.model.Video;
+import com.two.football.model.VideoFavorite;
 
 import java.util.List;
 
 /**
- * Created by TWO on 10/24/2017.
+ * Created by TWO on 10/27/2017.
  */
 
-public class ClubAdapter extends BaseAdapter {
-    private Context context;
-    private List<Club> list;
+public class VideoPlusAdapter extends BaseAdapter {
+    private List<Video> list;
     private LayoutInflater inflater;
+    private Context context;
 
-    public ClubAdapter(Context context, List<Club> list) {
-        this.context = context;
+    public VideoPlusAdapter(Context context, List<Video> list) {
         this.list = list;
+        this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -35,7 +38,7 @@ public class ClubAdapter extends BaseAdapter {
     }
 
     @Override
-    public Club getItem(int position) {
+    public Video getItem(int position) {
         return list.get(position);
     }
 
@@ -46,31 +49,30 @@ public class ClubAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-
-        if (convertView==null) {
-            convertView = inflater.inflate(R.layout.item_club_activity, parent, false);
+        ViewHolder holder = null;
+        if (convertView==null){
+            convertView = inflater.inflate(R.layout.item_higlight, parent, false);
             holder = new ViewHolder();
 
-            holder.imageView = (ImageView) convertView.findViewById(R.id.img_logo_club_activity);
-            holder.textView = (TextView) convertView.findViewById(R.id.tv_name_club_activity);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.img_highlight);
+            holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title_highlight);
 
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Club club = list.get(position);
+        Video video = list.get(position);
 
-        Picasso.with(context).load(club.getClubLogo()).into(holder.imageView);
-        holder.textView.setText(club.getClubName());
+        Picasso.with(context).load(video.getThumbnail()).into(holder.imageView);
+        holder.tvTitle.setText(video.getTitle().substring(7));
 
         return convertView;
     }
 
+
     private class ViewHolder{
         ImageView imageView;
-        TextView textView;
+        TextView tvTitle;
     }
 }
