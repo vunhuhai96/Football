@@ -42,6 +42,7 @@
         </android.support.design.widget.TabLayout>
 
         <android.support.v4.view.ViewPager
+            android:background="@color/colorGrey"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/main_viewpager"
