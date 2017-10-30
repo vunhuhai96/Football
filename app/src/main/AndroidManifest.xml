@@ -44,7 +44,7 @@
             android:isScrollContainer="true"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".view.activity.ToolbarActivity" />
-
+        <activity android:name=".view.activity.AboutActivity"/>
     </application>
 
 </manifest>

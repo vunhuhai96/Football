@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.two.football.model.Live;
 import com.two.football.R;
@@ -44,8 +45,33 @@ public class LiveAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView = inflater.inflate(R.layout.item_live, parent, false);
+        ViewHolder viewHolder = null;
+        if (convertView == null){
+            convertView = inflater.inflate(R.layout.item_live, parent, false);
+            viewHolder = new ViewHolder();
+
+            viewHolder.guestTeam = (TextView) convertView.findViewById(R.id.guestTeam);
+            viewHolder.homeTeam = (TextView) convertView.findViewById(R.id.homeTeam);
+            viewHolder.videoType = (TextView) convertView.findViewById(R.id.videoType);
+
+            convertView.setTag(viewHolder);
+
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        Live live = list.get(position);
+
+        viewHolder.guestTeam.setText(live.getGuestClub());
+        viewHolder.homeTeam.setText(live.getHomeClub());
+        viewHolder.videoType.setText(live.getVideoType());
 
         return convertView;
+    }
+
+    private class ViewHolder{
+        TextView guestTeam;
+        TextView homeTeam;
+        TextView videoType;
     }
 }
