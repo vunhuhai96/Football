@@ -10,41 +10,40 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         <activity
             android:name=".view.activity.MainActivity"
-            android:configChanges="orientation|screenSize">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.activity.ClubActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".view.activity.InfoClubActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".view.activity.ResultsActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".view.activity.ListResultsActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".view.activity.VideoFavoriteActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".view.activity.VideoPlusActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".view.activity.PlayVideoActivity"
-            android:configChanges="orientation|screenSize"
-            android:isScrollContainer="true"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".view.activity.ToolbarActivity" />
-        <activity android:name=".view.activity.AboutActivity"/>
+
+
+        <activity android:name=".view.activity.ClubActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.InfoClubActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.ResultsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.ListResultsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.VideoFavoriteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.VideoPlusActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.PlayVideoActivity"
+            android:screenOrientation="behind"
+                  android:windowSoftInputMode="adjustPan|stateHidden"
+                  android:isScrollContainer="true"
+                  android:configChanges="orientation|screenSize" />
+        <activity android:name=".view.activity.ToolbarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.AboutActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

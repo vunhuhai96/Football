@@ -37,6 +37,7 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         reference = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.activity_video_favorite);
+        //getSupportActionBar().hide();
         initView();
         initVideo();
     }

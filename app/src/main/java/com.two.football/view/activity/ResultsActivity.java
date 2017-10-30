@@ -31,8 +31,8 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         init();
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().hide();
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         backRe.setOnClickListener(new View.OnClickListener() {
             @Override
