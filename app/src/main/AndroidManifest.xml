@@ -26,7 +26,8 @@
         <activity android:name=".view.activity.VideoPlusActivity"/>
         <activity android:name=".view.activity.PlayVideoActivity"
                   android:windowSoftInputMode="adjustPan|stateHidden"
-                  android:isScrollContainer="true"  />
+                  android:isScrollContainer="true"
+                  android:configChanges="orientation|screenSize"/>
         <activity android:name=".view.activity.ToolbarActivity"/>
 
     </application>
