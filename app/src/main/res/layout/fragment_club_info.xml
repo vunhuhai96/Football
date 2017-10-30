@@ -25,13 +25,25 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_marginTop="5dp"
+        android:id="@+id/tv_year"
         android:text="Năm thành lập: "/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_marginTop="5dp"
+        android:id="@+id/tv_stadium"
+        android:text="Sân vận động: "/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_coach"
         android:text="Huấn luyện viên: "/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

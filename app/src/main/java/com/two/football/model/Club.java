@@ -6,24 +6,36 @@ package com.two.football.model;
 
 public class Club {
 
-    private String clubLogo;
-    private String clubName;
+    private String urlLogo;
+    private String name;
     private String id;
+    private String coach;
+    private String year;
+    private String stadium;
 
     public Club() {
     }
 
     public Club(String clubLogo, String clubName) {
-        this.clubLogo = clubLogo;
-        this.clubName = clubName;
+        this.urlLogo = clubLogo;
+        this.name = clubName;
     }
 
-    public String getClubLogo() {
-        return clubLogo;
+    public Club(String urlLogo, String name, String id, String coach, String year, String stadium) {
+        this.urlLogo = urlLogo;
+        this.name = name;
+        this.id = id;
+        this.coach = coach;
+        this.year = year;
+        this.stadium = stadium;
     }
 
-    public String getClubName() {
-        return clubName;
+    public String getUrlLogo() {
+        return urlLogo;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getId() {
@@ -32,5 +44,17 @@ public class Club {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCoach() {
+        return coach;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getStadium() {
+        return stadium;
     }
 }

@@ -54,7 +54,6 @@ public class ClubAdapter extends BaseAdapter {
 
             holder.imageView = (ImageView) convertView.findViewById(R.id.img_logo_club_activity);
             holder.textView = (TextView) convertView.findViewById(R.id.tv_name_club_activity);
-
             convertView.setTag(holder);
 
         } else {
@@ -63,8 +62,9 @@ public class ClubAdapter extends BaseAdapter {
 
         Club club = list.get(position);
 
-        Picasso.with(context).load(club.getClubLogo()).into(holder.imageView);
-        holder.textView.setText(club.getClubName());
+        Picasso.with(context).load(club.getUrlLogo()).into(holder.imageView);
+        holder.textView.setText(club.getName());
+
 
         return convertView;
     }

@@ -7,13 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
-import com.two.football.model.Highlight;
 import com.two.football.model.Video;
-import com.two.football.model.VideoFavorite;
 
 import java.util.List;
 
@@ -64,8 +61,8 @@ public class VideoPlusAdapter extends BaseAdapter {
 
         Video video = list.get(position);
 
-        Picasso.with(context).load(video.getThumbnail()).into(holder.imageView);
-        holder.tvTitle.setText(video.getTitle().substring(7));
+        Picasso.with(context).load(video.getUrlThumbnail()).into(holder.imageView);
+        holder.tvTitle.setText(video.getTitle());
 
         return convertView;
     }

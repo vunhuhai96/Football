@@ -1,11 +1,12 @@
 package com.two.football.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -14,10 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.R;
-import com.two.football.adapter.HomeVideoAdapter;
 import com.two.football.adapter.VideoPlusAdapter;
 import com.two.football.model.Video;
-import com.two.football.model.VideoFavorite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +25,12 @@ import java.util.List;
  * Created by TWO on 10/27/2017.
  */
 
-public class VideoPlusActivity extends Activity implements View.OnClickListener {
+public class VideoPlusActivity extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private ListView listView;
     private List<Video> list;
     private VideoPlusAdapter adapter;
     private DatabaseReference reference;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,11 +43,12 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener 
 
     private void initVideo() {
         list = new ArrayList<>();
-        reference.child("Video").child("High Light").child("Ngoại Hạng Anh").addChildEventListener(new ChildEventListener() {
+        reference.child("Tournament").child("Premier League").child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Video video = dataSnapshot.getValue(Video.class);
                 list.add(video);
+
                 adapter = new VideoPlusAdapter(VideoPlusActivity.this, list);
 
                 listView.setAdapter(adapter);
@@ -78,6 +79,7 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener 
     private void initView() {
         findViewById(R.id.btn_video_favorite_back).setOnClickListener(this);
         listView = (ListView) findViewById(R.id.lv_video_favorite);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -89,5 +91,16 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener 
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        intent = new Intent(VideoPlusActivity.this, PlayVideoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("title",list.get(position).getTitle());
+        bundle.putString("link",list.get(position).getUrlVideo());
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 }

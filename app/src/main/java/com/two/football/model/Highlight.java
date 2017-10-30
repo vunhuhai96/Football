@@ -6,20 +6,20 @@ package com.two.football.model;
 
 public class Highlight {
 
-    String id, title, thumbnail, link;
+    String id, title, urlThumbnail, urlVideo, videoType;
 
     public Highlight() {
     }
 
     public Highlight(String thumbnail) {
-        this.thumbnail = thumbnail;
+        this.urlThumbnail = thumbnail;
     }
 
     public Highlight(String id, String title, String thumbnail, String link) {
         this.id = id;
         this.title = title;
-        this.thumbnail = thumbnail;
-        this.link = link;
+        this.urlThumbnail = thumbnail;
+        this.urlVideo = link;
     }
 
     public String getId() {
@@ -30,12 +30,12 @@ public class Highlight {
         return title;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getUrlThumbnail() {
+        return urlThumbnail;
     }
 
-    public String getLink() {
-        return link;
+    public String getUrlVideo() {
+        return urlVideo;
     }
 
     public void setId(String id) {
@@ -46,11 +46,15 @@ public class Highlight {
         this.title = title;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setUrlThumbnail(String urlThumbnail) {
+        this.urlThumbnail = urlThumbnail;
     }
 
     public void setLinkVideo(String link) {
-        this.link = link;
+        this.urlVideo = link;
+    }
+
+    public String getVideoType() {
+        return videoType;
     }
 }

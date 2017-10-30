@@ -130,7 +130,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         videos = new ArrayList<>();
 
         mReference = FirebaseDatabase.getInstance().getReference();
-        mReference.child("Video").child("High Light").child("Ngoại Hạng Anh").addChildEventListener(new ChildEventListener() {
+        mReference.child("Tournament").child("Premier League").child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Video video = dataSnapshot.getValue(Video.class);
