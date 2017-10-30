@@ -5,20 +5,20 @@ package com.two.football.model;
  */
 
 public class Video {
-    String id, title, thumbnail, linkVideo;
+    String id, title, urlThumbnail, urlVideo;
 
     public Video() {
     }
 
     public Video(String thumbnail) {
-        this.thumbnail = thumbnail;
+        this.urlThumbnail = thumbnail;
     }
 
     public Video(String id, String title, String thumbnail, String linkVideo) {
         this.id = id;
         this.title = title;
-        this.thumbnail = thumbnail;
-        this.linkVideo = linkVideo;
+        this.urlThumbnail = thumbnail;
+        this.urlVideo = linkVideo;
     }
 
     public String getId() {
@@ -29,12 +29,12 @@ public class Video {
         return title;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getUrlThumbnail() {
+        return urlThumbnail;
     }
 
-    public String getLinkVideo() {
-        return linkVideo;
+    public String getUrlVideo() {
+        return urlVideo;
     }
 
     public void setId(String id) {
@@ -45,11 +45,4 @@ public class Video {
         this.title = title;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
-    public void setLinkVideo(String linkVideo) {
-        this.linkVideo = linkVideo;
-    }
 }

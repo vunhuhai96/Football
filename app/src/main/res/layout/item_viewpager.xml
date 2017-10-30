@@ -10,6 +10,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:padding="26dp"
+        android:gravity="center"
         android:layout_gravity="center"
         android:orientation="vertical">
 
@@ -24,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="-10dp"
             android:textColor="@android:color/white"
             android:text="MU"/>
 
@@ -60,6 +60,7 @@
         android:layout_weight="1"
         android:padding="26dp"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -74,7 +75,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="-10dp"
             android:textColor="@android:color/white"
             android:text="Chelsea"/>
 

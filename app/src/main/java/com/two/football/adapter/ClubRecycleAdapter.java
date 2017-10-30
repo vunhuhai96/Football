@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.model.Club;
-import com.two.football.model.Video;
 import com.two.football.view.activity.InfoClubActivity;
 
 import java.util.List;
@@ -43,8 +42,8 @@ public class ClubRecycleAdapter extends RecyclerView.Adapter<ClubRecycleAdapter.
     public void onBindViewHolder(ClubRecycleAdapter.ViewHolder holder, int position) {
         final Club club = list.get(position);
 
-        Picasso.with(context).load(club.getClubLogo()).into(holder.imageView);
-        holder.textView.setText(club.getClubName());
+        Picasso.with(context).load(club.getUrlLogo()).into(holder.imageView);
+        holder.textView.setText(club.getName());
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +56,7 @@ public class ClubRecycleAdapter extends RecyclerView.Adapter<ClubRecycleAdapter.
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -3,15 +3,12 @@ package com.two.football.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -26,7 +23,6 @@ import com.two.football.adapter.SpinnerHighlightAdapter;
 import com.two.football.model.Highlight;
 import com.two.football.R;
 import com.two.football.adapter.HighlightAdapter;
-import com.two.football.model.Video;
 import com.two.football.view.activity.PlayVideoActivity;
 
 import java.util.ArrayList;
@@ -36,7 +32,7 @@ import java.util.List;
  * Created by TWO on 10/23/2017.
  */
 
-public class FragmentHighlight extends Fragment implements AdapterView.OnItemClickListener{
+public class FragmentHighlight extends Fragment implements AdapterView.OnItemClickListener {
     private View view;
     private List<Highlight> list;
     private ListView listView;
@@ -71,19 +67,21 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
         listView.setOnItemClickListener(this);
     }
 
-    public void initData(String giaiDau){
+    public void initData(final String giaiDau) {
         list.clear();
-        mReference.child("Video").child("High Light").child(giaiDau).addChildEventListener(new ChildEventListener() {
+        mReference.child("Tournament").child(giaiDau).child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Highlight highlight = dataSnapshot.getValue(Highlight.class);
-                list.add(highlight);
-                adapter.notifyDataSetChanged();
+                if (highlight.getVideoType().equals("Highlight")) {
+                    list.add(highlight);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                initData(giaiDau);
             }
 
             @Override
@@ -109,17 +107,14 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
         spinner = (Spinner) view.findViewById(R.id.spinner);
     }
 
-    private void getGiaiDau(){
+    private void getGiaiDau() {
         final List<String> listText = new ArrayList<>();
         listText.add("Mới nhất");
-        mReference.child("Video").child("High Light").addChildEventListener(new ChildEventListener() {
+        mReference.child("Tournament").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String a =  dataSnapshot.getKey();
+                String a = dataSnapshot.getKey();
                 listText.add(a);
-                /*final ArrayAdapter<String> adapterSpinner = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listText);
-                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-
                 SpinnerHighlightAdapter adapterSpinner = new SpinnerHighlightAdapter(getContext(), listText);
 
                 spinner.setAdapter(adapterSpinner);
@@ -162,8 +157,8 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent = new Intent(getContext(), PlayVideoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("title",list.get(position).getTitle());
-        bundle.putString("link",list.get(position).getLink());
+        bundle.putString("title", list.get(position).getTitle());
+        bundle.putString("link", list.get(position).getUrlVideo());
         intent.putExtras(bundle);
 
         startActivity(intent);

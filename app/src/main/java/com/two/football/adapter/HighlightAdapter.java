@@ -1,7 +1,6 @@
 package com.two.football.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,24 +63,8 @@ public class HighlightAdapter extends BaseAdapter {
 
         Highlight highlight = list.get(position);
 
-        Picasso.with(context).load(highlight.getThumbnail()).into(holder.imageView);
+        Picasso.with(context).load(highlight.getUrlThumbnail()).into(holder.imageView);
         holder.tvTitle.setText(highlight.getTitle());
-
-        final ViewHolder finalHolder = holder;
-
-        holder.imgStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (check) {
-                    finalHolder.imgStar.setImageResource(R.drawable.ic_star_2);
-                    Toast.makeText(context, "Đã lưu vào mục yêu thích", Toast.LENGTH_SHORT).show();
-                } else {
-                    finalHolder.imgStar.setImageResource(R.drawable.ic_star_1);
-                }
-
-                check = !check;
-            }
-        });
 
         return convertView;
     }

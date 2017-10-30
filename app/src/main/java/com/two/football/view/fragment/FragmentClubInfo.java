@@ -26,7 +26,7 @@ import com.two.football.view.activity.InfoClubActivity;
 public class FragmentClubInfo extends Fragment {
     private View view;
     private ImageView imgLogo;
-    private TextView tvName;
+    private TextView tvName, tvCoach, tvYear, tvStadium;
     private DatabaseReference mReference;
 
     public FragmentClubInfo() {
@@ -50,8 +50,11 @@ public class FragmentClubInfo extends Fragment {
 
                 if (id.equals(dataSnapshot.getKey())){
                     Club club = dataSnapshot.getValue(Club.class);
-                    Picasso.with(getContext()).load(club.getClubLogo()).into(imgLogo);
-                    tvName.setText(club.getClubName());
+                    Picasso.with(getContext()).load(club.getUrlLogo()).into(imgLogo);
+                    tvName.setText("Tên CLB: "+club.getName());
+                    tvCoach.setText("Huấn luyện viên: "+club.getCoach());
+                    tvYear.setText("Năm thành lập: "+club.getYear());
+                    tvStadium.setText("Sân vận động: "+club.getStadium());
                 }
             }
 
@@ -80,5 +83,8 @@ public class FragmentClubInfo extends Fragment {
     private void initView() {
         imgLogo = (ImageView) view.findViewById(R.id.img_logo_info_club);
         tvName = (TextView) view.findViewById(R.id.tv_name_club_info);
+        tvCoach = (TextView) view.findViewById(R.id.tv_coach);
+        tvYear = (TextView) view.findViewById(R.id.tv_year);
+        tvStadium = (TextView) view.findViewById(R.id.tv_stadium);
     }
 }
