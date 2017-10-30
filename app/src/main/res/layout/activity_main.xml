@@ -31,13 +31,13 @@
         </TableRow>
 
         <android.support.design.widget.TabLayout
-            android:background="#558B2F"
+            android:background="@color/background_color_tab"
             android:layout_alignParentTop="true"
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             app:tabTextColor="@android:color/white"
             android:layout_height="?attr/actionBarSize"
-            app:tabSelectedTextColor="#33691E">
+            app:tabSelectedTextColor="@color/background_color">
 
         </android.support.design.widget.TabLayout>
 

@@ -16,9 +16,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="24dp"
         android:layout_marginTop="5dp"
         android:id="@+id/tv_name_club_info"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/background_color"
         android:text="Câu lạc bộ: "/>
     <TextView
         android:layout_width="match_parent"
@@ -26,6 +29,7 @@
         android:textSize="20dp"
         android:layout_marginTop="5dp"
         android:id="@+id/tv_year"
+        android:textColor="@color/background_color"
         android:text="Năm thành lập: "/>
 
     <TextView
@@ -34,6 +38,7 @@
         android:textSize="20dp"
         android:layout_marginTop="5dp"
         android:id="@+id/tv_stadium"
+        android:textColor="@color/background_color"
         android:text="Sân vận động: "/>
 
     <TextView
@@ -42,6 +47,7 @@
         android:textSize="20dp"
         android:layout_marginTop="5dp"
         android:id="@+id/tv_coach"
+        android:textColor="@color/background_color"
         android:text="Huấn luyện viên: "/>
 
     <TextView
@@ -49,6 +55,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_marginTop="5dp"
+        android:textColor="@color/background_color"
         android:text="Danh sách cầu thủ: "/>
 
 

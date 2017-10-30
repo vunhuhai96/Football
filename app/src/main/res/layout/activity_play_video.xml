@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <include layout="@layout/activity_toolbar"
-        android:id="@+id/tollbar"/>
+    <include layout="@layout/activity_toolbar" />
 
     <FrameLayout
         android:layout_weight="1"

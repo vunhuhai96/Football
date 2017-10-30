@@ -6,4 +6,5 @@
     <color name="background_color">#33691E</color>
     <color name="colorGreen">#43A047</color>
     <color name="colorGrey">#CFD8DC</color>
+    <color name="background_color_tab">#558B2F</color>
 </resources>

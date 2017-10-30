@@ -109,7 +109,7 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
 
     private void getGiaiDau() {
         final List<String> listText = new ArrayList<>();
-        listText.add("Mới nhất");
+        //listText.add("Mới nhất");
         mReference.child("Tournament").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

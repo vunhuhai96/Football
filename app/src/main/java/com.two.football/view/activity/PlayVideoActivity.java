@@ -83,8 +83,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
 
         controller = new MediaController(this);
 
-        back = (ImageView) findViewById(R.id.back);
+        back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
+
     }
 
     private void playVideo() {
@@ -126,7 +127,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.back:
+            case R.id.img_back:
                 finish();
                 break;
             default:
