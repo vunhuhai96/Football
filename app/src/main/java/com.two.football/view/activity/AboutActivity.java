@@ -19,9 +19,10 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         init();
 
+        /*setSupportActionBar(toolAbout);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
+
         getSupportActionBar().hide();
-//        setSupportActionBar(toolAbout);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

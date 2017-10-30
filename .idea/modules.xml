@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Football.iml" filepath="$PROJECT_DIR$/Football.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://E:\AndroidStudio\Football\app\app.iml" filepath="E:\AndroidStudio\Football\app\app.iml" />
-=======
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
->>>>>>> afbed50d8badcfe6ddcf4b2aa8c1fb0830c0afce
+      <module fileurl="file://E:\AndroidStudio\Football\app\app.iml" filepath="E:\AndroidStudio\Football\app\app.iml" />
     </modules>
   </component>
 </project>
