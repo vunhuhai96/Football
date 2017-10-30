@@ -1,5 +1,6 @@
 package com.two.football.view.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class ClubActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         reference = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.activity_club);
+        //getSupportActionBar().hide();
         initView();
         initClub();
     }
@@ -103,4 +105,6 @@ public class ClubActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
+
+
 }

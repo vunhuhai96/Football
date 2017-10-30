@@ -26,6 +26,7 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_info);
+        getSupportActionBar().hide();
         Intent intent = getIntent();
         key = intent.getStringExtra("ID_CLUB");
         initView();

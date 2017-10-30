@@ -9,15 +9,14 @@
         android:id="@+id/tollbar"/>
 
     <FrameLayout
-
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <VideoView
             android:id="@+id/videoView"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
         <ProgressBar
             android:id="@+id/proBar"
@@ -28,6 +27,7 @@
     </FrameLayout>
 
     <RelativeLayout
+        android:id="@+id/rv_detail"
         android:layout_weight="1.5"
         android:layout_width="match_parent"
         android:layout_height="0dp">
