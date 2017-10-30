@@ -2,29 +2,24 @@ package com.two.football.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
 
 import com.two.football.R;
 
-public class ToolbarActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
-    Toolbar tool;
+    Toolbar toolAbout;
     ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toolbar);
-
+        setContentView(R.layout.activity_about);
         init();
 
-        toolBar();
-    }
-
-    private void toolBar() {
-        setSupportActionBar(tool);
+        setSupportActionBar(toolAbout);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -33,10 +28,13 @@ public class ToolbarActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     private void init(){
-        tool = (Toolbar) findViewById(R.id.tool);
-        imgBack = (ImageView) findViewById(R.id.back);
+        toolAbout = (Toolbar) findViewById(R.id.toolAbout);
+
+        imgBack = (ImageView) findViewById(R.id.backAbout);
     }
+
 }

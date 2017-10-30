@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<Match> matches;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnResults, btnVideoFavorite;
+    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnTable, btnAbout,btnVideoFavorite;
     private MainAdapter mainAdapter;
 
 
@@ -71,13 +71,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMenuHome = (Button) findViewById(R.id.btn_menu_home);
         btnMenuLive = (Button) findViewById(R.id.btn_menu_live);
         btnMenuHighlight = (Button) findViewById(R.id.btn_menu_higlight);
-        btnResults = (Button) findViewById(R.id.btn_menu_results);
+        btnTable = (Button) findViewById(R.id.btn_menu_table);
+        btnAbout = (Button) findViewById(R.id.btn_menu_about);
         btnVideoFavorite = (Button) findViewById(R.id.btn_video_favorite);
 
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
         btnMenuHighlight.setOnClickListener(this);
-        btnResults.setOnClickListener(this);
+        btnTable.setOnClickListener(this);
+        btnAbout.setOnClickListener(this);
         btnVideoFavorite.setOnClickListener(this);
     }
 
@@ -101,11 +103,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 viewPager.setCurrentItem(2);
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.btn_menu_results:
+            case R.id.btn_menu_table:
                 Intent inResults = new Intent(this,ResultsActivity.class);
                 startActivity(inResults);
                 break;
-
+            case R.id.btn_menu_about:
+                Intent inAbout = new Intent(this,AboutActivity.class);
+                startActivity(inAbout);
+                break;
             case R.id.btn_video_favorite:
                 Intent intent = new Intent(this, VideoFavoriteActivity.class);
                 startActivity(intent);
