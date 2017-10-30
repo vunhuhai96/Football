@@ -85,7 +85,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
 
         back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
-
+        toolbar = (LinearLayout) findViewById(R.id.toolbar);
     }
 
     private void playVideo() {
