@@ -58,6 +58,7 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
             }
         });
 
+
     }
 
     @Override
