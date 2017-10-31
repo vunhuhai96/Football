@@ -6,32 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#EFEBE9"
-    tools:context="com.two.football.view.activity.ResultsActivity">
+    tools:context="com.two.football.view.activity.RankingsActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolResults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:titleTextColor="#ffffff"
-        android:background="@color/background_color">
-
-        <ImageView
-            android:id="@+id/backRe"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_left"/>
-
-        <Spinner
-            android:id="@+id/spinResults"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </Spinner>
-
-    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/activity_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +31,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listResults"
+        android:id="@+id/listRankings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"

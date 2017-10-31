@@ -51,21 +51,22 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
         return view;
     }
 
-    private void initLive(String tranDau) {
+    private void initLive(String giaiDau) {
         list = new ArrayList<>();
         for (int i=0;i<15;i++){
             list.add(new Live());
         }
-        initData(tranDau);
+        initData(giaiDau);
         adapter = new LiveAdapter(getContext(), list);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
     }
 
-    public void initData(final String tranDau){
+    public void initData(final String giaiDau){
         list.clear();
-        mReference.child("Tournament").child(tranDau).child("videos").addChildEventListener(new ChildEventListener() {
+//        mReference.child("T").child(tranDau).child("videos").orderByChild("videoType").equalTo("Live Stream");
+        mReference.child("Tournament").child(giaiDau).child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Live live = dataSnapshot.getValue(Live.class);
@@ -77,7 +78,7 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                initData(tranDau);
+                initData(giaiDau);
             }
 
             @Override
@@ -102,17 +103,11 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
     }
 
     private void getTranDau(){
-        final List<String> listMatch = new ArrayList<>();
+
         mReference.child("Tournament").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String match = dataSnapshot.getKey();
-                listMatch.add(match);
-
-                initLive("listMatch");
-//                for (int i = 0; i <= listMatch.size(); i++){
-//                    initLive(listMatch.get(i));
-//                }
+                String a = dataSnapshot.getKey();
             }
 
             @Override
@@ -135,7 +130,6 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
 
             }
         });
-
     }
 
     @Override
