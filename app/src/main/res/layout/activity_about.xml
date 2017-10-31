@@ -8,29 +8,7 @@
     android:background="#CFD8DC"
     tools:context="com.two.football.view.activity.AboutActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background_color">
-
-        <ImageView
-            android:id="@+id/backAbout"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_left"/>
-
-        <TextView
-            android:id="@+id/about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:text="About"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-
-    </android.support.v7.widget.Toolbar>
+   <include layout="@layout/activity_toolbar"/>
 
     <ImageView
         android:id="@+id/ic"

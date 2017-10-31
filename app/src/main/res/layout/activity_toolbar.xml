@@ -11,13 +11,22 @@
         android:id="@+id/tool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_color">
+        android:background="@color/colorGreen">
 
         <ImageView
-            android:id="@+id/back"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_left"/>
+
+        <TextView
+            android:id="@+id/tv_name_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
 
     </android.support.v7.widget.Toolbar>
 

@@ -4,14 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.two.football.R;
 
 public class AboutActivity extends AppCompatActivity {
 
-    Toolbar toolAbout;
-    ImageView imgBack;
+    private TextView tvNameToolBar;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +20,11 @@ public class AboutActivity extends AppCompatActivity {
         init();
 
         getSupportActionBar().hide();
-//        setSupportActionBar(toolAbout);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    private void init(){
+        tvNameToolBar = (TextView) findViewById(R.id.tv_name_toolbar);
+        imgBack = (ImageView) findViewById(R.id.img_back);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,13 +32,7 @@ public class AboutActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-    }
-
-    private void init(){
-        toolAbout = (Toolbar) findViewById(R.id.toolAbout);
-
-        imgBack = (ImageView) findViewById(R.id.backAbout);
+        tvNameToolBar.setText("About");
     }
 
 }

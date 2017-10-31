@@ -10,9 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
@@ -23,7 +23,7 @@ import android.widget.VideoView;
 import com.two.football.R;
 import com.two.football.adapter.PageAdapter;
 
-public class PlayVideoActivity extends AppCompatActivity{
+public class PlayVideoActivity extends AppCompatActivity implements View.OnClickListener{
     private Bundle getBundle = null;
     private String link;
     private ViewPager viewPager;
@@ -35,9 +35,9 @@ public class PlayVideoActivity extends AppCompatActivity{
     private ProgressBar process;
     private MediaController controller;
     private TextView tvDetail;
-    private ToolbarActivity toolbarActivity;
     private LinearLayout toolbar;
     private RelativeLayout rvDetails;
+    private ImageView back;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,11 +82,10 @@ public class PlayVideoActivity extends AppCompatActivity{
         rvDetails = (RelativeLayout) findViewById(R.id.rv_detail);
 
         controller = new MediaController(this);
-        /*toolbarActivity = new ToolbarActivity();
-        toolbar = (Toolbar) toolbarActivity.findViewById(R.id.tollbar);
-        setSupportActionBar(toolbar);*/
-        toolbar = (LinearLayout) findViewById(R.id.tollbar);
-        toolbarActivity = new ToolbarActivity();
+
+        back = (ImageView) findViewById(R.id.img_back);
+        back.setOnClickListener(this);
+        toolbar = (LinearLayout) findViewById(R.id.toolbar);
     }
 
     private void playVideo() {
@@ -119,12 +118,20 @@ public class PlayVideoActivity extends AppCompatActivity{
     }
 
     private void addRe() {
-
-
         //bxhAdapter = new BxhAdapter(this, arrBxh);
         //rcvBxh.setLayoutManager(new LinearLayoutManager(this));
         // rcvBxh.setAdapter(bxhAdapter);
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_back:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
 }

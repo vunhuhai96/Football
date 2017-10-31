@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/activity_toolbar"
-        android:id="@+id/tollbar"/>
+        android:id="@+id/toolbar"/>
 
     <FrameLayout
         android:layout_weight="1"

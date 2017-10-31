@@ -76,5 +76,4 @@ public class HighlightAdapter extends BaseAdapter {
         ImageView imgShare;
         TextView tvTitle;
     }
-
 }
