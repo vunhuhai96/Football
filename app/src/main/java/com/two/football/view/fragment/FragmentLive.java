@@ -1,5 +1,6 @@
 package com.two.football.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.model.Live;
 import com.two.football.R;
 import com.two.football.adapter.LiveAdapter;
+import com.two.football.view.activity.PlayVideoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,16 +44,19 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
         view = inflater.inflate(R.layout.live_layout, container, false);
         mReference = FirebaseDatabase.getInstance().getReference();
         initView();
-        initLive();
+        initLive("Bundesliga");
+        initLive("La Liga");
+        initLive("Premier League");
+//        getTranDau();
         return view;
     }
 
-    private void initLive() {
+    private void initLive(String tranDau) {
         list = new ArrayList<>();
         for (int i=0;i<15;i++){
             list.add(new Live());
         }
-//        initData(tranDau);
+        initData(tranDau);
         adapter = new LiveAdapter(getContext(), list);
         listView.setAdapter(adapter);
 
@@ -96,8 +101,52 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
         listView = (ListView) view.findViewById(R.id.lv_live);
     }
 
+    private void getTranDau(){
+        final List<String> listMatch = new ArrayList<>();
+        mReference.child("Tournament").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String match = dataSnapshot.getKey();
+                listMatch.add(match);
+
+                initLive("listMatch");
+//                for (int i = 0; i <= listMatch.size(); i++){
+//                    initLive(listMatch.get(i));
+//                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+        Intent intent = new Intent(getContext(), PlayVideoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("title", list.get(i).getTitle());
+        bundle.putString("link", list.get(i).getUrlVideo());
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 }
