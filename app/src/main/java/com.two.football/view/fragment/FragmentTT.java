@@ -1,6 +1,7 @@
 package com.two.football.view.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -99,7 +101,7 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     BLuan bLuan = dataSnapshot.getValue(BLuan.class);
-                    bLuans.add(bLuan);
+                    bLuans.add(0,bLuan);
                     blAdapter.notifyDataSetChanged();
                 }
 
@@ -134,13 +136,15 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                     Toast.makeText(getContext(), "Mời bạn đăng nhập để bình luận ", Toast.LENGTH_SHORT).show();
                 } else {
                     Calendar c = Calendar.getInstance();
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     String formattedDate = df.format(c.getTime());
                     final BLuan bLuan = new BLuan(user.getId(), user.getName(), user.getUrlAvatar(), edtCommentContent.getText().toString(), formattedDate, title);
                     mDatabaseReference.child("Comments").child(title).push().setValue(bLuan);
+                    edtCommentContent.setText("");
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 }
-
-
             }
         });
 

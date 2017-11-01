@@ -113,6 +113,7 @@
         android:gravity="center|left"
         android:paddingLeft="46dp"
         android:text="Lịch thi đấu"
+        android:id="@+id/btn_menu_ltd"
         android:textAllCaps="false"
         android:textSize="@dimen/text_size" />
 
