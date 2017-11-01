@@ -39,7 +39,8 @@ public class ClubActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         reference = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.activity_club);
-        //getSupportActionBar().hide();
+        getSupportActionBar().hide();
+
         initView();
         initSpinner();
         initClub();
@@ -50,6 +51,7 @@ public class ClubActivity extends AppCompatActivity implements View.OnClickListe
         listText.add("Bundesliga");
         listText.add("La Liga");
         listText.add("Premier League");
+        listText.add("SeriA");
 
         SpinnerHighlightAdapter adapterSpinner = new SpinnerHighlightAdapter(ClubActivity.this, listText);
 
