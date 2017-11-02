@@ -58,11 +58,9 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
     @Override
     public int getItemCount() {
 
-        return 2;
-
-
-
+        return list.size();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView imageView;

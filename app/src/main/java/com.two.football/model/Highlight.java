@@ -6,7 +6,7 @@ package com.two.football.model;
 
 public class Highlight {
 
-    String id, title, urlThumbnail, urlVideo, videoType;
+    String id, title, urlThumbnail, urlVideo, videoType, tournaments;
 
     public Highlight() {
     }
@@ -15,43 +15,57 @@ public class Highlight {
         this.urlThumbnail = thumbnail;
     }
 
-    public Highlight(String id, String title, String thumbnail, String link) {
+    public Highlight(String id, String title, String urlThumbnail, String urlVideo, String videoType, String tournaments) {
         this.id = id;
         this.title = title;
-        this.urlThumbnail = thumbnail;
-        this.urlVideo = link;
+        this.urlThumbnail = urlThumbnail;
+        this.urlVideo = urlVideo;
+        this.videoType = videoType;
+        this.tournaments = tournaments;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUrlThumbnail() {
-        return urlThumbnail;
-    }
-
-    public String getUrlVideo() {
-        return urlVideo;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getUrlThumbnail() {
+        return urlThumbnail;
+    }
+
     public void setUrlThumbnail(String urlThumbnail) {
         this.urlThumbnail = urlThumbnail;
     }
 
-    public void setLinkVideo(String link) {
-        this.urlVideo = link;
+    public String getUrlVideo() {
+        return urlVideo;
+    }
+
+    public void setUrlVideo(String urlVideo) {
+        this.urlVideo = urlVideo;
+    }
+
+    public void setVideoType(String videoType) {
+        this.videoType = videoType;
+    }
+
+    public String getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(String tournaments) {
+        this.tournaments = tournaments;
     }
 
     public String getVideoType() {

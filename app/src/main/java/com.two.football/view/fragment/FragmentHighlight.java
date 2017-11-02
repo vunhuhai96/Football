@@ -159,6 +159,11 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
         Bundle bundle = new Bundle();
         bundle.putString("title", list.get(position).getTitle());
         bundle.putString("link", list.get(position).getUrlVideo());
+        bundle.putString("tournaments",list.get(position).getTournaments());
+
+        Log.d("thanh", "onItemClick: " +list.get(position).getTournaments());
+
+
         intent.putExtras(bundle);
         startActivity(intent);
     }

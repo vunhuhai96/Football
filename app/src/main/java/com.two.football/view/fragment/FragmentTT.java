@@ -1,24 +1,22 @@
 package com.two.football.view.fragment;
 
-import android.app.Activity;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,28 +27,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.adapter.BlAdapter;
 import com.two.football.model.BLuan;
 import com.two.football.model.User;
-import com.two.football.view.activity.MainActivity;
+
 import com.two.football.view.activity.PlayVideoActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-
-import static android.content.Context.MODE_PRIVATE;
-
 
 public class FragmentTT extends Fragment implements View.OnClickListener {
     private TextView tvDetail;
     private Bundle getBundle = null;
-    private String title;
+    private String title, title2;
+    private Intent intent;
 
     private ImageView imageAccountComment, imageSendComment;
     private EditText edtCommentContent;
@@ -74,6 +69,18 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
         tvDetail = (TextView) view.findViewById(R.id.tv_detail);
         getBundle = getActivity().getIntent().getExtras();
         title = getBundle.getString("title");
+
+
+        intent = getActivity().getIntent();
+        title2 = intent.getStringExtra("title");
+
+        if (title2 == null){
+            tvDetail.setText(title);
+        }else {
+            tvDetail.setText(title2);
+        }
+
+
         tvDetail.setText(title);
 
         imageAccountComment = (ImageView) view.findViewById(R.id.img_account_comment);
@@ -99,7 +106,7 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     BLuan bLuan = dataSnapshot.getValue(BLuan.class);
-                    bLuans.add(bLuan);
+                    bLuans.add(0,bLuan);
                     blAdapter.notifyDataSetChanged();
                 }
 
@@ -134,15 +141,18 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                     Toast.makeText(getContext(), "Mời bạn đăng nhập để bình luận ", Toast.LENGTH_SHORT).show();
                 } else {
                     Calendar c = Calendar.getInstance();
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     String formattedDate = df.format(c.getTime());
                     final BLuan bLuan = new BLuan(user.getId(), user.getName(), user.getUrlAvatar(), edtCommentContent.getText().toString(), formattedDate, title);
                     mDatabaseReference.child("Comments").child(title).push().setValue(bLuan);
+                    edtCommentContent.setText("");
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 }
-
-
             }
         });
+
 
         return view;
     }
@@ -169,8 +179,7 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                         @Override
                         public void onError() {
                             imageView.setImageResource(R.drawable.ic_account);
-                        }
-                    });
+                        }});
         }
     }
 }
