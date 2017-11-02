@@ -1,5 +1,6 @@
 package com.two.football.view.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -25,7 +26,7 @@ import com.two.football.adapter.PageAdapter;
 
 public class PlayVideoActivity extends AppCompatActivity implements View.OnClickListener{
     private Bundle getBundle = null;
-    private String link;
+    private String link,link2;
     private ViewPager viewPager;
     private FragmentManager fragmentManager ;
     private PageAdapter pageAdapter;
@@ -38,6 +39,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private LinearLayout toolbar;
     private RelativeLayout rvDetails;
     private ImageView back;
+    private Intent intent;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +51,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         adControll();
         result();
         playVideo();
-        addRe();
     }
 
     @Override
@@ -73,6 +74,10 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private void result() {
         getBundle = getIntent().getExtras();
         link = getBundle.getString("link");
+
+        intent = getIntent();
+        link2 = intent.getStringExtra("link");
+
     }
 
     private void init() {
@@ -89,7 +94,13 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void playVideo() {
-        String videoUrl = link;
+        String videoUrl = null;
+        if (link2 == null){
+             videoUrl = link;
+        }
+        else {
+             videoUrl = link2;
+        }
 
         video.setMediaController(controller);
         video.setVideoURI(Uri.parse(videoUrl));
@@ -115,12 +126,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setTabsFromPagerAdapter(pageAdapter);
-    }
 
-    private void addRe() {
-        //bxhAdapter = new BxhAdapter(this, arrBxh);
-        //rcvBxh.setLayoutManager(new LinearLayoutManager(this));
-        // rcvBxh.setAdapter(bxhAdapter);
     }
 
 

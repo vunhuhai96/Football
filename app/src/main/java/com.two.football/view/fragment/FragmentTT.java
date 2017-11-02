@@ -1,5 +1,6 @@
 package com.two.football.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,8 @@ import com.two.football.R;
 public class FragmentTT extends Fragment implements View.OnClickListener {
     private TextView tvDetail;
     private Bundle getBundle = null;
-    private String title;
+    private String title, title2;
+    private Intent intent;
 
     public FragmentTT(){
 
@@ -30,7 +32,16 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
 
         getBundle = getActivity().getIntent().getExtras();
         title = getBundle.getString("title");
-        tvDetail.setText(title);
+
+        intent = getActivity().getIntent();
+        title2 = intent.getStringExtra("title");
+
+        if (title2 == null){
+            tvDetail.setText(title);
+        }else {
+            tvDetail.setText(title2);
+        }
+
         return view;
     }
 

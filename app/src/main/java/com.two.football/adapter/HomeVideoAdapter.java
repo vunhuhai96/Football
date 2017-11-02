@@ -57,13 +57,11 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
                 context.startActivity(intent);
             }
         });
-
-
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return list.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
