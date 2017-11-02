@@ -1,11 +1,13 @@
 package com.two.football.adapter;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -53,6 +55,12 @@ public class VideoPlusAdapter extends BaseAdapter {
 
             holder.imageView = (ImageView) convertView.findViewById(R.id.img_highlight);
             holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title_highlight);
+
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            int width = metrics.widthPixels;
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, width/2);
+            holder.imageView.setLayoutParams(layoutParams);
 
             convertView.setTag(holder);
         } else {

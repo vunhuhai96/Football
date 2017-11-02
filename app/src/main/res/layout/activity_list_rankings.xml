@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#BBDEFB"
-    tools:context="com.two.football.view.activity.ListResultsActivity">
+    tools:context="com.two.football.view.activity.ListRankingsActivity">
 
     <TextView
         android:id="@+id/table"
@@ -87,7 +87,7 @@
         android:layout_height="180dp">
 
         <ListView
-            android:id="@+id/listRe"
+            android:id="@+id/listRa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">

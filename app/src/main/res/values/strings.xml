@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Football</string>
+    <string name="facebook_app_id">1787464214885673</string>
+    <string name="fb_login_protocol_scheme">fb1787464214885673</string>
 </resources>

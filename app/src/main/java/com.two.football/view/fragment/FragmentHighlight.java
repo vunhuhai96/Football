@@ -165,7 +165,6 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
 
 
         intent.putExtras(bundle);
-
         startActivity(intent);
     }
 }

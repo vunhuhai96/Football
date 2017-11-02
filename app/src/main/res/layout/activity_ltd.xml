@@ -11,16 +11,15 @@
         <ImageView android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:padding="16dp"
-            android:id="@+id/btn_video_favorite_back"
+            android:id="@+id/btn_ltd_back"
             android:src="@drawable/ic_back"/>
 
     </TableRow>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/lv_video_favorite">
+        android:layout_height="match_parent"
+        android:id="@+id/lv_ltd">
 
     </ListView>
 

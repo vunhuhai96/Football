@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.two.football.R;
-import com.two.football.model.Results;
+import com.two.football.model.Rankings;
 
 import java.util.ArrayList;
 
@@ -17,26 +17,26 @@ import java.util.ArrayList;
  * Created by ADMIN on 10/26/2017.
  */
 
-public class ResultsAdapter extends BaseAdapter {
+public class RankingsAdapter extends BaseAdapter {
 
-    private ArrayList<Results> relist;
+    private ArrayList<Rankings> ralist;
     private LayoutInflater inflater;
     private Context context;
 
-    public ResultsAdapter(ArrayList<Results> relist, Context context) {
-        this.relist = relist;
+    public RankingsAdapter(ArrayList<Rankings> ralist, Context context) {
+        this.ralist = ralist;
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return relist.size();
+        return ralist.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return relist.get(position);
+        return ralist.get(position);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ResultsAdapter extends BaseAdapter {
         ViewHolder view;
 
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.activity_list_results, parent, false);
+            convertView = inflater.inflate(R.layout.activity_list_rankings, parent, false);
 
             view = new ViewHolder();
 
@@ -61,25 +61,25 @@ public class ResultsAdapter extends BaseAdapter {
             view.tLose = (TextView) convertView.findViewById(R.id.titleLose);
             view.tOffset = (TextView) convertView.findViewById(R.id.titleOff);
             view.tTotal = (TextView) convertView.findViewById(R.id.titleTotal);
-            view.listView = (ListView) convertView.findViewById(R.id.listRe);
+            view.listView = (ListView) convertView.findViewById(R.id.listRa);
 
             convertView.setTag(view);
         }else{
             view = (ViewHolder) convertView.getTag();
         }
 
-        Results re = relist.get(position);
+        Rankings rankings = ralist.get(position);
 
-        view.table.setText(re.getTable());
+        view.table.setText(rankings.getTable());
 
-        ArrayList<Results> list = new ArrayList<>();
+        ArrayList<Rankings> list = new ArrayList<>();
 
-        list.add(new Results("Chelsea", "28", "7", "13","5", "23/55", "31"));
-        list.add(new Results("Chelsea", "27", "6", "13","5", "23/55", "31"));
-        list.add(new Results("Chelsea", "26", "6", "13","5", "23/55", "31"));
-        list.add(new Results("Chelsea", "21", "6", "13","5", "23/55", "31"));
+        list.add(new Rankings("Chelsea", "28", "7", "13","5", "23/55", "31"));
+        list.add(new Rankings("Chelsea", "27", "6", "13","5", "23/55", "31"));
+        list.add(new Rankings("Chelsea", "26", "6", "13","5", "23/55", "31"));
+        list.add(new Rankings("Chelsea", "21", "6", "13","5", "23/55", "31"));
 
-        ListResultsAdapter adapterRe = new ListResultsAdapter(list, context.getApplicationContext());
+        ListRankingsAdapter adapterRe = new ListRankingsAdapter(list, context.getApplicationContext());
         view.listView.setAdapter(adapterRe);
 
 
