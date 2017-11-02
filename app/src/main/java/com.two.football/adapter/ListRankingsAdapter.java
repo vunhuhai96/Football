@@ -1,43 +1,40 @@
 package com.two.football.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.two.football.R;
-import com.two.football.model.Results;
+import com.two.football.model.Rankings;
 
 import java.util.ArrayList;
 /**
  * Created by ADMIN on 10/25/2017.
  */
 
-public class ListResultsAdapter extends BaseAdapter {
+public class ListRankingsAdapter extends BaseAdapter {
 
-    private ArrayList<Results> reslist;
+    private ArrayList<Rankings> ralist;
     private LayoutInflater inflater;
     private Context context;
 
-    public ListResultsAdapter(ArrayList<Results> reslist, Context context) {
-        this.reslist = reslist;
+    public ListRankingsAdapter(ArrayList<Rankings> ralist, Context context) {
+        this.ralist = ralist;
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return reslist.size();
+        return ralist.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return reslist.get(position);
+        return ralist.get(position);
     }
 
     @Override
@@ -51,7 +48,7 @@ public class ListResultsAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.item_results, null, false);
+            view = inflater.inflate(R.layout.item_rankings, null, false);
 
             viewHolder = new ViewHolder();
 //            viewHolder.teamImg = (ImageView) view.findViewById(R.id.teamImg);
@@ -68,15 +65,15 @@ public class ListResultsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        Results results = reslist.get(position);
+        Rankings rankings = ralist.get(position);
 
-        viewHolder.teamName.setText(results.getNameTeam());
-        viewHolder.battle.setText(results.getBattle());
-        viewHolder.win.setText(results.getWin());
-        viewHolder.draw.setText(results.getDraw());
-        viewHolder.lose.setText(results.getLose());
-        viewHolder.offset.setText(results.getOffset());
-        viewHolder.totalpoint.setText(results.getTotalPoints());
+        viewHolder.teamName.setText(rankings.getNameTeam());
+        viewHolder.battle.setText(rankings.getBattle());
+        viewHolder.win.setText(rankings.getWin());
+        viewHolder.draw.setText(rankings.getDraw());
+        viewHolder.lose.setText(rankings.getLose());
+        viewHolder.offset.setText(rankings.getOffset());
+        viewHolder.totalpoint.setText(rankings.getTotalPoints());
 
         return view;
     }

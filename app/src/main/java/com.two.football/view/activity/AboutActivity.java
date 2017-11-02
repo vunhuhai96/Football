@@ -32,7 +32,7 @@ public class AboutActivity extends AppCompatActivity {
                 finish();
             }
         });
-        tvNameToolBar.setText("About");
+        tvNameToolBar.setText("Thông tin");
     }
 
 }

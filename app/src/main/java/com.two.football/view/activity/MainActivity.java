@@ -18,8 +18,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+
 import android.util.Base64;
 import android.util.Log;
+
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +48,11 @@ import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.adapter.MainAdapter;
 import com.two.football.model.User;
+
+
+import com.two.football.R;
+import com.two.football.adapter.MainAdapter;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -229,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                 md.update(signature.toByteArray());
-                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                /*Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));*/
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -282,7 +290,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.closeDrawers();
                 break;
             case R.id.btn_menu_table:
-                Intent inResults = new Intent(this, ResultsActivity.class);
+
+
+
+                Intent inResults = new Intent(this,RankingsActivity.class);
+
                 startActivity(inResults);
                 break;
             case R.id.btn_menu_about:

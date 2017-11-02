@@ -3,13 +3,13 @@ package com.two.football.model;
 import android.widget.ImageView;
 
 /**
- * Created by ADMIN on 10/25/2017.
+ * Created by ADMIN on 10/31/2017.
  */
 
-public class Results {
+public class Rankings {
 
     private String table;
-    private ImageView teamImg;
+    private String teamImg;
     private String nameTeam;
     private String battle;
     private String win;
@@ -18,15 +18,15 @@ public class Results {
     private String offset;
     private String totalPoints;
 
-    public Results(){
+    public Rankings(){
 
     }
 
-    public Results(String table) {
+    public Rankings(String table) {
         this.table = table;
     }
 
-    public Results(String nameTeam, String battle, String win, String draw, String lose, String offset, String totalPoints) {
+    public Rankings(String nameTeam, String battle, String win, String draw, String lose, String offset, String totalPoints) {
         this.nameTeam = nameTeam;
         this.battle = battle;
         this.win = win;
@@ -56,11 +56,11 @@ public class Results {
         this.table = table;
     }
 
-    public ImageView getTeamImg() {
+    public String getTeamImg() {
         return teamImg;
     }
 
-    public void setTeamImg(ImageView teamImg) {
+    public void setTeamImg(String teamImg) {
         this.teamImg = teamImg;
     }
 

@@ -16,14 +16,14 @@ import java.util.ArrayList;
  * Created by ADMIN on 10/26/2017.
  */
 
-public class SpinnerResultsAdapter extends ArrayAdapter<String> {
+public class SpinnerRankingsAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private ArrayList<String> data;
     public Resources res;
     private LayoutInflater inflater;
 
-    public SpinnerResultsAdapter(Context context, ArrayList<String> objects) {
+    public SpinnerRankingsAdapter(Context context, ArrayList<String> objects) {
         super(context, R.layout.item_spinner, objects);
 
         this.context = context;

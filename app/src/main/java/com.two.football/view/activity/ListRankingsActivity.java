@@ -6,23 +6,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.two.football.R;
-import com.two.football.adapter.ListResultsAdapter;
-import com.two.football.model.Results;
+import com.two.football.adapter.ListRankingsAdapter;
+import com.two.football.model.Rankings;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ListResultsActivity extends AppCompatActivity {
+public class ListRankingsActivity extends AppCompatActivity {
 
     TextView table;
-    ListView listResults;
-    ArrayList<Results> list;
-    private static ListResultsAdapter adapterRe;
+    ListView listRankings;
+    ArrayList<Rankings> list;
+    private static ListRankingsAdapter adapterRa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_results);
+        setContentView(R.layout.activity_list_rankings);
         getSupportActionBar().hide();
 
         init();
@@ -34,6 +33,6 @@ public class ListResultsActivity extends AppCompatActivity {
 
         table = (TextView) findViewById(R.id.table);
 
-        listResults = (ListView) findViewById(R.id.listRe);
+        listRankings = (ListView) findViewById(R.id.listRa);
     }
 }
