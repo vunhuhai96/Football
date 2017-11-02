@@ -37,11 +37,9 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
-
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Video video = list.get(position);
-
         Picasso.with(context).load(video.getUrlThumbnail()).into(holder.imageView);
         holder.textView.setText(video.getTitle());
 
@@ -53,19 +51,14 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
                 bundle.putString("title",list.get(position).getTitle());
                 bundle.putString("link",list.get(position).getUrlVideo());
                 intent.putExtras(bundle);
-
                 context.startActivity(intent);
             }
         });
-
-
     }
-
     @Override
     public int getItemCount() {
-        return 4;
+        return 2;
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView imageView;
