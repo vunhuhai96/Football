@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,7 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
                     list.add(live);
                     adapter.notifyDataSetChanged();
                 }
+
             }
 
             @Override
@@ -120,6 +122,7 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
 
             }
         });
+
     }
 
     private void initView() {
@@ -134,6 +137,7 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
         Bundle bundle = new Bundle();
         bundle.putString("title", list.get(i).getTitle());
         bundle.putString("link", list.get(i).getUrlVideo());
+        bundle.putString("tournaments",list.get(i).getTournaments());
         intent.putExtras(bundle);
 
         startActivity(intent);
