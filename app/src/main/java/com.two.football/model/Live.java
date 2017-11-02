@@ -6,27 +6,18 @@ package com.two.football.model;
 
 public class Live {
 
-    private String id, title, guestClub, homeClub, urlVideo, videoType;
+    private String title, guestClub, homeClub, urlVideo, videoType;
 
     public Live(){
 
     }
 
-    public Live(String id, String title, String guestClub, String homeClub, String urlVideo, String videoType) {
-        this.id = id;
+    public Live(String title, String guestClub, String homeClub, String urlVideo, String videoType) {
         this.title = title;
         this.guestClub = guestClub;
         this.homeClub = homeClub;
         this.urlVideo = urlVideo;
         this.videoType = videoType;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
