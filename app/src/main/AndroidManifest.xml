@@ -45,7 +45,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.ScreenActivity"/>
 
-
         <activity android:name=".view.activity.LTDActivity"
             android:screenOrientation="portrait"/>
 

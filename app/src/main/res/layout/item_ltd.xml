@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_height="wrap_content">
+
+    <TableRow android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginLeft="2dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Chelsea"
+            android:textColor="@color/background_color"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:id="@+id/tv_ltd_home_club"
+            android:gravity="center|right"/>
+
+        <ImageView
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_chel"
+            android:padding="8dp"
+            android:id="@+id/img_ltd_home"
+            android:layout_gravity="center"/>
+
+    </TableRow>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:00"
+            android:textStyle="bold"
+            android:textColor="#D50000"
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_ltd_time"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30/10/2017"
+            android:textStyle="bold"
+            android:id="@+id/tv_ltd_date"
+            android:layout_marginTop="5dp"
+            android:textColor="#D50000"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+
+    <TableRow android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:src="@drawable/ic_mu"
+            android:padding="8dp"
+            android:id="@+id/img_ltd_guest"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Manchester United"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:id="@+id/tv_ltd_guest_club"
+            android:textColor="@color/background_color"
+            android:gravity="center|left"/>
+
+    </TableRow>
+
+
+</LinearLayout>
