@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.two.football.R;
 import com.two.football.adapter.VideoFavoriteAdapter;
@@ -21,6 +23,8 @@ public class VideoFavoriteActivity extends Activity implements View.OnClickListe
     private ListView listView;
     private List<VideoFavorite> list;
     private VideoFavoriteAdapter adapter;
+    private TextView tvNameToolbar;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,14 +49,17 @@ public class VideoFavoriteActivity extends Activity implements View.OnClickListe
 
     private void initView() {
         listView = (ListView) findViewById(R.id.lv_video_favorite);
+        tvNameToolbar = (TextView) findViewById(R.id.tv_name_toolbar);
+        tvNameToolbar.setText("Video yêu thích");
+        imgBack = (ImageView) findViewById( R.id.img_back);
+        imgBack.setOnClickListener(this);
 
-        findViewById(R.id.btn_video_favorite_back).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_video_favorite_back:
+            case R.id.img_back:
                 onBackPressed();
                 break;
             default:

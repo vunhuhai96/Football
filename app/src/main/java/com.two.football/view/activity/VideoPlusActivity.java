@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -31,6 +32,7 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener,
     private VideoPlusAdapter adapter;
     private DatabaseReference reference;
     private Intent intent;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +80,8 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener,
     }
 
     private void initView() {
-        findViewById(R.id.btn_video_favorite_back).setOnClickListener(this);
+        imgBack = (ImageView) findViewById(R.id.img_back);
+        imgBack.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.lv_video_favorite);
         listView.setOnItemClickListener(this);
     }
@@ -86,7 +89,7 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_video_favorite_back:
+            case R.id.img_back:
                 onBackPressed();
                 break;
             default:

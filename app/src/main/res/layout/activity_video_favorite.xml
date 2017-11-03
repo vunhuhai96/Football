@@ -4,17 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorGreen">
-
-        <ImageView android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:padding="16dp"
-            android:id="@+id/btn_video_favorite_back"
-            android:src="@drawable/ic_back"/>
-
-    </TableRow>
+    <include layout="@layout/activity_toolbar"/>
 
     <ListView
         android:layout_width="match_parent"
