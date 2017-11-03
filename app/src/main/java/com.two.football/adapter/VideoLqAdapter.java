@@ -51,6 +51,7 @@ public class VideoLqAdapter extends RecyclerView.Adapter<VideoLqAdapter.ViewHold
                 Bundle bundle = new Bundle();
                 bundle.putString("title", videos.get(position).getTitle());
                 bundle.putString("link", videos.get(position).getUrlVideo());
+                bundle.putString("tournaments",videos.get(position).getTournaments());
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }
