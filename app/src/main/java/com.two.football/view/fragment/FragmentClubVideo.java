@@ -96,6 +96,7 @@ public class FragmentClubVideo extends Fragment implements AdapterView.OnItemCli
         Bundle bundle = new Bundle();
         bundle.putString("title", list.get(position).getTitle());
         bundle.putString("link", list.get(position).getUrlVideo());
+
         intent.putExtras(bundle);
 
         startActivity(intent);

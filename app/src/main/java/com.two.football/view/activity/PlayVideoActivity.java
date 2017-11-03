@@ -1,6 +1,10 @@
 package com.two.football.view.activity;
 
+
+import android.content.Intent;
+
 import android.content.SharedPreferences;
+
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -38,7 +42,11 @@ import java.util.ArrayList;
 
 public class PlayVideoActivity extends AppCompatActivity implements View.OnClickListener {
     private Bundle getBundle = null;
-    private String link, title;
+
+    private String title;
+
+    private String link, link2;
+
     private ViewPager viewPager;
     private FragmentManager fragmentManager;
     private PageAdapter pageAdapter;
@@ -53,6 +61,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
 
     private RelativeLayout rvDetails;
     private ImageView back;
+
+    private Intent intent;
+
     private String FILE_NAME = "user.txt";
     private DatabaseReference mDatabaseReference;
     private String idCurrentUser;
@@ -73,7 +84,10 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         adControll();
         result();
         playVideo();
+
         likeVideo();
+
+
     }
 
     public User restoringPreferences() {
@@ -106,9 +120,14 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             getSupportActionBar().hide();
         }
     }
+
     private void result() {
         getBundle = getIntent().getExtras();
         link = getBundle.getString("link");
+
+        intent = getIntent();
+        link2 = intent.getStringExtra("link");
+
     }
 
     private void init() {
@@ -139,7 +158,15 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void playVideo() {
-        String videoUrl = link;
+
+        String videoUrl = null;
+        if (link2 == null) {
+            videoUrl = link;
+        } else {
+            videoUrl = link2;
+        }
+
+
         video.setMediaController(controller);
         video.setVideoURI(Uri.parse(videoUrl));
         video.requestFocus();
@@ -170,32 +197,41 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         tabLayout.setTabsFromPagerAdapter(pageAdapter);
     }
 
+
     private void likeVideo() {
         mDatabaseReference.child("Other").child(title).child("like").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-              currentLike = dataSnapshot.getValue(int.class);
-              tvLikeNumber.setText(currentLike + "");
+                try {
+                    if (dataSnapshot.getValue(int.class)!=null){
+                        currentLike = dataSnapshot.getValue(int.class);
+                        tvLikeNumber.setText(currentLike + "");
+                    }
+                } catch (Exception e) {
+
+                }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
-    private void isCurrentLiked(){
+
+    private void isCurrentLiked() {
         arrUserLiked.clear();
         mDatabaseReference.child("Other").child(title).child("idUserLiked").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String idUser = dataSnapshot.getValue(String.class);
                 arrUserLiked.add(idUser);
-                Log.e("user", idUser );
-                if (arrUserLiked.size()>0){
-                    for (int i=0;i<arrUserLiked.size();i++){
-                        if (idCurrentUser.equals(arrUserLiked.get(i))){
+                Log.e("user", idUser);
+                if (arrUserLiked.size() > 0) {
+                    for (int i = 0; i < arrUserLiked.size(); i++) {
+                        if (idCurrentUser.equals(arrUserLiked.get(i))) {
                             imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
                             isLike = true;
-                            Log.e("isLike", isLike+"");
+                            Log.e("isLike", isLike + "");
 
                         }
                     }
@@ -224,8 +260,8 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-    }
 
+    }
 
     private void shareVideo() {
         if (ShareDialog.canShow(ShareLinkContent.class)) {
@@ -255,7 +291,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void addUserLike() {
-        currentLike=currentLike+1;
+        currentLike = currentLike + 1;
         mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
         imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
         mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).setValue(idCurrentUser);
@@ -263,7 +299,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void removeUserLike() {
-        currentLike = currentLike-1;
+        currentLike = currentLike - 1;
         mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
         imgLikeVideo.setImageResource(R.drawable.icon_like_video);
         mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).removeValue();

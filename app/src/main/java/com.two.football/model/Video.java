@@ -5,44 +5,56 @@ package com.two.football.model;
  */
 
 public class Video {
-    String id, title, urlThumbnail, urlVideo;
+    String id, title, urlThumbnail, urlVideo,tournaments;
 
     public Video() {
     }
 
-    public Video(String thumbnail) {
-        this.urlThumbnail = thumbnail;
-    }
-
-    public Video(String id, String title, String thumbnail, String linkVideo) {
+    public Video(String id, String title, String urlThumbnail, String urlVideo, String tournaments) {
         this.id = id;
         this.title = title;
-        this.urlThumbnail = thumbnail;
-        this.urlVideo = linkVideo;
+        this.urlThumbnail = urlThumbnail;
+        this.urlVideo = urlVideo;
+        this.tournaments = tournaments;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUrlThumbnail() {
-        return urlThumbnail;
-    }
-
-    public String getUrlVideo() {
-        return urlVideo;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getUrlThumbnail() {
+        return urlThumbnail;
+    }
+
+    public void setUrlThumbnail(String urlThumbnail) {
+        this.urlThumbnail = urlThumbnail;
+    }
+
+    public String getUrlVideo() {
+        return urlVideo;
+    }
+
+    public void setUrlVideo(String urlVideo) {
+        this.urlVideo = urlVideo;
+    }
+
+    public String getTournament() {
+        return tournaments;
+    }
+
+    public void setTournament(String tournament) {
+        this.tournaments = tournament;
+    }
 }

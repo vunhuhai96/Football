@@ -50,15 +50,20 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
                 Bundle bundle = new Bundle();
                 bundle.putString("title",list.get(position).getTitle());
                 bundle.putString("link",list.get(position).getUrlVideo());
+                bundle.putString("tournaments",list.get(position).getTournament());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
     }
     @Override
-    public int getItemCount() {
-        return 2;
+    public int getItemCount() {        return 2;
+
+
+
+
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView imageView;

@@ -53,26 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:layout_marginTop="7dp"
-            android:layout_gravity="fill_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp">
 
-            <ImageView
-                android:background="@drawable/like"
-                android:id="@+id/img_like"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:layout_marginLeft="8dp"
-                android:id="@+id/img_heath"
-                android:background="@drawable/heath"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

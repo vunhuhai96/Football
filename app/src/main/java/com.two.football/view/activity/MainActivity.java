@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnNavigation;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnTable, btnAbout, btnVideoFavorite;
+    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnTable, btnAbout, btnLTD, btnVideoFavorite;
     private MainAdapter mainAdapter;
     private CallbackManager callbackManager;
     private TextView tvAccountName;
     private DatabaseReference mDatabaseReference;
-    ImageView imageAccount;
+    private ImageView imageAccount;
     private boolean isLogin = false;
     private String FILE_NAME = "user.txt";
 
@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tvAccountName.setText(user.getName());
             isLogin = true;
         }
+
+
 
     }
 
@@ -258,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMenuHome = (Button) findViewById(R.id.btn_menu_home);
         btnMenuLive = (Button) findViewById(R.id.btn_menu_live);
         btnMenuHighlight = (Button) findViewById(R.id.btn_menu_higlight);
+        btnLTD = (Button) findViewById(R.id.btn_menu_ltd);
         btnTable = (Button) findViewById(R.id.btn_menu_table);
         btnAbout = (Button) findViewById(R.id.btn_menu_about);
         btnVideoFavorite = (Button) findViewById(R.id.btn_video_favorite);
@@ -272,9 +275,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTable.setOnClickListener(this);
         btnAbout.setOnClickListener(this);
         btnVideoFavorite.setOnClickListener(this);
+        btnLTD.setOnClickListener(this);
         imageAccount.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -307,6 +309,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, VideoFavoriteActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.btn_menu_ltd:
+                Intent intentLTD = new Intent(this, LTDActivity.class);
+                startActivity(intentLTD);
+                break;
+
             case R.id.img_account:
                 if (isLogin) logOut();
                 else
@@ -316,13 +323,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
     private void logOut() {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

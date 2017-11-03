@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
@@ -27,7 +33,6 @@ public class BlAdapter extends RecyclerView.Adapter<BlAdapter.ViewHolder> implem
     private Context context;
     private ArrayList<BLuan> bLuans;
     private LayoutInflater inflater;
-    private boolean ischecker = false;
 
     public BlAdapter(Context context, ArrayList<BLuan> bLuans) {
         this.context = context;
@@ -41,6 +46,7 @@ public class BlAdapter extends RecyclerView.Adapter<BlAdapter.ViewHolder> implem
         View view = inflater.inflate(R.layout.item_bl, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         BLuan bLuan = bLuans.get(position);
@@ -62,12 +68,12 @@ public class BlAdapter extends RecyclerView.Adapter<BlAdapter.ViewHolder> implem
                         holder.imgAvater.setImageResource(R.drawable.ic_account);
                     }
                 });
-
         holder.tvName1.setText(bLuan.getName());
         holder.tvContent.setText(bLuan.getContent());
         holder.tvTime.setText(bLuan.getTime());
-        holder.imgLike.setOnClickListener(this);
-        holder.imgHeath.setOnClickListener(this);
+
+
+
 
     }
 
@@ -75,36 +81,26 @@ public class BlAdapter extends RecyclerView.Adapter<BlAdapter.ViewHolder> implem
     public int getItemCount() {
         return bLuans.size();
     }
+
     @Override
     public void onClick(View view) {
         ViewHolder holder = null;
-        switch (view.getId()) {
-            case R.id.img_like:
-                if (ischecker)
-                    holder.imgLike.setImageResource(R.drawable.like);
-                else if (ischecker = true) {
-                    holder.imgLike.setImageResource(R.drawable.like2);
-                }
-                break;
-            case R.id.img_heath:
-                break;
-        }
     }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgAvater;
         private TextView tvName1;
-        private TextView tvContent,tvTime;
-        private ImageView imgLike;
-        private ImageView imgHeath;
+        private TextView tvContent, tvTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imgAvater = (ImageView) itemView.findViewById(R.id.image_account_comment);
             tvName1 = (TextView) itemView.findViewById(R.id.tv_name1);
             tvContent = (TextView) itemView.findViewById(R.id.tv_content);
-            imgLike = (ImageView) itemView.findViewById(R.id.img_like);
-            imgHeath = (ImageView) itemView.findViewById(R.id.img_heath);
             tvTime = (TextView) itemView.findViewById(R.id.tv_time);
+
+
         }
     }
 }

@@ -30,13 +30,14 @@
             android:layout_gravity="center"/>
 
     </TableRow>
+
     <TextView
         android:id="@+id/videoType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Trực tiếp"
         android:textStyle="bold"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:textColor="#D50000"
         android:layout_gravity="center"/>
 

@@ -1,26 +1,33 @@
 package com.two.football.model;
 
 public class BLuan {
-    private String id, name, avatar, content, time,titleVideo;
+    private String  idUser, name, avatar, content, time, titleVideo;
 
     public BLuan() {
     }
 
-    public BLuan(String id, String name, String avatar, String content, String time, String titleVideo) {
-        this.id = id;
+
+
+    public BLuan( String idUser, String name, String avatar, String content, String time, String titleVideo) {
+
+        this.idUser = idUser;
         this.name = name;
         this.avatar = avatar;
         this.content = content;
         this.time = time;
         this.titleVideo = titleVideo;
+
+
     }
 
-    public String getId() {
-        return id;
+
+
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {
@@ -62,4 +69,7 @@ public class BLuan {
     public void setTitleVideo(String titleVideo) {
         this.titleVideo = titleVideo;
     }
+
+
+
 }
