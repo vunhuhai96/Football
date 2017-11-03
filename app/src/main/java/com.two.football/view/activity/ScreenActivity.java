@@ -4,17 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import com.two.football.R;
 import com.two.football.model.VideoLq;
 import java.util.ArrayList;
-
 
 public class ScreenActivity extends AppCompatActivity {
    private Bundle bundle ;
    private Intent intent;
    private String link;
    private String title;
+   private String tournaments;
    private ArrayList<VideoLq> videos;
 
     @Override
@@ -31,8 +30,11 @@ public class ScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 intent = new Intent(ScreenActivity.this,PlayVideoActivity.class);
-                intent.putExtra("link",link);
-                intent.putExtra("title",title);
+                bundle = new Bundle();
+                bundle.putString("link",link);
+                bundle.putString("title",title);
+                bundle.putString("tournaments",tournaments);
+                intent.putExtras(bundle);
 
                 startActivity(intent);
                 finish();
@@ -40,13 +42,10 @@ public class ScreenActivity extends AppCompatActivity {
         }).start();
     }
 
-
-
     private void result() {
         bundle = getIntent().getExtras();
         link = bundle.getString("link");
         title = bundle.getString("title");
+        tournaments = bundle.getString("tournaments");
     }
-
-
 }
