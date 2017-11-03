@@ -5,17 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/background_color">
-
-        <ImageView android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:padding="16dp"
-            android:id="@+id/btn_club_info_back"
-            android:src="@drawable/ic_back"/>
-
-    </TableRow>
+    <include layout="@layout/activity_toolbar"/>
 
     <android.support.design.widget.TabLayout
         android:background="@color/background_color_tab"

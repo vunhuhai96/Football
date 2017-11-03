@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.two.football.R;
 import com.two.football.adapter.InfoClubAdapter;
@@ -21,6 +22,7 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
     private TabLayout tabLayout;
     private InfoClubAdapter adapter;
     private String key;
+    private ImageView imgback;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,13 +53,14 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
         pager = (ViewPager) findViewById(R.id.club_info_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout_club_info);
 
-        findViewById(R.id.btn_club_info_back).setOnClickListener(this);
+        imgback = (ImageView) findViewById(R.id.img_back);
+        imgback.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_club_info_back:
+            case R.id.img_back:
                 onBackPressed();
                 break;
             default:
