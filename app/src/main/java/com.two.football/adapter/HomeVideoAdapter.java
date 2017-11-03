@@ -51,6 +51,7 @@ public class HomeVideoAdapter extends RecyclerView.Adapter<HomeVideoAdapter.View
                 bundle.putString("title",list.get(position).getTitle());
                 bundle.putString("link",list.get(position).getUrlVideo());
                 bundle.putString("tournaments",list.get(position).getTournament());
+                bundle.putString("id", list.get(position).getId());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
