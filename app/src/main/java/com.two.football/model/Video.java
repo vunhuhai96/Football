@@ -50,11 +50,11 @@ public class Video {
         this.urlVideo = urlVideo;
     }
 
-    public String getTournament() {
+    public String getTournaments() {
         return tournaments;
     }
 
-    public void setTournament(String tournament) {
-        this.tournaments = tournament;
+    public void setTournaments(String tournaments) {
+        this.tournaments = tournaments;
     }
 }

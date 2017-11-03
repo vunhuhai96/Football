@@ -46,6 +46,7 @@ public class FragmentVideoLq extends Fragment {
         arrVideo = new ArrayList<>();
         recyclerView();
         Bundle bundle = getActivity().getIntent().getExtras();
+        String id = bundle.getString("id");
         String title = bundle.getString("title");
         String link = bundle.getString("link");
 
