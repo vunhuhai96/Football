@@ -131,8 +131,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             isLogin = true;
         }
 
+    }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     public User restoringPreferences() {

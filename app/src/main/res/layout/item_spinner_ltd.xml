@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/background_color_tab">
     <TextView
-        android:id="@+id/tv_spinner_highlight"
+        android:id="@+id/tv_spinner_ltd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="5dp"
-        android:textSize="18dp" />
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@android:color/white"
+        android:textSize="16dp" />
 
 </LinearLayout>
