@@ -24,6 +24,7 @@ import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.facebook.share.model.ShareLinkContent;
@@ -203,7 +204,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
-                    if (dataSnapshot.getValue(int.class)!=null){
+                    if (dataSnapshot.getValue(int.class) != null) {
                         currentLike = dataSnapshot.getValue(int.class);
                         tvLikeNumber.setText(currentLike + "");
                     }
@@ -291,18 +292,26 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void addUserLike() {
-        currentLike = currentLike + 1;
-        mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
-        imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
-        mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).setValue(idCurrentUser);
-        isLike = true;
+        if (idCurrentUser == null)
+            Toast.makeText(this, "Mời bạn đăng nhập để like ", Toast.LENGTH_SHORT).show();
+        else {
+            currentLike = currentLike + 1;
+            mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
+            imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
+            mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).setValue(idCurrentUser);
+            isLike = true;
+        }
     }
 
     private void removeUserLike() {
-        currentLike = currentLike - 1;
-        mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
-        imgLikeVideo.setImageResource(R.drawable.icon_like_video);
-        mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).removeValue();
-        isLike = false;
+        if (idCurrentUser == null)
+            Toast.makeText(this, "Mời bạn đăng nhập để like ", Toast.LENGTH_SHORT).show();
+        else {
+            currentLike = currentLike - 1;
+            mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
+            imgLikeVideo.setImageResource(R.drawable.icon_like_video);
+            mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).removeValue();
+            isLike = false;
+        }
     }
 }

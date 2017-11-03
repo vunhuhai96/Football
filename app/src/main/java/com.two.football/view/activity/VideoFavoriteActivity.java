@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.two.football.R;
+import com.two.football.adapter.HighlightAdapter;
 import com.two.football.adapter.VideoFavoriteAdapter;
+import com.two.football.model.Highlight;
 import com.two.football.model.VideoFavorite;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class VideoFavoriteActivity extends Activity implements View.OnClickListener {
     private ListView listView;
-    private List<VideoFavorite> list;
+    private List<Highlight> list;
     private VideoFavoriteAdapter adapter;
 
     @Override
@@ -35,9 +37,7 @@ public class VideoFavoriteActivity extends Activity implements View.OnClickListe
     private void initVideoFavorite() {
         list = new ArrayList<>();
 
-        for (int i=0;i<10;i++){
-            list.add(new VideoFavorite());
-        }
+        list = HighlightAdapter.highlights;
 
         adapter = new VideoFavoriteAdapter(VideoFavoriteActivity.this, list);
         listView.setAdapter(adapter);
