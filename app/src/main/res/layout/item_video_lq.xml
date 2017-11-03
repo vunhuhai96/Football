@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/ll_video_lq"
         android:orientation="horizontal"
         android:layout_width="match_parent"

@@ -42,11 +42,8 @@ import java.util.ArrayList;
 
 public class PlayVideoActivity extends AppCompatActivity implements View.OnClickListener {
     private Bundle getBundle = null;
-
     private String title;
-
     private String link, link2;
-
     private ViewPager viewPager;
     private FragmentManager fragmentManager;
     private PageAdapter pageAdapter;
@@ -58,12 +55,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private MediaController controller;
     private TextView tvDetail, tvLikeNumber, tvShareNumber;
     private LinearLayout toolbar;
-
     private RelativeLayout rvDetails;
     private ImageView back;
-
     private Intent intent;
-
     private String FILE_NAME = "user.txt";
     private DatabaseReference mDatabaseReference;
     private String idCurrentUser;
@@ -110,11 +104,17 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             rvDetails.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
+            imgLikeVideo.setVisibility(View.VISIBLE);
+            imgShareVideo.setVisibility(View.VISIBLE);
+            tvLikeNumber.setVisibility(View.VISIBLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvDetails.setVisibility(View.GONE);
             toolbar.setVisibility(View.GONE);
+            imgLikeVideo.setVisibility(View.GONE);
+            imgShareVideo.setVisibility(View.GONE);
+            tvLikeNumber.setVisibility(View.GONE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();

@@ -4,8 +4,10 @@ package com.two.football.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +92,7 @@ public class FragmentVideoLq extends Fragment {
 
     private void init() {
         rcvVideoLq = (RecyclerView) view.findViewById(R.id.rcv_video_lq);
+        rcvVideoLq.setItemAnimator(new DefaultItemAnimator() {});
     }
 
     private void recyclerView() {
