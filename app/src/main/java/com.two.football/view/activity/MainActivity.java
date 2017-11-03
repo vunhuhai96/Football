@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -38,9 +39,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -76,13 +79,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isLogin = false;
     private String FILE_NAME = "user.txt";
 
-
+    private AccessToken accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+        accessToken = AccessToken.getCurrentAccessToken();
         getSupportActionBar().hide();
         callbackManager = CallbackManager.Factory.create();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -92,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isLogin = true;
                 getProfileUser();
             }
-
             @Override
             public void onCancel() {
                 Log.e("Thong bao", "Cancel");
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         initPager();
         User user = restoringPreferences();
-        if (user!=null&&user.getUrlAvatar()!=null&&user.getName()!=null){
+        if (user != null && user.getUrlAvatar() != null && user.getName() != null) {
             Picasso.with(getApplicationContext()).load(user.getUrlAvatar())
                     .resize(200, 200)
                     .into(imageAccount, new Callback() {
@@ -125,25 +128,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
             tvAccountName.setText(user.getName());
-            isLogin=true;
+            isLogin = true;
         }
-/*        getKeyHash();*/
+
     }
+
     public User restoringPreferences() {
         SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
         String userName = preferences.getString("name", "");
         String id = preferences.getString("id", "");
         String avatar = preferences.getString("avatar", "");
-        User user=null;
-        if (userName.equals("")||id.equals("")||avatar.equals("")){
-        }
-        else{
-            user= new User(userName, id, avatar);
+        User user = null;
+        if (userName.equals("") || id.equals("") || avatar.equals("")) {
+        } else {
+            user = new User(userName, id, avatar);
             return user;
         }
         return user;
     }
-    private void savingPreferences(String name, String avatar, String id,boolean chk) {
+
+    private void savingPreferences(String name, String avatar, String id, boolean chk) {
         SharedPreferences sharedPreferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -173,10 +177,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String id = object.getString("id");
                     String name = object.getString("name");
                     String urlAvatar = "https://graph.facebook.com/" + id + "/picture?type=large";
-                    savingPreferences(name, urlAvatar, id,false);
+                    savingPreferences(name, urlAvatar, id, false);
                     User user = new User(name, id, urlAvatar);
                     tvAccountName.setText(name);
                     mDatabaseReference.child("User").child(id).setValue(user);
+
                     Picasso.with(getApplicationContext()).load(urlAvatar)
                             .resize(200, 200)
                             .into(imageAccount, new Callback() {
@@ -194,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     imageAccount.setImageResource(R.drawable.ic_account);
                                 }
                             });
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -226,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void getKeyHash() {
+   /* private void getKeyHash() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo("com.two.football", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
@@ -237,12 +243,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                 md.update(signature.toByteArray());
-                /*Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));*/
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void initView() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -290,11 +296,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.closeDrawers();
                 break;
             case R.id.btn_menu_table:
-
-
-
-                Intent inResults = new Intent(this,RankingsActivity.class);
-
+                Intent inResults = new Intent(this, RankingsActivity.class);
                 startActivity(inResults);
                 break;
             case R.id.btn_menu_about:
@@ -307,7 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.img_account:
                 if (isLogin) logOut();
-                else LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+                else
+                    LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
                 break;
             default:
                 break;
@@ -334,8 +337,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         LoginManager.getInstance().logOut();
                         tvAccountName.setText("Đăng Nhập");
                         imageAccount.setImageResource(R.drawable.ic_account);
-                        savingPreferences(null,null,null,true);
-                        isLogin=false;
+                        savingPreferences(null, null, null, true);
+                        isLogin = false;
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

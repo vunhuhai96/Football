@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
@@ -23,54 +22,69 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.two.football.R;
 import com.two.football.adapter.PageAdapter;
 import com.two.football.model.User;
-import com.two.football.view.fragment.FragmentTT;
 
-import java.io.File;
+import java.util.ArrayList;
 
 public class PlayVideoActivity extends AppCompatActivity implements View.OnClickListener {
     private Bundle getBundle = null;
-    private String link;
+    private String link, title;
     private ViewPager viewPager;
     private FragmentManager fragmentManager;
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
     private VideoView video;
     private RecyclerView rcvBxh;
+    private ImageView imgLikeVideo, imgShareVideo;
     private ProgressBar process;
     private MediaController controller;
-    private TextView tvDetail;
+    private TextView tvDetail, tvLikeNumber, tvShareNumber;
     private LinearLayout toolbar;
+
     private RelativeLayout rvDetails;
     private ImageView back;
     private String FILE_NAME = "user.txt";
+    private DatabaseReference mDatabaseReference;
+    private String idCurrentUser;
+    private ShareDialog shareDialog;
+    private ShareLinkContent shareLinkContent;
+    private ArrayList<String> arrUserLiked;
+    private boolean isLike = false;
+    private int currentLike;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video);
         getSupportActionBar().hide();
-
         restoringPreferences();
         init();
         adControll();
         result();
         playVideo();
-        addRe();
+        likeVideo();
     }
 
     public User restoringPreferences() {
         SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
         String userName = preferences.getString("name", "");
-        String id = preferences.getString("id", "");
+        idCurrentUser = preferences.getString("id", "");
         String avatar = preferences.getString("avatar", "");
-        User user=null;
-        if (userName.equals("")||id.equals("")||avatar.equals("")){
-        }
-        else{
-           user= new User(userName, id, avatar);
+        User user = null;
+        if (userName.equals("") || idCurrentUser.equals("") || avatar.equals("")) {
+        } else {
+            user = new User(userName, idCurrentUser, avatar);
             return user;
         }
         return user;
@@ -92,31 +106,43 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             getSupportActionBar().hide();
         }
     }
-
     private void result() {
         getBundle = getIntent().getExtras();
         link = getBundle.getString("link");
     }
 
     private void init() {
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        arrUserLiked = new ArrayList<>();
+        getBundle = getIntent().getExtras();
+        link = getBundle.getString("link");
+        title = getBundle.getString("title");
         video = (VideoView) findViewById(R.id.videoView);
         process = (ProgressBar) findViewById(R.id.proBar);
         tvDetail = (TextView) findViewById(R.id.tv_detail);
         rvDetails = (RelativeLayout) findViewById(R.id.rv_detail);
         controller = new MediaController(this);
-
         back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
         toolbar = (LinearLayout) findViewById(R.id.toolbar);
+
+        shareDialog = new ShareDialog(PlayVideoActivity.this);
+
+        imgShareVideo = (ImageView) findViewById(R.id.img_share_video);
+        imgLikeVideo = (ImageView) findViewById(R.id.img_like_video);
+        tvLikeNumber = (TextView) findViewById(R.id.tv_like_number);
+
+
+        isCurrentLiked();
+        imgLikeVideo.setOnClickListener(this);
+        imgShareVideo.setOnClickListener(this);
     }
 
     private void playVideo() {
         String videoUrl = link;
-
         video.setMediaController(controller);
         video.setVideoURI(Uri.parse(videoUrl));
         video.requestFocus();
-
         video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -125,6 +151,11 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+
+    }
+
+    public void playlink(String link) {
+        // play link
 
     }
 
@@ -139,12 +170,70 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         tabLayout.setTabsFromPagerAdapter(pageAdapter);
     }
 
-    private void addRe() {
-        //bxhAdapter = new BxhAdapter(this, arrBxh);
-        //rcvBxh.setLayoutManager(new LinearLayoutManager(this));
-        // rcvBxh.setAdapter(bxhAdapter);
+    private void likeVideo() {
+        mDatabaseReference.child("Other").child(title).child("like").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+              currentLike = dataSnapshot.getValue(int.class);
+              tvLikeNumber.setText(currentLike + "");
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+    private void isCurrentLiked(){
+        arrUserLiked.clear();
+        mDatabaseReference.child("Other").child(title).child("idUserLiked").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String idUser = dataSnapshot.getValue(String.class);
+                arrUserLiked.add(idUser);
+                Log.e("user", idUser );
+                if (arrUserLiked.size()>0){
+                    for (int i=0;i<arrUserLiked.size();i++){
+                        if (idCurrentUser.equals(arrUserLiked.get(i))){
+                            imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
+                            isLike = true;
+                            Log.e("isLike", isLike+"");
+
+                        }
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
+
+    private void shareVideo() {
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            title = getBundle.getString("title");
+            shareLinkContent = new ShareLinkContent.Builder().setContentTitle(title).setContentDescription(title).setContentUrl(Uri.parse(link)).build();
+        }
+        shareDialog.show(shareLinkContent);
+    }
 
     @Override
     public void onClick(View v) {
@@ -152,8 +241,32 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             case R.id.img_back:
                 finish();
                 break;
+            case R.id.img_like_video:
+                likeVideo();
+                if (isLike) removeUserLike();
+                else addUserLike();
+                break;
+            case R.id.img_share_video:
+                shareVideo();
+                break;
             default:
                 break;
         }
+    }
+
+    private void addUserLike() {
+        currentLike=currentLike+1;
+        mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
+        imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
+        mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).setValue(idCurrentUser);
+        isLike = true;
+    }
+
+    private void removeUserLike() {
+        currentLike = currentLike-1;
+        mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
+        imgLikeVideo.setImageResource(R.drawable.icon_like_video);
+        mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).removeValue();
+        isLike = false;
     }
 }

@@ -51,7 +51,6 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
     private TextView tvDetail;
     private Bundle getBundle = null;
     private String title;
-
     private ImageView imageAccountComment, imageSendComment;
     private EditText edtCommentContent;
     private RecyclerView recyclerViewComment;
@@ -59,6 +58,8 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
     private BlAdapter blAdapter;
     private DatabaseReference mDatabaseReference;
     private User user;
+    private String FILE_CURRENT_TITLE;
+
 
     public FragmentTT() {
 
@@ -68,18 +69,14 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_video, container, false);
-
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
         tvDetail = (TextView) view.findViewById(R.id.tv_detail);
         getBundle = getActivity().getIntent().getExtras();
         title = getBundle.getString("title");
         tvDetail.setText(title);
-
         imageAccountComment = (ImageView) view.findViewById(R.id.img_account_comment);
         imageSendComment = (ImageView) view.findViewById(R.id.image_send_comment);
         edtCommentContent = (EditText) view.findViewById(R.id.edt_comment_content);
-
         PlayVideoActivity activity = (PlayVideoActivity) getActivity();
         user = activity.restoringPreferences();
         circleView(imageAccountComment);
@@ -89,7 +86,6 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
         recyclerViewComment.setLayoutManager(layoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), layoutManager.getOrientation());
         recyclerViewComment.addItemDecoration(dividerItemDecoration);
-
         bLuans = new ArrayList<>();
         blAdapter = new BlAdapter(getContext(), bLuans);
         recyclerViewComment.setAdapter(blAdapter);
@@ -137,13 +133,12 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String formattedDate = df.format(c.getTime());
                     final BLuan bLuan = new BLuan(user.getId(), user.getName(), user.getUrlAvatar(), edtCommentContent.getText().toString(), formattedDate, title);
-                    mDatabaseReference.child("Comments").child(title).push().setValue(bLuan);
+                    String idComment= mDatabaseReference.child("Comments").child(title).push().getKey();
+                    mDatabaseReference.child("Comments").child(title).child(idComment).setValue(bLuan);
+
                 }
-
-
             }
         });
-
         return view;
     }
 
@@ -164,6 +159,7 @@ public class FragmentTT extends Fragment implements View.OnClickListener {
                             imageDrawable.setCircular(true);
                             imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
                             imageView.setImageDrawable(imageDrawable);
+
                         }
 
                         @Override
