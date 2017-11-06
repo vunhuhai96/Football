@@ -10,11 +10,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/stt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_marginTop="4dp"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size"/>
+
         <ImageView
             android:id="@+id/teamImg"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/ic_chel"
             android:layout_marginRight="10dp"/>
 

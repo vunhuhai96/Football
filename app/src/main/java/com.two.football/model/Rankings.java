@@ -8,9 +8,9 @@ import android.widget.ImageView;
 
 public class Rankings {
 
-    private String table;
+    private String stt;
     private String teamImg;
-    private String nameTeam;
+    private String teamName;
     private String battle;
     private String win;
     private String draw;
@@ -22,12 +22,10 @@ public class Rankings {
 
     }
 
-    public Rankings(String table) {
-        this.table = table;
-    }
-
-    public Rankings(String nameTeam, String battle, String win, String draw, String lose, String offset, String totalPoints) {
-        this.nameTeam = nameTeam;
+    public Rankings(String stt, String teamName, String battle, String win, String draw, String lose, String offset, String totalPoints) {
+        this.stt = stt;
+//        this.teamImg = teamImg;
+        this.teamName = teamName;
         this.battle = battle;
         this.win = win;
         this.draw = draw;
@@ -36,24 +34,12 @@ public class Rankings {
         this.totalPoints = totalPoints;
     }
 
-    //    public Results(String table, ImageView teamImg, String nameTeam, String battle, String win, String draw, String lose, String offset, String totalPoints) {
-//        this.table = table;
-//        this.teamImg = teamImg;
-//        this.nameTeam = nameTeam;
-//        this.battle = battle;
-//        this.win = win;
-//        this.draw = draw;
-//        this.lose = lose;
-//        this.offset = offset;
-//        this.totalPoints = totalPoints;
-//    }
-
-    public String getTable() {
-        return table;
+    public String getStt() {
+        return stt;
     }
 
-    public void setTable(String table) {
-        this.table = table;
+    public void setStt(String stt) {
+        this.stt = stt;
     }
 
     public String getTeamImg() {
@@ -64,12 +50,12 @@ public class Rankings {
         this.teamImg = teamImg;
     }
 
-    public String getNameTeam() {
-        return nameTeam;
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setNameTeam(String nameTeam) {
-        this.nameTeam = nameTeam;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getBattle() {

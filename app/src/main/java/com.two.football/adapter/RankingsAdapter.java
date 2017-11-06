@@ -8,6 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.two.football.R;
 import com.two.football.model.Rankings;
 
@@ -47,53 +51,50 @@ public class RankingsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder view;
+        ViewHolder viewHolder;
 
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.activity_list_rankings, parent, false);
+            convertView = inflater.inflate(R.layout.item_rankings, parent, false);
 
-            view = new ViewHolder();
+            viewHolder = new ViewHolder();
 
-            view.table = (TextView) convertView.findViewById(R.id.table);
-            view.tBatle = (TextView) convertView.findViewById(R.id.titleBattle);
-            view.tWin = (TextView) convertView.findViewById(R.id.titleWin);
-            view.tDraw = (TextView) convertView.findViewById(R.id.titleDraw);
-            view.tLose = (TextView) convertView.findViewById(R.id.titleLose);
-            view.tOffset = (TextView) convertView.findViewById(R.id.titleOff);
-            view.tTotal = (TextView) convertView.findViewById(R.id.titleTotal);
-            view.listView = (ListView) convertView.findViewById(R.id.listRa);
+            viewHolder.stt = (TextView) convertView.findViewById(R.id.stt);
+            viewHolder.teamName = (TextView) convertView.findViewById(R.id.teamName);
+            viewHolder.battle = (TextView) convertView.findViewById(R.id.battle);
+            viewHolder.win = (TextView) convertView.findViewById(R.id.win);
+            viewHolder.draw = (TextView) convertView.findViewById(R.id.draw);
+            viewHolder.lose = (TextView) convertView.findViewById(R.id.lose);
+            viewHolder.offset = (TextView) convertView.findViewById(R.id.offset);
+            viewHolder.totalpoint = (TextView) convertView.findViewById(R.id.totalpoint);
 
-            convertView.setTag(view);
+            convertView.setTag(viewHolder);
         }else{
-            view = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Rankings rankings = ralist.get(position);
 
-        view.table.setText(rankings.getTable());
-
-        ArrayList<Rankings> list = new ArrayList<>();
-
-        list.add(new Rankings("Chelsea", "28", "7", "13","5", "23/55", "31"));
-        list.add(new Rankings("Chelsea", "27", "6", "13","5", "23/55", "31"));
-        list.add(new Rankings("Chelsea", "26", "6", "13","5", "23/55", "31"));
-        list.add(new Rankings("Chelsea", "21", "6", "13","5", "23/55", "31"));
-
-        ListRankingsAdapter adapterRe = new ListRankingsAdapter(list, context.getApplicationContext());
-        view.listView.setAdapter(adapterRe);
+        viewHolder.stt.setText(rankings.getStt());
+        viewHolder.teamName.setText(rankings.getTeamName());
+        viewHolder.battle.setText(rankings.getBattle());
+        viewHolder.win.setText(rankings.getWin());
+        viewHolder.draw.setText(rankings.getDraw());
+        viewHolder.lose.setText(rankings.getLose());
+        viewHolder.offset.setText(rankings.getOffset());
+        viewHolder.totalpoint.setText(rankings.getTotalPoints());
 
 
         return convertView;
     }
 
     private class ViewHolder{
-        TextView table;
-        TextView tBatle;
-        TextView tWin;
-        TextView tDraw;
-        TextView tLose;
-        TextView tOffset;
-        TextView tTotal;
-        ListView listView;
+        TextView stt;
+        TextView battle;
+        TextView teamName;
+        TextView win;
+        TextView draw;
+        TextView lose;
+        TextView offset;
+        TextView totalpoint;
     }
 }

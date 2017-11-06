@@ -52,6 +52,7 @@ public class ListRankingsAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
 //            viewHolder.teamImg = (ImageView) view.findViewById(R.id.teamImg);
+            viewHolder.stt = (TextView) view.findViewById(R.id.stt);
             viewHolder.teamName = (TextView) view.findViewById(R.id.teamName);
             viewHolder.battle = (TextView) view.findViewById(R.id.battle);
             viewHolder.win = (TextView) view.findViewById(R.id.win);
@@ -67,7 +68,8 @@ public class ListRankingsAdapter extends BaseAdapter {
 
         Rankings rankings = ralist.get(position);
 
-        viewHolder.teamName.setText(rankings.getNameTeam());
+        viewHolder.stt.setText(rankings.getStt());
+        viewHolder.teamName.setText(rankings.getTeamName());
         viewHolder.battle.setText(rankings.getBattle());
         viewHolder.win.setText(rankings.getWin());
         viewHolder.draw.setText(rankings.getDraw());
@@ -80,6 +82,7 @@ public class ListRankingsAdapter extends BaseAdapter {
 
 
     private class ViewHolder{
+        TextView stt;
         TextView battle;
         TextView teamName;
         TextView win;
