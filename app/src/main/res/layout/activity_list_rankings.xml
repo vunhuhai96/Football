@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="Bảng A"
+        android:text="Giải Bundesliga"
         android:layout_marginTop="10dp"
         android:textColor="#000000"
         android:textSize="@dimen/text_size"

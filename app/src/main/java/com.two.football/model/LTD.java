@@ -5,24 +5,36 @@ package com.two.football.model;
  */
 
 public class LTD {
-    private String time, date, guestClub, homeClub, logoHome, logoGuest;
+    private String time, date, guestClub, homeClub, logoHome, logoGuest, result, round;
     public LTD() {
     }
 
-    public LTD(String time, String date, String guestClub, String homeClub, String logoHome, String logoGuest) {
+    public LTD(String time, String date, String guestClub, String homeClub, String logoHome, String logoGuest, String result, String round) {
+
         this.time = time;
         this.date = date;
         this.guestClub = guestClub;
         this.homeClub = homeClub;
         this.logoHome = logoHome;
         this.logoGuest = logoGuest;
+        this.result = result;
+        this.round = round;
     }
 
-    public LTD(String time, String date, String guestClub, String homeClub) {
-        this.time = time;
-        this.date = date;
-        this.guestClub = guestClub;
-        this.homeClub = homeClub;
+    public String getRound() {
+        return round;
+    }
+
+    public void setRound(String round) {
+        this.round = round;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public String getLogoHome() {
