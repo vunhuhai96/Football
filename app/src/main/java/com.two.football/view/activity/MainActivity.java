@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageAccount;
     private boolean isLogin = false;
     private String FILE_NAME = "user.txt";
+    public static String ID;
+
 
     private AccessToken accessToken;
 
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+
         accessToken = AccessToken.getCurrentAccessToken();
         getSupportActionBar().hide();
         callbackManager = CallbackManager.Factory.create();
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         initPager();
         User user = restoringPreferences();
+
         if (user != null && user.getUrlAvatar() != null && user.getName() != null) {
             Picasso.with(getApplicationContext()).load(user.getUrlAvatar())
                     .resize(200, 200)
@@ -133,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -143,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String userName = preferences.getString("name", "");
         String id = preferences.getString("id", "");
         String avatar = preferences.getString("avatar", "");
+        ID = id;
         User user = null;
         if (userName.equals("") || id.equals("") || avatar.equals("")) {
         } else {
@@ -162,8 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.putString("name", name);
             editor.putString("avatar", avatar);
             editor.putString("id", id);
-
-
+            ID = id;
         }
         editor.commit();
     }
@@ -235,25 +240,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_live);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_highlight);
     }
-
-
-   /* private void getKeyHash() {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.two.football", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = null;
-                try {
-                    md = MessageDigest.getInstance("SHA");
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-                md.update(signature.toByteArray());
-                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private void initView() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
