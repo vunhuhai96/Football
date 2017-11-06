@@ -215,6 +215,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+
     private void isCurrentLiked() {
         arrUserLiked.clear();
         mDatabaseReference.child("Other").child(title).child("idUserLiked").addChildEventListener(new ChildEventListener() {
@@ -288,7 +289,12 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void addUserLike() {
-        if (idCurrentUser == null)
+        SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
+        String userName = preferences.getString("name", "");
+        idCurrentUser = preferences.getString("id", "");
+        String avatar = preferences.getString("avatar", "");
+
+        if (userName.equals("") || idCurrentUser.equals("") || avatar.equals(""))
             Toast.makeText(this, "Mời bạn đăng nhập để like ", Toast.LENGTH_SHORT).show();
         else {
             currentLike = currentLike + 1;
@@ -300,7 +306,11 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void removeUserLike() {
-        if (idCurrentUser == null)
+        SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
+        String userName = preferences.getString("name", "");
+        idCurrentUser = preferences.getString("id", "");
+        String avatar = preferences.getString("avatar", "");
+        if (userName.equals("") || idCurrentUser.equals("") || avatar.equals(""))
             Toast.makeText(this, "Mời bạn đăng nhập để like ", Toast.LENGTH_SHORT).show();
         else {
             currentLike = currentLike - 1;

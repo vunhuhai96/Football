@@ -1,6 +1,8 @@
 package com.two.football.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +11,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
+import com.two.football.model.Highlight;
 import com.two.football.model.Video;
+import com.two.football.view.activity.MainActivity;
 
 import java.util.List;
 
@@ -21,14 +28,16 @@ import java.util.List;
  */
 
 public class VideoPlusAdapter extends BaseAdapter {
-    private List<Video> list;
+    private List<Highlight> list;
     private LayoutInflater inflater;
     private Context context;
+    private DatabaseReference reference;
 
-    public VideoPlusAdapter(Context context, List<Video> list) {
+    public VideoPlusAdapter(Context context, List<Highlight> list) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
+        reference = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -37,7 +46,7 @@ public class VideoPlusAdapter extends BaseAdapter {
     }
 
     @Override
-    public Video getItem(int position) {
+    public Highlight getItem(int position) {
         return list.get(position);
     }
 
@@ -55,6 +64,7 @@ public class VideoPlusAdapter extends BaseAdapter {
 
             holder.imageView = (ImageView) convertView.findViewById(R.id.img_highlight);
             holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title_highlight);
+            holder.imgStar = (ImageView) convertView.findViewById(R.id.btn_star);
 
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int width = metrics.widthPixels;
@@ -67,17 +77,55 @@ public class VideoPlusAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Video video = list.get(position);
+        final Highlight highlight = list.get(position);
 
-        Picasso.with(context).load(video.getUrlThumbnail()).into(holder.imageView);
-        holder.tvTitle.setText(video.getTitle());
+        Picasso.with(context).load(highlight.getUrlThumbnail()).into(holder.imageView);
+        holder.tvTitle.setText(highlight.getTitle());
+
+        holder.imgStar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*if (MainActivity.userOld==null){
+                    showDialog();
+                } else {
+                    reference.child("User").child(id).child("Video").push().setValue(highlight);
+                    Toast.makeText(context, "Đã lưu vào mục video yêu thích", Toast.LENGTH_SHORT).show();
+                }*/
+            }
+        });
 
         return convertView;
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Đăng nhập !");
+        builder.setMessage("Bạn có muốn đăng nhập không ?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
     private class ViewHolder{
         ImageView imageView;
         TextView tvTitle;
+        ImageView imgStar;
     }
+
 }

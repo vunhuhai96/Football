@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.two.football.R;
 import com.two.football.adapter.InfoClubAdapter;
@@ -23,6 +24,7 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
     private InfoClubAdapter adapter;
     private String key;
     private ImageView imgback;
+    private TextView tvName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
 
         imgback = (ImageView) findViewById(R.id.img_back);
         imgback.setOnClickListener(this);
+
+        tvName = (TextView) findViewById(R.id.tv_name_toolbar);
+        tvName.setText("Đội bóng");
     }
 
     @Override

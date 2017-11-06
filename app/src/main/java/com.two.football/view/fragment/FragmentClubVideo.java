@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.R;
 import com.two.football.adapter.VideoPlusAdapter;
+import com.two.football.model.Highlight;
 import com.two.football.model.Video;
 import com.two.football.view.activity.PlayVideoActivity;
 import com.two.football.view.activity.VideoPlusActivity;
@@ -32,7 +33,7 @@ import java.util.List;
 public class FragmentClubVideo extends Fragment implements AdapterView.OnItemClickListener {
     private View view;
     private ListView listView;
-    private List<Video> list;
+    private List<Highlight> list;
     private VideoPlusAdapter adapter;
     private DatabaseReference reference;
     private Intent intent;
@@ -55,8 +56,8 @@ public class FragmentClubVideo extends Fragment implements AdapterView.OnItemCli
         reference.child("Tournament").child("Premier League").child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Video video = dataSnapshot.getValue(Video.class);
-                list.add(video);
+                Highlight highlight = dataSnapshot.getValue(Highlight.class);
+                list.add(highlight);
 
                 adapter = new VideoPlusAdapter(getContext(), list);
 

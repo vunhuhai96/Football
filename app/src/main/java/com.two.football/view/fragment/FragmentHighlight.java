@@ -101,6 +101,8 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
         });
     }
 
+
+
     private void initView() {
         listView = (ListView) view.findViewById(R.id.lv_highlight);
 

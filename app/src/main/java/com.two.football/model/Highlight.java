@@ -6,7 +6,7 @@ package com.two.football.model;
 
 public class Highlight {
 
-    String id, title, urlThumbnail, urlVideo, videoType, tournaments;
+    String id, title, urlThumbnail, urlVideo, videoType, tournaments, key;
 
     public Highlight() {
     }
@@ -70,5 +70,13 @@ public class Highlight {
 
     public String getVideoType() {
         return videoType;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

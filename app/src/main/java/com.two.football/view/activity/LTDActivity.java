@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +35,7 @@ public class LTDActivity extends AppCompatActivity implements View.OnClickListen
     private ListView listView;
     private LTDAdapter adapter;
     private ImageView btnBack;
+    private TextView tvName;
     private Spinner spinner, spinnerVong;
     private DatabaseReference reference;
 
@@ -193,14 +196,18 @@ public class LTDActivity extends AppCompatActivity implements View.OnClickListen
         spinner = (Spinner) findViewById(R.id.spinner_ltd);
         spinnerVong = (Spinner) findViewById(R.id.spinner_ltd_vong);
 
-        btnBack = (ImageView) findViewById(R.id.btn_ltd_back);
+        btnBack = (ImageView) findViewById(R.id.img_back);
         btnBack.setOnClickListener(this);
+
+        tvName = (TextView) findViewById(R.id.tv_name_toolbar);
+
+        tvName.setText("Lịch thi đấu");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_ltd_back:
+            case R.id.img_back:
                 onBackPressed();
                 break;
             default:
