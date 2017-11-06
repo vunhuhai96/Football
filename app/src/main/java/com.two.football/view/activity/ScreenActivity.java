@@ -14,7 +14,7 @@ public class ScreenActivity extends AppCompatActivity {
    private String link;
    private String title;
    private String tournaments;
-   private ArrayList<VideoLq> videos;
+   private String id;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class ScreenActivity extends AppCompatActivity {
                 bundle.putString("link",link);
                 bundle.putString("title",title);
                 bundle.putString("tournaments",tournaments);
+                bundle.putString("id",id);
                 intent.putExtras(bundle);
 
                 startActivity(intent);
@@ -47,5 +48,6 @@ public class ScreenActivity extends AppCompatActivity {
         link = bundle.getString("link");
         title = bundle.getString("title");
         tournaments = bundle.getString("tournaments");
+        id = bundle.getString("id");
     }
 }

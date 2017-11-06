@@ -7,22 +7,10 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/nameLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size"
-        android:text="Link DP: "
-        android:textColor="#000000"/>
-
-    <TextView
         android:id="@+id/link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_margin="10dp"
         android:textSize="@dimen/text_size"
         android:text="Http:// "
         android:textColor="#000000"/>

@@ -1,6 +1,6 @@
 package com.two.football.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  * Created by TWO on 10/23/2017.
@@ -9,19 +9,10 @@ import java.util.ArrayList;
 public class Live {
 
     private String title, guestClub, homeClub, urlVideo, videoType, tournaments;
+    private String id;
 
 
     public Live() {
-    }
-
-    public Live(String title, String guestClub, String homeClub, String urlVideo, String videoType, String tournaments) {
-        this.title = title;
-        this.guestClub = guestClub;
-        this.homeClub = homeClub;
-        this.urlVideo = urlVideo;
-        this.videoType = videoType;
-        this.tournaments = tournaments;
-
     }
 
     public String getTitle() {
@@ -72,4 +63,22 @@ public class Live {
         this.tournaments = tournaments;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Live(String title, String guestClub, String homeClub, String urlVideo, String videoType, String tournaments, String id) {
+
+        this.title = title;
+        this.guestClub = guestClub;
+        this.homeClub = homeClub;
+        this.urlVideo = urlVideo;
+        this.videoType = videoType;
+        this.tournaments = tournaments;
+        this.id = id;
+    }
 }

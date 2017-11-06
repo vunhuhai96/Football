@@ -90,7 +90,6 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
 
     public void initData(final String listGiai){
         list.clear();
-//        mReference.child("T").child(tranDau).child("videos").orderByChild("videoType").equalTo("Live Stream");
         mReference.child("Tournament").child(listGiai).child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -99,7 +98,6 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
                     list.add(live);
                     adapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -122,7 +120,6 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
 
             }
         });
-
     }
 
     private void initView() {
@@ -138,6 +135,7 @@ public class FragmentLive extends Fragment implements AdapterView.OnItemClickLis
         bundle.putString("title", list.get(i).getTitle());
         bundle.putString("link", list.get(i).getUrlVideo());
         bundle.putString("tournaments",list.get(i).getTournaments());
+        bundle.putString("id",list.get(i).getId());
         intent.putExtras(bundle);
 
         startActivity(intent);

@@ -67,7 +67,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private ArrayList<String> arrUserLiked;
     private boolean isLike = false;
     private int currentLike;
-
+    private LinearLayout lnLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,17 +105,13 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             rvDetails.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
-            imgLikeVideo.setVisibility(View.VISIBLE);
-            imgShareVideo.setVisibility(View.VISIBLE);
-            tvLikeNumber.setVisibility(View.VISIBLE);
+            lnLayout.setVisibility(View.VISIBLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvDetails.setVisibility(View.GONE);
             toolbar.setVisibility(View.GONE);
-            imgLikeVideo.setVisibility(View.GONE);
-            imgShareVideo.setVisibility(View.GONE);
-            tvLikeNumber.setVisibility(View.GONE);
+            lnLayout.setVisibility(View.GONE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
@@ -151,7 +147,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         imgShareVideo = (ImageView) findViewById(R.id.img_share_video);
         imgLikeVideo = (ImageView) findViewById(R.id.img_like_video);
         tvLikeNumber = (TextView) findViewById(R.id.tv_like_number);
-
+        lnLayout = (LinearLayout) findViewById(R.id.ln_like);
 
         isCurrentLiked();
         imgLikeVideo.setOnClickListener(this);

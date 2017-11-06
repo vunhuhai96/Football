@@ -6,28 +6,25 @@ package com.two.football.model;
 
 public class Reserves {
 
-    private String title, tournaments, urlReserves;
+    private String id, title, link, tournaments;
 
     public Reserves(){
 
     }
 
-    public Reserves(String urlReserves) {
-        this.urlReserves = urlReserves;
+    public String getId() {
+        return id;
     }
 
-    public Reserves(String title, String tournaments, String urlReserves) {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Reserves(String id, String title, String link, String tournaments) {
+        this.id = id;
         this.title = title;
+        this.link = link;
         this.tournaments = tournaments;
-        this.urlReserves = urlReserves;
-    }
-
-    public String getUrlReserves() {
-        return urlReserves;
-    }
-
-    public void setUrlReserves(String urlReserves) {
-        this.urlReserves = urlReserves;
     }
 
     public String getTitle() {
@@ -36,6 +33,14 @@ public class Reserves {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getTournaments() {
