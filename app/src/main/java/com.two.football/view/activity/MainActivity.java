@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnNavigation;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnTable, btnAbout, btnLTD, btnVideoFavorite;
+    private Button btnMenuHome, btnMenuLive, btnMenuHighlight, btnTable, btnAbout, btnLTD, btnVideoFavorite, btnMEnuResult;
     private MainAdapter mainAdapter;
     private CallbackManager callbackManager;
     private TextView tvAccountName;
@@ -258,8 +258,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         btnNavigation = (ImageView) findViewById(R.id.btn_navigation);
-        btnNavigation.setOnClickListener(this);
-
         btnMenuHome = (Button) findViewById(R.id.btn_menu_home);
         btnMenuLive = (Button) findViewById(R.id.btn_menu_live);
         btnMenuHighlight = (Button) findViewById(R.id.btn_menu_higlight);
@@ -267,11 +265,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTable = (Button) findViewById(R.id.btn_menu_table);
         btnAbout = (Button) findViewById(R.id.btn_menu_about);
         btnVideoFavorite = (Button) findViewById(R.id.btn_video_favorite);
-
-
         tvAccountName = (TextView) findViewById(R.id.tv_name_account);
         imageAccount = (ImageView) findViewById(R.id.img_account);
+        btnMEnuResult = (Button) findViewById(R.id.btn_menu_results);
 
+        btnMEnuResult.setOnClickListener(this);
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
         btnMenuHighlight.setOnClickListener(this);
@@ -280,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnVideoFavorite.setOnClickListener(this);
         btnLTD.setOnClickListener(this);
         imageAccount.setOnClickListener(this);
+        btnNavigation.setOnClickListener(this);
     }
 
     @Override
@@ -316,11 +315,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentLTD = new Intent(this, LTDActivity.class);
                 startActivity(intentLTD);
                 break;
-
             case R.id.img_account:
                 if (isLogin) logOut();
                 else
                     LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+                break;
+            case R.id.btn_menu_results:
+                intent = new Intent(MainActivity.this, ResultActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
