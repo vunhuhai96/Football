@@ -14,18 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:background="#EFEBE9">
+        android:background="@drawable/bg_spinner">
 
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:src="@drawable/soccer"/>
         <Spinner
+            android:layout_weight="4"
             android:id="@+id/spinRound"
-            android:layout_width="match_parent"
-            android:layout_height="35dp">
+            android:layout_width="0dp"
+            android:layout_height="40dp">
 
         </Spinner>
     </LinearLayout>
