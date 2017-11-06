@@ -22,9 +22,9 @@ public class Rankings {
 
     }
 
-    public Rankings(String stt, String teamName, String battle, String win, String draw, String lose, String offset, String totalPoints) {
+    public Rankings(String stt, String teamImg, String teamName, String battle, String win, String draw, String lose, String offset, String totalPoints) {
         this.stt = stt;
-//        this.teamImg = teamImg;
+        this.teamImg = teamImg;
         this.teamName = teamName;
         this.battle = battle;
         this.win = win;

@@ -28,8 +28,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.RankingsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.ListRankingsActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.VideoFavoriteActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.VideoPlusActivity"
