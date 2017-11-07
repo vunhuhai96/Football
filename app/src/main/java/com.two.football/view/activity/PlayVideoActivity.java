@@ -367,7 +367,10 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                 else addUserLike();
                 break;
             case R.id.img_share_video:
+              User user = restoringPreferences();
+                if (user==null){
                 LoginManager.getInstance().logInWithReadPermissions(PlayVideoActivity.this, Arrays.asList("public_profile"));
+            }else{ shareVideo();}
                 isShare = true;
                 break;
             default:
