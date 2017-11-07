@@ -31,11 +31,10 @@
             android:textColor="#7c7b7b"
             android:layout_weight="0.7"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="bottom|right"
             android:text="Time"
             android:textStyle="italic"
-            android:textSize="11dp"
-            />
+            android:textSize="11dp" />
 
     </LinearLayout>
 
