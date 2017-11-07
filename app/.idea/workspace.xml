@@ -11,17 +11,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="113c8441-24f5-409f-8277-364e8475fc06" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/like1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/like2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/share.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/model/LogoutFacebookListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/drawable/share.png" afterPath="$PROJECT_DIR$/src/main/res/drawable/share.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/adapter/ReservesAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/adapter/ReservesAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/model/Reserves.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/model/Reserves.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/view/activity/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/view/activity/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/view/activity/PlayVideoActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/view/activity/PlayVideoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_link_td.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_link_td.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentLinkTd.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentLinkTd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentTT.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentTT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentVideoLq.java" afterPath="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentVideoLq.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/home_layout.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/home_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/detail_video.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/detail_video.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/drawer_layout.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/drawer_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/item_bl.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/item_bl.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/item_video_lq.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/item_video_lq.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,19 +53,34 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
               <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-              <folding />
+              <folding>
+                <marker date="1510046806006" expanded="true" signature="2712:2736" ph="{...}" />
+                <marker date="1510046806006" expanded="true" signature="2850:2874" ph="{...}" />
+                <marker date="1510046806006" expanded="true" signature="2979:3003" ph="{...}" />
+                <marker date="1510046806006" expanded="true" signature="3281:3775" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayVideoActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayVideoActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com.two.football/view/activity/PlayVideoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="139" column="37" lean-forward="false" selection-start-line="139" selection-start-column="37" selection-end-line="139" selection-end-column="37" />
+            <state relative-caret-position="-1196">
+              <caret line="345" column="0" lean-forward="false" selection-start-line="345" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
               <folding>
-                <element signature="e#6223#6441#0" expanded="true" />
-                <element signature="e#6440#6441#0" expanded="true" />
+                <element signature="e#4430#4431#0" expanded="true" />
+                <element signature="e#4490#4491#0" expanded="true" />
+                <element signature="e#4572#4573#0" expanded="true" />
+                <element signature="e#4631#4632#0" expanded="true" />
+                <element signature="e#5060#5777#0" expanded="true" />
+                <element signature="e#5776#5777#0" expanded="true" />
+                <element signature="e#9808#10026#0" expanded="true" />
+                <element signature="e#10025#10026#0" expanded="true" />
+                <element signature="e#13878#14210#0" expanded="true" />
+                <element signature="e#14209#14210#0" expanded="true" />
+                <element signature="e#14257#14451#0" expanded="true" />
+                <element signature="e#14450#14451#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_play_video.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="activity_play_video.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-817">
-              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+            <state relative-caret-position="253">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1888,10 +1906,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com.two.football/view/fragment/FragmentLinkTd.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_link_td.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/item_reserves.xml" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com.two.football/view/activity/PlayVideoActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/home_layout.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.two.football/view/activity/PlayVideoActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml" />
       </list>
     </option>
   </component>
@@ -2076,7 +2094,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="D:/AndroidStudioProject/DemoVitamioVideo" />
-    <property name="device.picker.selection" value="Pixel_XL_API_25_2" />
+    <property name="device.picker.selection" value="Nexus_10_API_25" />
     <property name="android.profiler.active" value="true" />
   </component>
   <component name="RecentsManager">
@@ -2167,7 +2185,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510046740759" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510048468478" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2215,7 +2233,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510046740760" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510048468478" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2398,7 +2416,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510046740764" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510048468479" />
       </method>
     </configuration>
     <list size="1">
@@ -2451,7 +2469,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8242321" sideWeight="0.5030257" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.87542665" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -2884,7 +2902,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding />
+          <folding>
+            <marker date="1510046806006" expanded="true" signature="2712:2736" ph="{...}" />
+            <marker date="1510046806006" expanded="true" signature="2850:2874" ph="{...}" />
+            <marker date="1510046806006" expanded="true" signature="2979:3003" ph="{...}" />
+            <marker date="1510046806006" expanded="true" signature="3281:3775" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2929,30 +2952,8 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/item_video.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable/ico_share.png">
       <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-817">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>
@@ -2986,15 +2987,47 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/item_video.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com.two.football/view/activity/PlayVideoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="139" column="37" lean-forward="false" selection-start-line="139" selection-start-column="37" selection-end-line="139" selection-end-column="37" />
+        <state relative-caret-position="-1196">
+          <caret line="345" column="0" lean-forward="false" selection-start-line="345" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
           <folding>
-            <element signature="e#6223#6441#0" expanded="true" />
-            <element signature="e#6440#6441#0" expanded="true" />
+            <element signature="e#4430#4431#0" expanded="true" />
+            <element signature="e#4490#4491#0" expanded="true" />
+            <element signature="e#4572#4573#0" expanded="true" />
+            <element signature="e#4631#4632#0" expanded="true" />
+            <element signature="e#5060#5777#0" expanded="true" />
+            <element signature="e#5776#5777#0" expanded="true" />
+            <element signature="e#9808#10026#0" expanded="true" />
+            <element signature="e#10025#10026#0" expanded="true" />
+            <element signature="e#13878#14210#0" expanded="true" />
+            <element signature="e#14209#14210#0" expanded="true" />
+            <element signature="e#14257#14451#0" expanded="true" />
+            <element signature="e#14450#14451#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_play_video.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>

@@ -65,7 +65,8 @@ public class FragmentLinkTd extends Fragment implements AdapterView.OnItemClickL
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                        adapter.notifyDataSetChanged();
+                        result();
                     }
 
                     @Override
