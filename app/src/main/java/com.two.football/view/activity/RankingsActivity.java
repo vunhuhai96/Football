@@ -2,7 +2,6 @@ package com.two.football.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.R;
 import com.two.football.adapter.RankingsAdapter;
-import com.two.football.adapter.SpinnerRankingsAdapter;
 import com.two.football.model.Rankings;
 
 import java.util.ArrayList;

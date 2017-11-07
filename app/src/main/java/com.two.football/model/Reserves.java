@@ -6,7 +6,7 @@ package com.two.football.model;
 
 public class Reserves {
 
-    private String id, title, link, tournaments;
+    private String id, title, link, tournaments, nameServer;
 
     public Reserves(){
 
@@ -20,11 +20,12 @@ public class Reserves {
         this.id = id;
     }
 
-    public Reserves(String id, String title, String link, String tournaments) {
+    public Reserves(String id, String title, String link, String tournaments, String nameServer) {
         this.id = id;
         this.title = title;
         this.link = link;
         this.tournaments = tournaments;
+        this.nameServer = nameServer;
     }
 
     public String getTitle() {
@@ -49,5 +50,13 @@ public class Reserves {
 
     public void setTournaments(String tournaments) {
         this.tournaments = tournaments;
+    }
+
+    public String getNameServer() {
+        return nameServer;
+    }
+
+    public void setNameServer(String nameServer) {
+        this.nameServer = nameServer;
     }
 }

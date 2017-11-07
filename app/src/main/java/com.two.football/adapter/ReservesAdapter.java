@@ -60,7 +60,7 @@ public class ReservesAdapter extends BaseAdapter{
 
         Reserves reserves = list.get(i);
 
-        viewHolder.link.setText(reserves.getLink());
+        viewHolder.link.setText(reserves.getNameServer());
         return view;
     }
 

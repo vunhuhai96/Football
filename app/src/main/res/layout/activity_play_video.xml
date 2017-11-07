@@ -16,7 +16,6 @@
         android:layout_height="0dp">
 
         <VideoView
-            android:background="@color/colorBlack"
             android:layout_gravity="center_horizontal"
             android:id="@+id/videoView"
             android:layout_width="match_parent"
@@ -42,7 +41,7 @@
         android:id="@+id/img_like_video"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/icon_like_video"
+        android:src="@drawable/like1"
         />
     <TextView
         android:id="@+id/tv_like_number"
@@ -58,7 +57,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/ico_share"
+        android:src="@drawable/share"
         android:layout_gravity="right"
         />
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.model.Rankings;
 
@@ -59,6 +61,7 @@ public class RankingsAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
 
             viewHolder.stt = (TextView) convertView.findViewById(R.id.stt);
+            viewHolder.teamImg = (ImageView) convertView.findViewById(R.id.teamImg);
             viewHolder.teamName = (TextView) convertView.findViewById(R.id.teamName);
             viewHolder.battle = (TextView) convertView.findViewById(R.id.battle);
             viewHolder.win = (TextView) convertView.findViewById(R.id.win);
@@ -75,6 +78,7 @@ public class RankingsAdapter extends BaseAdapter {
         Rankings rankings = ralist.get(position);
 
         viewHolder.stt.setText(rankings.getStt());
+        Picasso.with(context).load(rankings.getTeamImg()).into(viewHolder.teamImg);
         viewHolder.teamName.setText(rankings.getTeamName());
         viewHolder.battle.setText(rankings.getBattle());
         viewHolder.win.setText(rankings.getWin());
@@ -96,5 +100,6 @@ public class RankingsAdapter extends BaseAdapter {
         TextView lose;
         TextView offset;
         TextView totalpoint;
+        ImageView teamImg;
     }
 }

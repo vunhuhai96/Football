@@ -90,8 +90,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private boolean isLike = false;
     private int currentLike;
     private LinearLayout lnLayout;
+    private TextView nameToolbar;
     private CallbackManager callbackManager;
-   public boolean isLogin = false;
+    public boolean isLogin = false;
     private boolean isShare = false;
 
     @Override
@@ -237,6 +238,8 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
         toolbar = (LinearLayout) findViewById(R.id.toolbar);
+        nameToolbar = (TextView) findViewById(R.id.tv_name_toolbar);
+        nameToolbar.setText("Bóng đá online");
         shareDialog = new ShareDialog(PlayVideoActivity.this);
 
         imgShareVideo = (ImageView) findViewById(R.id.img_share_video);
@@ -313,7 +316,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                 if (arrUserLiked.size() > 0) {
                     for (int i = 0; i < arrUserLiked.size(); i++) {
                         if (idCurrentUser.equals(arrUserLiked.get(i))) {
-                            imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
+                            imgLikeVideo.setImageResource(R.drawable.like2);
                             isLike = true;
                             Log.e("isLike", isLike + "");
 
@@ -414,7 +417,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         else {
             currentLike = currentLike + 1;
             mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
-            imgLikeVideo.setImageResource(R.drawable.icon_liked_video);
+            imgLikeVideo.setImageResource(R.drawable.like1);
             mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).setValue(idCurrentUser);
             isLike = true;
         }
@@ -435,7 +438,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         else {
             currentLike = currentLike - 1;
             mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
-            imgLikeVideo.setImageResource(R.drawable.icon_like_video);
+            imgLikeVideo.setImageResource(R.drawable.like1);
             mDatabaseReference.child("Other").child(title).child("idUserLiked").child(idCurrentUser).removeValue();
             isLike = false;
         }
