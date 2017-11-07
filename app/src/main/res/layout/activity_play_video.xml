@@ -9,12 +9,14 @@
         android:id="@+id/toolbar"/>
 
     <FrameLayout
+        android:background="@color/colorBlack"
         android:id="@+id/fl_video"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
         <VideoView
+            android:background="@color/colorBlack"
             android:layout_gravity="center_horizontal"
             android:id="@+id/videoView"
             android:layout_width="match_parent"
@@ -71,7 +73,8 @@
             android:id="@+id/tab_play_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabMode="scrollable"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabSelectedTextColor="@color/colorPrimaryDark">
         </android.support.design.widget.TabLayout>

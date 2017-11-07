@@ -23,8 +23,8 @@
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_account"
-            ></ImageView>
+            android:src="@drawable/ic_account">
+        </ImageView>
 
         <EditText
             android:id="@+id/edt_comment_content"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:paddingLeft="5dp"
-            android:hint="context" />
+            android:hint="Bình luận" />
 
         <ImageView
             android:id="@+id/image_send_comment"

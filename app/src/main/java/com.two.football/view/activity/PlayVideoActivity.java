@@ -1,18 +1,25 @@
 package com.two.football.view.activity;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
 
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,6 +34,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.firebase.database.ChildEventListener;
@@ -35,11 +51,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.adapter.PageAdapter;
 import com.two.football.model.User;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlayVideoActivity extends AppCompatActivity implements View.OnClickListener {
     private Bundle getBundle = null;
@@ -68,21 +90,95 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private boolean isLike = false;
     private int currentLike;
     private LinearLayout lnLayout;
+    private CallbackManager callbackManager;
+   public boolean isLogin = false;
+    private boolean isShare = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_play_video);
         getSupportActionBar().hide();
+        isShare=false;
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                isLogin = true;
+                getProfileUser();
+
+                restoringPreferences();
+                if (isShare) {
+                    shareVideo();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                Log.e("Thong bao", "Cancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.e("Thong bao", "Error");
+            }
+        });
         restoringPreferences();
         init();
         adControll();
         result();
         playVideo();
-
         likeVideo();
+    }
+
+    @Override
+    protected void onResume() {
+        restoringPreferences();
+        getProfileUser();
+        super.onResume();
+    }
 
 
+    public void getProfileUser() {
+        final GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String id = object.getString("id");
+                    String name = object.getString("name");
+                    String urlAvatar = "https://graph.facebook.com/" + id + "/picture?type=large";
+                    savingPreferences(name, urlAvatar, id, false);
+                    User user = new User(name, id, urlAvatar);
+                    mDatabaseReference.child("User").child(id).setValue(user);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,gender,birthday");
+        graphRequest.setParameters(parameters);
+        graphRequest.executeAsync();
+
+    }
+
+    private void savingPreferences(String name, String avatar, String id, boolean chk) {
+        SharedPreferences sharedPreferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if (chk) {
+            editor.clear();
+        } else {
+            editor.putString("name", name);
+            editor.putString("avatar", avatar);
+            editor.putString("id", id);
+        }
+        editor.commit();
     }
 
     public User restoringPreferences() {
@@ -141,7 +237,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
         toolbar = (LinearLayout) findViewById(R.id.toolbar);
-
         shareDialog = new ShareDialog(PlayVideoActivity.this);
 
         imgShareVideo = (ImageView) findViewById(R.id.img_share_video);
@@ -162,8 +257,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         } else {
             videoUrl = link2;
         }
-
-
         video.setMediaController(controller);
         video.setVideoURI(Uri.parse(videoUrl));
         video.requestFocus();
@@ -174,13 +267,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                 video.start();
             }
         });
-
-
-    }
-
-    public void playlink(String link) {
-        // play link
-
     }
 
     private void adControll() {
@@ -257,8 +343,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
-
-
     }
 
     private void shareVideo() {
@@ -273,19 +357,48 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
+                isShare=false;
                 finish();
                 break;
             case R.id.img_like_video:
+                isShare=false;
                 likeVideo();
                 if (isLike) removeUserLike();
                 else addUserLike();
                 break;
             case R.id.img_share_video:
-                shareVideo();
+                LoginManager.getInstance().logInWithReadPermissions(PlayVideoActivity.this, Arrays.asList("public_profile"));
+                isShare = true;
                 break;
             default:
                 break;
         }
+    }
+
+    public void showDialogLogin() {
+        AlertDialog.Builder builder;
+       builder = new AlertDialog.Builder(PlayVideoActivity.this);
+        builder.setMessage("Bạn cần đăng nhập để thực hiện chức năng !")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoginManager.getInstance().logInWithReadPermissions(PlayVideoActivity.this, Arrays.asList("public_profile"));
+                        getProfileUser();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        getProfileUser();
+        restoringPreferences();
+        super.onResumeFragments();
     }
 
     private void addUserLike() {
@@ -293,9 +406,8 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         String userName = preferences.getString("name", "");
         idCurrentUser = preferences.getString("id", "");
         String avatar = preferences.getString("avatar", "");
-
         if (userName.equals("") || idCurrentUser.equals("") || avatar.equals(""))
-            Toast.makeText(this, "Mời bạn đăng nhập để like ", Toast.LENGTH_SHORT).show();
+            showDialogLogin();
         else {
             currentLike = currentLike + 1;
             mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);
@@ -304,6 +416,11 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             isLike = true;
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void removeUserLike() {
         SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
@@ -311,7 +428,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         idCurrentUser = preferences.getString("id", "");
         String avatar = preferences.getString("avatar", "");
         if (userName.equals("") || idCurrentUser.equals("") || avatar.equals(""))
-            Toast.makeText(this, "Mời bạn đăng nhập để like ", Toast.LENGTH_SHORT).show();
+            showDialogLogin();
         else {
             currentLike = currentLike - 1;
             mDatabaseReference.child("Other").child(title).child("like").setValue(currentLike);

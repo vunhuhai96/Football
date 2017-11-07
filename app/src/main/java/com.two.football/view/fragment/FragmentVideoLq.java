@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ public class FragmentVideoLq extends Fragment {
     private View view;
     private ArrayList<VideoLq> arrVideo;
     private VideoLqAdapter videoLqAdapter;
-   private  String tournaments;
+    private  String tournaments;
     public FragmentVideoLq() {
     }
 
@@ -44,7 +45,7 @@ public class FragmentVideoLq extends Fragment {
 
     private void database() {
         arrVideo = new ArrayList<>();
-        recyclerView();
+
         Bundle bundle = getActivity().getIntent().getExtras();
         String id = bundle.getString("id");
         String title = bundle.getString("title");
@@ -60,12 +61,15 @@ public class FragmentVideoLq extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 VideoLq a = dataSnapshot.getValue(VideoLq.class);
                 arrVideo.add(a);
-                videoLqAdapter.notifyDataSetChanged();
+                recyclerView();
+
+
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                videoLqAdapter.notifyDataSetChanged();
+                database();
             }
 
             @Override
@@ -95,7 +99,7 @@ public class FragmentVideoLq extends Fragment {
 
     private void recyclerView() {
         videoLqAdapter = new VideoLqAdapter(getContext(), arrVideo);
-        rcvVideoLq.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvVideoLq.setLayoutManager(new GridLayoutManager(getContext(),2));
         rcvVideoLq.setAdapter(videoLqAdapter);
 
     }
