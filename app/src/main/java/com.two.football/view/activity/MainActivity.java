@@ -3,12 +3,8 @@ package com.two.football.view.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -19,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import android.util.Base64;
 import android.util.Log;
 
 import android.view.Gravity;
@@ -27,23 +22,18 @@ import android.view.View;
 import android.widget.Button;
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -51,20 +41,9 @@ import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.adapter.MainAdapter;
 import com.two.football.model.User;
-
-
-import com.two.football.R;
-import com.two.football.adapter.MainAdapter;
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DrawerLayout drawerLayout;
     private ImageView btnNavigation;
@@ -79,9 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isLogin = false;
     private String FILE_NAME = "user.txt";
     public static String ID;
+    private LinearLayout leftMenu;
+    AccessToken accessToken;
 
 
-    private AccessToken accessToken;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
-        accessToken = AccessToken.getCurrentAccessToken();
+
+
         getSupportActionBar().hide();
         callbackManager = CallbackManager.Factory.create();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        accessToken = AccessToken.getCurrentAccessToken();
+
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -111,6 +97,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         initView();
         initPager();
+     loadUser();
+    }
+
+        @Override
+    protected void onStart() {
+        super.onStart();
+    }
+    private void loadUser(){
         User user = restoringPreferences();
 
         if (user != null && user.getUrlAvatar() != null && user.getName() != null) {
@@ -134,15 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tvAccountName.setText(user.getName());
             isLogin = true;
         }
-
     }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
     public User restoringPreferences() {
         SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
         String userName = preferences.getString("name", "");
@@ -176,9 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
-
     }
-
     private void getProfileUser() {
         final GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
             @Override
@@ -191,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     User user = new User(name, id, urlAvatar);
                     tvAccountName.setText(name);
                     mDatabaseReference.child("User").child(id).setValue(user);
-
                     Picasso.with(getApplicationContext()).load(urlAvatar)
                             .resize(200, 200)
                             .into(imageAccount, new Callback() {
@@ -209,13 +192,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     imageAccount.setImageResource(R.drawable.ic_account);
                                 }
                             });
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
         });
@@ -223,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         parameters.putString("fields", "id,name,email,gender,birthday");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
-
     }
 
     private void initPager() {
@@ -233,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainAdapter = new MainAdapter(manager);
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setTabsFromPagerAdapter(mainAdapter);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
@@ -254,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvAccountName = (TextView) findViewById(R.id.tv_name_account);
         imageAccount = (ImageView) findViewById(R.id.img_account);
         btnMEnuResult = (Button) findViewById(R.id.btn_menu_results);
-
         btnMEnuResult.setOnClickListener(this);
         btnMenuHome.setOnClickListener(this);
         btnMenuLive.setOnClickListener(this);
@@ -265,8 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLTD.setOnClickListener(this);
         imageAccount.setOnClickListener(this);
         btnNavigation.setOnClickListener(this);
-    }
 
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -314,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -321,16 +298,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void logOut() {
         AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(MainActivity.this);
-        }
-        builder.setTitle("Log Out")
-                .setMessage("Bạn có muốn đăng xuất không ?")
+        builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Bạn có muốn đăng xuất không ?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        LoginManager.getInstance().logOut();
+
                         tvAccountName.setText("Đăng Nhập");
                         imageAccount.setImageResource(R.drawable.ic_account);
                         savingPreferences(null, null, null, true);
@@ -343,6 +315,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert).show();
-
+    }
+    @Override
+    protected void onResume() {
+        loadUser();
+        super.onResume();
     }
 }

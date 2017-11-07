@@ -17,25 +17,30 @@
     android:layout_height="35dp" />
         <TextView
             android:id="@+id/tv_name1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:layout_weight="1"
             android:textStyle="bold"
             android:textColor="#5ba4e9"
             android:text="name" />
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            />
+        <TextView
             android:id="@+id/tv_time"
             android:layout_width="0dp"
             android:textColor="#7c7b7b"
-            android:layout_weight="0.7"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="Time"
             android:textStyle="italic"
             android:textSize="11dp"
             />
+
 
     </LinearLayout>
 
