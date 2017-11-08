@@ -7,20 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,13 +26,10 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -59,14 +48,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.adapter.PageAdapter;
-import com.two.football.model.FullScreenMediaController;
 import com.two.football.model.User;
+import com.universalvideoview.UniversalMediaController;
+import com.universalvideoview.UniversalVideoView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -80,12 +67,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private FragmentManager fragmentManager;
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
-    private VideoView video;
-    //private UniversalVideoView video;
     private RecyclerView rcvBxh;
     private ImageView imgLikeVideo, imgShareVideo;
     private ProgressBar process;
-    private MediaController controller;
     private TextView tvDetail, tvLikeNumber, tvShareNumber;
     private LinearLayout toolbar;
     private RelativeLayout rvDetails;
@@ -107,10 +91,10 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private TextView titleVideo;
     private TextView errorText;
     private TextView loadText;
-    private SeekBar seekBar;
-
-    //private UniversalMediaController mediaController;
+    private UniversalVideoView video;
+    private UniversalMediaController mediaController;
     private boolean isFullscreen = false;
+    private ImageView btnCenterPlay;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -157,11 +141,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         restoringPreferences();
         getProfileUser();
         super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     public void getProfileUser() {
@@ -265,16 +244,14 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         link = getBundle.getString("link");
         title = getBundle.getString("title");
 
-        //video = (UniversalVideoView) findViewById(R.id.videoView);
-        video = (VideoView) findViewById(R.id.videoView);
+        video = (UniversalVideoView) findViewById(R.id.videoView);
 
         process = (ProgressBar) findViewById(R.id.proBar);
         tvDetail = (TextView) findViewById(R.id.tv_detail);
         rvDetails = (RelativeLayout) findViewById(R.id.rv_detail);
 
-        controller = new MediaController(this);
-        //mediaController = (UniversalMediaController) findViewById(R.id.media_controller);
-        //video.setMediaController(mediaController);
+        mediaController = (UniversalMediaController) findViewById(R.id.media_controller);
+        video.setMediaController(mediaController);
 
         back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
@@ -292,11 +269,24 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         imgLikeVideo.setOnClickListener(this);
         imgShareVideo.setOnClickListener(this);
 
+        titleVideo = (TextView) findViewById(R.id.title);
+        titleVideo.setText(title);
+
+        errorText = (TextView) findViewById(R.id.error_text);
+        errorText.setText("Không phát được video !!");
+
+        loadText = (TextView) findViewById(R.id.loading_text);
+        loadText.setText("");
+
         full();
+        initVideo();
+
+        btnCenterPlay = (ImageView) findViewById(R.id.center_play_btn);
+        btnCenterPlay.setOnClickListener(this);
     }
 
 
-    /*private void initVideo() {
+    private void initVideo() {
         video.setVideoViewCallback(new UniversalVideoView.VideoViewCallback() {
 
             @Override
@@ -307,39 +297,35 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                     layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
                     video.setLayoutParams(layoutParams);
-                    //GONE the unconcerned views to leave room for video and controller
-                    //mBottomLayout.setVisibility(View.GONE);
                 } else {
                     ViewGroup.LayoutParams layoutParams = video.getLayoutParams();
                     layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    //layoutParams.height = this.cachedHeight;
                     video.setLayoutParams(layoutParams);
-                    //mBottomLayout.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
-            public void onPause(MediaPlayer mediaPlayer) { // Video pause
+            public void onPause(MediaPlayer mediaPlayer) {
 
             }
 
             @Override
-            public void onStart(MediaPlayer mediaPlayer) { // Video start/resume to play
+            public void onStart(MediaPlayer mediaPlayer) {
 
             }
 
             @Override
-            public void onBufferingStart(MediaPlayer mediaPlayer) {// steam start loading
+            public void onBufferingStart(MediaPlayer mediaPlayer) {
 
             }
 
             @Override
-            public void onBufferingEnd(MediaPlayer mediaPlayer) {// steam end loading
+            public void onBufferingEnd(MediaPlayer mediaPlayer) {
 
             }
 
         });
-    }*/
+    }
 
     private void playVideo() {
         String videoUrl = null;
@@ -348,11 +334,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         } else {
             videoUrl = link2;
         }
-        //video.setVideoURI(Uri.parse("http://www.html5videoplayer.net/videos/toystory.mp4"));
-        video.setMediaController(controller);
+        video.setMediaController(mediaController);
         video.setVideoURI(Uri.parse(videoUrl));
         video.requestFocus();
-        //seekBar.setMax(video.getDuration());
         video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -468,6 +452,10 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                 }
                 isShare = true;
                 break;
+
+            case R.id.center_play_btn:
+                playVideo();
+                break;
             default:
                 break;
         }
@@ -485,7 +473,6 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
