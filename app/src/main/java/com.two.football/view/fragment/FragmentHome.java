@@ -1,18 +1,23 @@
 package com.two.football.view.fragment;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +62,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private List<Club> clubs;
     private ClubRecycleAdapter clubAdapter;
     private DatabaseReference mReference;
+    private LinearLayout llHomeLive, llVideoNb, llinforClub;
 
     Runnable runnable = new Runnable() {
         public void run() {
@@ -186,11 +192,34 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         btnViewClub = (Button) view.findViewById(R.id.btn_view_club);
         btnVideoPlus = (Button) view.findViewById(R.id.btn_video_plus);
 
+        llHomeLive = (LinearLayout) view.findViewById(R.id.ll_home_live);
+        llVideoNb = (LinearLayout) view.findViewById(R.id.ll_video_nb);
+        llinforClub = (LinearLayout) view.findViewById(R.id.ll_infor_club);
+
         btnLeft.setOnClickListener(this);
         btnRight.setOnClickListener(this);
         btnViewClub.setOnClickListener(this);
         btnVideoPlus.setOnClickListener(this);
 
+        TypedValue tv = new TypedValue();
+        int actionBarHeight = 0;
+        if (getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+        }
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        int newHeight = height - (actionBarHeight * 2);
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llHomeLive.getLayoutParams();
+        params.height = newHeight/3;
+        llHomeLive.setLayoutParams(params);
+
+        LinearLayout.LayoutParams paramss = (LinearLayout.LayoutParams) llinforClub.getLayoutParams();
+        paramss.height = newHeight/3;
+        llinforClub.setLayoutParams(paramss);
+
+        LinearLayout.LayoutParams paramsss = (LinearLayout.LayoutParams) llVideoNb.getLayoutParams();
+        paramsss.height = newHeight/3;
+        llVideoNb.setLayoutParams(paramsss);
     }
 
     @Override

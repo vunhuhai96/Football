@@ -4,152 +4,161 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp">
 
-        <include layout="@layout/layout_home_live" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg4"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <!--<ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_video"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Video nổi bật"
-                android:textSize="16dp"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:layout_weight="1"/>-->
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="Video nổi bật"
-                android:textAllCaps="false"
-                android:textSize="14dp"
-                android:drawablePadding="5dp"
-                android:drawableLeft="@drawable/ic_video"
-                android:textColor="@android:color/white"
-                android:background="@android:color/transparent"/>
-
-
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="center|right"
-                android:text="Xem thêm"
-                android:textColor="@android:color/white"
-                android:textSize="14dp"
-                android:textAllCaps="false"
-                android:drawablePadding="2dp"
-                android:id="@+id/btn_video_plus"
-                android:drawableRight="@drawable/ic_double_right"
-                android:background="@android:color/transparent"/>
-
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:id="@+id/recycle_video"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:background="@drawable/bgf"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_ball"
-                android:drawablePadding="5dp"
-                android:gravity="center|left"
-                android:text="Đội bóng"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="14dp" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawablePadding="2dp"
-                android:drawableRight="@drawable/ic_double_right"
-                android:gravity="center|right"
-                android:text="Xem thêm"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:id="@+id/btn_view_club"
-                android:textSize="14dp" />
-
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:id="@+id/recycle_club"/>
-
-    </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:weightSum="3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_home_live"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp">
+
+                <include layout="@layout/layout_home_live"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_video_nb"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg4"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <!--<ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_video"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Video nổi bật"
+                        android:textSize="16dp"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:layout_weight="1"/>-->
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:text="Video nổi bật"
+                        android:textAllCaps="false"
+                        android:textSize="14dp"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/ic_video"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/transparent"/>
+
+
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:text="Xem thêm"
+                        android:textColor="@android:color/white"
+                        android:textSize="14dp"
+                        android:textAllCaps="false"
+                        android:drawablePadding="2dp"
+                        android:id="@+id/btn_video_plus"
+                        android:drawableRight="@drawable/ic_double_right"
+                        android:background="@android:color/transparent"/>
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:id="@+id/recycle_video"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_infor_club"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/bgf"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:drawableLeft="@drawable/ic_ball"
+                        android:drawablePadding="5dp"
+                        android:gravity="center|left"
+                        android:text="Đội bóng"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="14dp" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:drawablePadding="2dp"
+                        android:drawableRight="@drawable/ic_double_right"
+                        android:gravity="center|right"
+                        android:text="Xem thêm"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/btn_view_club"
+                        android:textSize="14dp" />
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:id="@+id/recycle_club"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
