@@ -85,12 +85,7 @@ public class VideoPlusAdapter extends BaseAdapter {
         holder.imgStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if (MainActivity.userOld==null){
-                    showDialog();
-                } else {
-                    reference.child("User").child(id).child("Video").push().setValue(highlight);
-                    Toast.makeText(context, "Đã lưu vào mục video yêu thích", Toast.LENGTH_SHORT).show();
-                }*/
+
             }
         });
 

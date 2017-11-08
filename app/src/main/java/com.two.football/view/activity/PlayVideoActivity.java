@@ -9,10 +9,13 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -23,13 +26,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -55,6 +63,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.adapter.PageAdapter;
+import com.two.football.model.FullScreenMediaController;
 import com.two.football.model.User;
 
 import org.json.JSONException;
@@ -72,6 +81,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private PageAdapter pageAdapter;
     private TabLayout tabLayout;
     private VideoView video;
+    //private UniversalVideoView video;
     private RecyclerView rcvBxh;
     private ImageView imgLikeVideo, imgShareVideo;
     private ProgressBar process;
@@ -94,6 +104,13 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     private CallbackManager callbackManager;
     public boolean isLogin = false;
     private boolean isShare = false;
+    private TextView titleVideo;
+    private TextView errorText;
+    private TextView loadText;
+    private SeekBar seekBar;
+
+    //private UniversalMediaController mediaController;
+    private boolean isFullscreen = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,7 +118,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_play_video);
         getSupportActionBar().hide();
-        isShare=false;
+        isShare = false;
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -112,9 +129,8 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
                 restoringPreferences();
                 if (isShare) {
                     shareVideo();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -143,6 +159,10 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         super.onResume();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
     public void getProfileUser() {
         final GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
@@ -205,6 +225,9 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             lnLayout.setVisibility(View.VISIBLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+            full();
+
         } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvDetails.setVisibility(View.GONE);
             toolbar.setVisibility(View.GONE);
@@ -212,7 +235,18 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
+            full();
+
         }
+    }
+
+    private void full() {
+        Display display = getWindowManager().getDefaultDisplay();
+        int width = display.getWidth();
+        int height = display.getHeight();
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+        params.gravity = Gravity.CENTER;
+        video.setLayoutParams(params);
     }
 
     private void result() {
@@ -230,11 +264,18 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         getBundle = getIntent().getExtras();
         link = getBundle.getString("link");
         title = getBundle.getString("title");
+
+        //video = (UniversalVideoView) findViewById(R.id.videoView);
         video = (VideoView) findViewById(R.id.videoView);
+
         process = (ProgressBar) findViewById(R.id.proBar);
         tvDetail = (TextView) findViewById(R.id.tv_detail);
         rvDetails = (RelativeLayout) findViewById(R.id.rv_detail);
+
         controller = new MediaController(this);
+        //mediaController = (UniversalMediaController) findViewById(R.id.media_controller);
+        //video.setMediaController(mediaController);
+
         back = (ImageView) findViewById(R.id.img_back);
         back.setOnClickListener(this);
         toolbar = (LinearLayout) findViewById(R.id.toolbar);
@@ -250,19 +291,68 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
         isCurrentLiked();
         imgLikeVideo.setOnClickListener(this);
         imgShareVideo.setOnClickListener(this);
+
+        full();
     }
 
-    private void playVideo() {
 
+    /*private void initVideo() {
+        video.setVideoViewCallback(new UniversalVideoView.VideoViewCallback() {
+
+            @Override
+            public void onScaleChange(boolean isFullscreen) {
+                PlayVideoActivity.this.isFullscreen = isFullscreen;
+                if (isFullscreen) {
+                    ViewGroup.LayoutParams layoutParams = video.getLayoutParams();
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    video.setLayoutParams(layoutParams);
+                    //GONE the unconcerned views to leave room for video and controller
+                    //mBottomLayout.setVisibility(View.GONE);
+                } else {
+                    ViewGroup.LayoutParams layoutParams = video.getLayoutParams();
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    //layoutParams.height = this.cachedHeight;
+                    video.setLayoutParams(layoutParams);
+                    //mBottomLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPause(MediaPlayer mediaPlayer) { // Video pause
+
+            }
+
+            @Override
+            public void onStart(MediaPlayer mediaPlayer) { // Video start/resume to play
+
+            }
+
+            @Override
+            public void onBufferingStart(MediaPlayer mediaPlayer) {// steam start loading
+
+            }
+
+            @Override
+            public void onBufferingEnd(MediaPlayer mediaPlayer) {// steam end loading
+
+            }
+
+        });
+    }*/
+
+    private void playVideo() {
         String videoUrl = null;
         if (link2 == null) {
             videoUrl = link;
         } else {
             videoUrl = link2;
         }
+        //video.setVideoURI(Uri.parse("http://www.html5videoplayer.net/videos/toystory.mp4"));
         video.setMediaController(controller);
         video.setVideoURI(Uri.parse(videoUrl));
         video.requestFocus();
+        //seekBar.setMax(video.getDuration());
         video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -360,20 +450,22 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
-                isShare=false;
+                isShare = false;
                 finish();
                 break;
             case R.id.img_like_video:
-                isShare=false;
+                isShare = false;
                 likeVideo();
                 if (isLike) removeUserLike();
                 else addUserLike();
                 break;
             case R.id.img_share_video:
-              User user = restoringPreferences();
-                if (user==null){
-                LoginManager.getInstance().logInWithReadPermissions(PlayVideoActivity.this, Arrays.asList("public_profile"));
-            }else{ shareVideo();}
+                User user = restoringPreferences();
+                if (user == null) {
+                    LoginManager.getInstance().logInWithReadPermissions(PlayVideoActivity.this, Arrays.asList("public_profile"));
+                } else {
+                    shareVideo();
+                }
                 isShare = true;
                 break;
             default:
@@ -383,7 +475,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
 
     public void showDialogLogin() {
         AlertDialog.Builder builder;
-       builder = new AlertDialog.Builder(PlayVideoActivity.this);
+        builder = new AlertDialog.Builder(PlayVideoActivity.this);
         builder.setMessage("Bạn cần đăng nhập để thực hiện chức năng !")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -422,6 +514,7 @@ public class PlayVideoActivity extends AppCompatActivity implements View.OnClick
             isLike = true;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

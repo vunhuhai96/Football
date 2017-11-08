@@ -16,10 +16,16 @@
         android:layout_height="0dp">
 
         <VideoView
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
             android:id="@+id/videoView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <!--<com.universalvideoview.UniversalMediaController
+            android:id="@+id/media_controller"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:uvv_scalable="true" />-->
 
         <ProgressBar
             android:id="@+id/proBar"
