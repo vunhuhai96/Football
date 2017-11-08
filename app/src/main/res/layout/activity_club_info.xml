@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         app:tabTextColor="@android:color/white"
         android:layout_height="?attr/actionBarSize"
+        app:tabGravity="fill"
         app:tabSelectedTextColor="#33691E">
 
     </android.support.design.widget.TabLayout>
