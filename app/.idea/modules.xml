@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Football.iml" filepath="$PROJECT_DIR$/../Football.iml" />
+      <module fileurl="file://C:\Users\ADMIN\Desktop\Football\Football.iml" filepath="C:\Users\ADMIN\Desktop\Football\Football.iml" />
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
+      <module fileurl="file://C:\Users\ADMIN\Desktop\Football\app\app.iml" filepath="C:\Users\ADMIN\Desktop\Football\app\app.iml" />
     </modules>
   </component>
 </project>

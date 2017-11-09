@@ -18,16 +18,25 @@
         android:background="#E0E0E0">
 
         <ImageView
-            android:layout_weight="1"
+            android:layout_weight="0.4"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/soccer"/>
+
         <Spinner
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:id="@+id/spinRound"
             android:layout_width="0dp"
             android:layout_height="40dp">
+
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/spinTabble"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1">
 
         </Spinner>
     </LinearLayout>

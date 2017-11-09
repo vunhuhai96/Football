@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.two.football.model.Live;
 import com.two.football.R;
 
@@ -53,6 +55,8 @@ public class LiveAdapter extends BaseAdapter {
             viewHolder.guestTeam = (TextView) convertView.findViewById(R.id.guestTeam);
             viewHolder.homeTeam = (TextView) convertView.findViewById(R.id.homeTeam);
             viewHolder.videoType = (TextView) convertView.findViewById(R.id.videoType);
+            viewHolder.guestImg = (ImageView) convertView.findViewById(R.id.imgGuest);
+            viewHolder.homeImg = (ImageView) convertView.findViewById(R.id.imgHome);
 
             convertView.setTag(viewHolder);
 
@@ -65,6 +69,8 @@ public class LiveAdapter extends BaseAdapter {
         viewHolder.guestTeam.setText(live.getGuestClub());
         viewHolder.homeTeam.setText(live.getHomeClub());
         viewHolder.videoType.setText(live.getVideoType());
+        Picasso.with(context).load(live.getGuestImg()).into(viewHolder.guestImg);
+        Picasso.with(context).load(live.getHomeImg()).into(viewHolder.homeImg);
 
         return convertView;
     }
@@ -73,5 +79,7 @@ public class LiveAdapter extends BaseAdapter {
         TextView guestTeam;
         TextView homeTeam;
         TextView videoType;
+        ImageView guestImg;
+        ImageView homeImg;
     }
 }

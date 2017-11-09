@@ -26,7 +26,7 @@ public class RankingsActivity extends AppCompatActivity {
 
     private ImageView backRe;
     private TextView nameToolbar;
-    private Spinner spinRo;
+    private Spinner spinRo, spinTable;
     private ListView lvRankings;
     private ArrayList<Rankings> listRa;
     private RankingsAdapter adapter;
@@ -59,15 +59,47 @@ public class RankingsActivity extends AppCompatActivity {
         backRe = (ImageView) findViewById(R.id.img_back);
 
         spinRo = (Spinner) findViewById(R.id.spinRound);
+        spinTable = (Spinner) findViewById(R.id.spinTabble);
 
         lvRankings = (ListView) findViewById(R.id.listRankings);
     }
 
-    private void initRanking(String listGiai){
+    private void initRanking(final String listGiai, final String table){
         listRa = new ArrayList<>();
-        initData(listGiai);
-        adapter = new RankingsAdapter(listRa, getApplicationContext());
-        lvRankings.setAdapter(adapter);
+        listRa.clear();
+
+        mReference.child("Tournament").child(listGiai).child("rankings").child(table).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Rankings rankings = dataSnapshot.getValue(Rankings.class);
+                listRa.add(rankings);
+                adapter = new RankingsAdapter(listRa, getApplicationContext());
+                lvRankings.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                adapter.notifyDataSetChanged();
+                initRanking(listGiai, table);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void getGiaiDau(){
@@ -83,7 +115,7 @@ public class RankingsActivity extends AppCompatActivity {
                 spinRo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        initRanking(list.get(i));
+                        initSpinTable(list.get(i));
                     }
 
                     @Override
@@ -115,20 +147,37 @@ public class RankingsActivity extends AppCompatActivity {
         });
     }
 
-    public void initData(final String listGiai){
-        listRa.clear();
+    public void initSpinTable(final String listGiai){
+        final List<String> listTable = new ArrayList<>();
+        listTable.clear();
         mReference.child("Tournament").child(listGiai).child("rankings").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Rankings rankings = dataSnapshot.getValue(Rankings.class);
-                listRa.add(rankings);
-                adapter.notifyDataSetChanged();
+                final String table = dataSnapshot.getKey();
+                listTable.add("Bảng " +table);
+
+                ArrayAdapter<String> adapterTable = new ArrayAdapter<String>(RankingsActivity.this, android.R.layout.simple_spinner_dropdown_item, listTable);
+                spinTable.setAdapter(adapterTable);
+                spinTable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        String tvTable = listTable.get(i);
+                        tvTable = tvTable.substring(5);
+                        initRanking(listGiai, tvTable + "");
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                adapter.notifyDataSetChanged();
-                initData(listGiai);
+
             }
 
             @Override
