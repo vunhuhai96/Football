@@ -11,8 +11,8 @@
         android:orientation="horizontal">
 
         <TableRow
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -46,10 +46,10 @@
         </TableRow>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:layout_weight="250"
+            android:layout_weight="1"
             android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
