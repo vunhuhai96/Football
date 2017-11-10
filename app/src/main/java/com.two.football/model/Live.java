@@ -8,11 +8,23 @@ import java.io.Serializable;
 
 public class Live {
 
-    private String title, guestClub, homeClub, urlVideo, videoType, tournaments;
+    private String title, guestClub, homeClub, urlVideo, videoType, tournaments, guestImg, homeImg;
     private String id;
 
 
     public Live() {
+    }
+
+    public Live(String title, String guestClub, String homeClub, String urlVideo, String videoType, String tournaments, String guestImg, String homeImg, String id) {
+        this.title = title;
+        this.guestClub = guestClub;
+        this.homeClub = homeClub;
+        this.urlVideo = urlVideo;
+        this.videoType = videoType;
+        this.tournaments = tournaments;
+        this.guestImg = guestImg;
+        this.homeImg = homeImg;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -71,14 +83,19 @@ public class Live {
         this.id = id;
     }
 
-    public Live(String title, String guestClub, String homeClub, String urlVideo, String videoType, String tournaments, String id) {
+    public String getGuestImg() {
+        return guestImg;
+    }
 
-        this.title = title;
-        this.guestClub = guestClub;
-        this.homeClub = homeClub;
-        this.urlVideo = urlVideo;
-        this.videoType = videoType;
-        this.tournaments = tournaments;
-        this.id = id;
+    public void setGuestImg(String guestImg) {
+        this.guestImg = guestImg;
+    }
+
+    public String getHomeImg() {
+        return homeImg;
+    }
+
+    public void setHomeImg(String homeImg) {
+        this.homeImg = homeImg;
     }
 }

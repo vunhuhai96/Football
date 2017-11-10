@@ -74,6 +74,7 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Highlight highlight = dataSnapshot.getValue(Highlight.class);
                 if (highlight.getVideoType().equals("Highlight")) {
+                    highlight.setKey(dataSnapshot.getKey());
                     list.add(highlight);
                     adapter.notifyDataSetChanged();
                 }

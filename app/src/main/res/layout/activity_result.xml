@@ -12,30 +12,52 @@
         android:orientation="horizontal"
         android:background="@color/background_color"
         android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_filter"/>
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_spinner">
+            android:background="@color/background_color"
+            android:layout_height="wrap_content">
 
-            <Spinner
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/spinner">
-            </Spinner>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/bg_spinner">
 
-        </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/spinner">
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/bg_spinner">
+
+                <Spinner
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/spinnerLoop">
+                </Spinner>
+
+            </LinearLayout>
+
+
+        </TableRow>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

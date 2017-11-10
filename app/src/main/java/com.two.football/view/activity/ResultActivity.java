@@ -20,6 +20,7 @@ import com.two.football.R;
 import com.two.football.adapter.ResultAdapter;
 import com.two.football.adapter.ResultListAdapter;
 import com.two.football.adapter.SpinnerHighlightAdapter;
+import com.two.football.adapter.SpinnerLTDAdapter;
 import com.two.football.model.LTD;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.List;
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView imgBack;
     private TextView tvNameTollbar;
-    private Spinner spinner;
+    private Spinner spinner, spinnerLoop;
     private RecyclerView rcvResult;
     private ArrayList<LTD> arrResult;
     private ResultAdapter resultAdapter;
@@ -55,15 +56,37 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         initSpinner();
     }
 
-    private void initRound(  ) {
-        strings = new ArrayList<>();
-        strings.clear();
+    private void initRound(final String giaiDau) {
+        final List<String> listVong = new ArrayList<>();
+        listVong.clear();
 
-        reference.child("Tournament").child("Bundesliga").child("ltd").addChildEventListener(new ChildEventListener() {
+        reference.child("Tournament").child(giaiDau).child("ltd").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                round = dataSnapshot.getKey();
-                strings.add(round);
+                final String vong  = dataSnapshot.getKey();
+
+                int soVong = Integer.parseInt(vong);
+
+                listVong.add("Vòng "+(soVong+1));
+                SpinnerLTDAdapter adapterSpinner = new SpinnerLTDAdapter(ResultActivity.this, listVong);
+
+                spinnerLoop.setAdapter(adapterSpinner);
+
+                spinnerLoop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String tvVong = listVong.get(position);
+                        tvVong = tvVong.substring(5);
+                        int tvSoVong = Integer.parseInt(tvVong) - 1;
+
+                        initResult(giaiDau, tvSoVong+"");
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
             }
 
             @Override
@@ -90,23 +113,19 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initSpinner() {
         final List<String> listText = new ArrayList<>();
-
-        initRound();
+        listText.clear();
 
         reference.child("Tournament").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 listText.add(dataSnapshot.getKey());
 
-                String a = dataSnapshot.getKey();
-
                 SpinnerHighlightAdapter adapterSpinner = new SpinnerHighlightAdapter(ResultActivity.this, listText);
                 spinner.setAdapter(adapterSpinner);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        //initRound();
-                        initResult(listText.get(position));
+                        initRound(listText.get(position));
 
                     }
 
@@ -139,53 +158,43 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void initResult(final String giaiDau) {
+    private void initResult(final String giaiDau, final String vong) {
         arrResult = new ArrayList<>();
+        arrResult.clear();
 
-        for (String s : strings){
-            reference.child("Tournament").child(giaiDau).child("ltd").child(s).addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    LTD ltd = dataSnapshot.getValue(LTD.class);
-                    arrResult.add(ltd);
+        reference.child("Tournament").child(giaiDau).child("ltd").child(vong).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                LTD ltd = dataSnapshot.getValue(LTD.class);
+                arrResult.add(ltd);
 
-                    resultListAdapter = new ResultListAdapter(ResultActivity.this, arrResult);
-                    rcvResult.setLayoutManager(new LinearLayoutManager(ResultActivity.this));
-                    rcvResult.setAdapter(resultListAdapter);
+                resultListAdapter = new ResultListAdapter(ResultActivity.this, arrResult);
+                rcvResult.setLayoutManager(new LinearLayoutManager(ResultActivity.this));
+                rcvResult.setAdapter(resultListAdapter);
+            }
 
-                    //resultListAdapter.notifyDataSetChanged();
-                }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                resultListAdapter.notifyDataSetChanged();
+                initResult(giaiDau,vong);
+            }
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    resultListAdapter.notifyDataSetChanged();
-                    initResult(giaiDau);
-                }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
 
-                }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
 
-                }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
-                }
-            });
-        }
-
-
-    }
-
-    private void recyclerView() {
-        resultAdapter = new ResultAdapter(this, arrResult);
-        rcvResult.setLayoutManager(new LinearLayoutManager(this));
-        rcvResult.setAdapter(resultAdapter);
     }
 
     private void init() {
@@ -196,6 +205,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         tvNameTollbar.setText("Kết quả");
 
         spinner = (Spinner) findViewById(R.id.spinner);
+        spinnerLoop = (Spinner) findViewById(R.id.spinnerLoop);
         rcvResult = (RecyclerView) findViewById(R.id.rcv_result);
     }
 

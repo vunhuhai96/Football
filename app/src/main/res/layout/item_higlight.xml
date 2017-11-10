@@ -17,6 +17,7 @@
         <LinearLayout android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -35,12 +36,12 @@
             android:layout_gravity="center"
             android:id="@+id/btn_star"
             android:src="@drawable/ic_star_1"/>
-        <ImageView android:layout_width="?attr/actionBarSize"
+        <!--<ImageView android:layout_width="?attr/actionBarSize"
             android:padding="16dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="center"
             android:id="@+id/btn_share"
-            android:src="@drawable/ic_share"/>
+            android:src="@drawable/ic_share"/>-->
 
 
     </TableRow>

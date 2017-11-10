@@ -1,6 +1,7 @@
 package com.two.football.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
 import com.two.football.model.Highlight;
-import com.two.football.model.VideoFavorite;
 import com.two.football.view.activity.MainActivity;
 
 import java.util.List;
@@ -30,6 +30,7 @@ public class VideoFavoriteAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private DatabaseReference reference;
+    private HighlightAdapter adapter = new HighlightAdapter();
 
     public VideoFavoriteAdapter(Context context, List<Highlight> list) {
         this.list = list;
@@ -65,7 +66,7 @@ public class VideoFavoriteAdapter extends BaseAdapter {
 
             holder.imageView = (ImageView) convertView.findViewById(R.id.img_highlight);
             holder.imgStar = (ImageView) convertView.findViewById(R.id.btn_star);
-            holder.imgShare = (ImageView) convertView.findViewById(R.id.btn_share);
+            //holder.imgShare = (ImageView) convertView.findViewById(R.id.btn_share);
             holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title_highlight);
 
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -84,7 +85,7 @@ public class VideoFavoriteAdapter extends BaseAdapter {
         Picasso.with(context).load(highlight.getUrlThumbnail()).into(holder.imageView);
         holder.tvTitle.setText(highlight.getTitle());
 
-        holder.imgStar.setImageResource(R.drawable.ic_star_2);
+        holder.imgStar.setImageResource(R.drawable.delete);
 
         holder.imgStar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +94,11 @@ public class VideoFavoriteAdapter extends BaseAdapter {
                 reference.child("User").child(idUser).child("Video").child(highlight.getKey()).removeValue();
                 Toast.makeText(context,"Đã xóa video khỏi mục yêu thích", Toast.LENGTH_SHORT).show();
                 list.remove(highlight);
+                SharedPreferences sharedPreferences = context.getSharedPreferences("LOVE", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean(MainActivity.ID+"/"+highlight.getTitle(), false);
+                editor.commit();
+                adapter.notifyDataSetChanged();
                 notifyDataSetChanged();
             }
         });
