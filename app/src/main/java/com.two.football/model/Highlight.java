@@ -6,7 +6,8 @@ package com.two.football.model;
 
 public class Highlight {
 
-    String id, title, urlThumbnail, urlVideo, videoType, tournaments, key;
+    private String id, title, urlThumbnail, urlVideo, videoType, tournaments, key;
+    private boolean check = false;
 
     public Highlight() {
     }
@@ -78,5 +79,13 @@ public class Highlight {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 }
