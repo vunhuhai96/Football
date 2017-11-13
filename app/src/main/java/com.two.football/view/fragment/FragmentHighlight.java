@@ -102,7 +102,11 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
         });
     }
 
-
+    @Override
+    public void onPause() {
+        adapter.notifyDataSetChanged();
+        super.onPause();
+    }
 
     private void initView() {
         listView = (ListView) view.findViewById(R.id.lv_highlight);

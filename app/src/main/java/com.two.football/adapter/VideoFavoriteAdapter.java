@@ -2,6 +2,7 @@ package com.two.football.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.two.football.R;
+import com.two.football.Utils;
 import com.two.football.model.Highlight;
 import com.two.football.view.activity.MainActivity;
 
@@ -30,7 +32,8 @@ public class VideoFavoriteAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private DatabaseReference reference;
-    private HighlightAdapter adapter = new HighlightAdapter();
+    private Utils utils;
+    private HighlightAdapter highlightAdapter;
 
     public VideoFavoriteAdapter(Context context, List<Highlight> list) {
         this.list = list;
@@ -39,9 +42,13 @@ public class VideoFavoriteAdapter extends BaseAdapter {
         reference = FirebaseDatabase.getInstance().getReference();
     }
 
+    public VideoFavoriteAdapter(Context context) {
+        this.context = context;
+    }
+
     @Override
     public int getCount() {
-        if (list.size()==0){
+        if (list.size() == 0) {
             return 0;
         }
         return list.size();
@@ -92,19 +99,27 @@ public class VideoFavoriteAdapter extends BaseAdapter {
             public void onClick(View v) {
                 String idUser = MainActivity.ID;
                 reference.child("User").child(idUser).child("Video").child(highlight.getKey()).removeValue();
-                Toast.makeText(context,"Đã xóa video khỏi mục yêu thích", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Đã xóa video khỏi mục yêu thích", Toast.LENGTH_SHORT).show();
                 list.remove(highlight);
                 SharedPreferences sharedPreferences = context.getSharedPreferences("LOVE", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean(MainActivity.ID+"/"+highlight.getTitle(), false);
+                editor.putBoolean(MainActivity.ID + "/" + highlight.getTitle(), false);
                 editor.commit();
-                adapter.notifyDataSetChanged();
+                highlightAdapter = new HighlightAdapter();
+                highlightAdapter.notifyDataSetChanged();
+                try {
+                    utils.checkLove(false);
+                } catch (Exception e){
+
+                }
                 notifyDataSetChanged();
+
             }
         });
 
         return convertView;
     }
+
 
     private class ViewHolder {
         ImageView imageView;
@@ -112,4 +127,5 @@ public class VideoFavoriteAdapter extends BaseAdapter {
         ImageView imgShare;
         TextView tvTitle;
     }
+
 }
