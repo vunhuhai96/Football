@@ -297,7 +297,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_video_favorite:
                 Intent intent = new Intent(this, VideoFavoriteActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_menu_ltd:
                 Intent intentLTD = new Intent(this, LTDActivity.class);

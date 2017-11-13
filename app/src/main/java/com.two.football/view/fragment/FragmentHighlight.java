@@ -47,6 +47,16 @@ public class FragmentHighlight extends Fragment implements AdapterView.OnItemCli
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){
+
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
