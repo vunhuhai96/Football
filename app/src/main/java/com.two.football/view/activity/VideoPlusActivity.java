@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -17,9 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.R;
-import com.two.football.adapter.VideoPlusAdapter;
+import com.two.football.adapter.HighlightAdapter;
 import com.two.football.model.Highlight;
-import com.two.football.model.Video;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,7 @@ import java.util.List;
 public class VideoPlusActivity extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private ListView listView;
     private List<Highlight> list;
-    private VideoPlusAdapter adapter;
+    private HighlightAdapter adapter;
     private DatabaseReference reference;
     private Intent intent;
     private ImageView imgBack;
@@ -55,7 +53,7 @@ public class VideoPlusActivity extends Activity implements View.OnClickListener,
                 Highlight highlight = dataSnapshot.getValue(Highlight.class);
                 list.add(highlight);
 
-                adapter = new VideoPlusAdapter(VideoPlusActivity.this, list);
+                adapter = new HighlightAdapter(VideoPlusActivity.this, list);
 
                 listView.setAdapter(adapter);
             }

@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+import com.two.football.Utils;
 import com.two.football.model.Highlight;
 import com.two.football.R;
 import com.two.football.model.User;
@@ -38,7 +39,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class HighlightAdapter extends BaseAdapter {
+public class HighlightAdapter extends BaseAdapter implements Utils{
     private List<Highlight> list;
     private LayoutInflater inflater;
     private Context context;
@@ -46,16 +47,15 @@ public class HighlightAdapter extends BaseAdapter {
     private String FILE_NAME = "user.txt";
     SharedPreferences preferences;
     String userName, idCurrentUser, avatar;
-    ArrayList<Highlight> arrHighlight = new ArrayList<>();
-    Boolean isLove = false;
-    private int a = 0;
-    private List<Highlight> listLove = new ArrayList<>();
+    private boolean love;
+    private View view;
 
     public HighlightAdapter(Context context, List<Highlight> list) {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
         reference = FirebaseDatabase.getInstance().getReference();
+
     }
 
     public HighlightAdapter() {
@@ -108,46 +108,9 @@ public class HighlightAdapter extends BaseAdapter {
 
         holder.imgStar.setImageResource(R.drawable.ic_star_1);
 
-
-        reference.child("User").child(MainActivity.ID).child("Video").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Highlight highlight1 = dataSnapshot.getValue(Highlight.class);
-                listLove.add(highlight1);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        for (int i = 0; i < listLove.size(); i++) {
-            if (highlight.getTitle().equals(listLove.get(i).getTitle())
-                    && highlight.getId().equals(listLove.get(i).getId())) {
-                holder.imgStar.setImageResource(R.drawable.ic_star_2);
-                highlight.setCheck(true);
-            }
-        }
-
         final String id = MainActivity.ID;
         final SharedPreferences sharedPreferences = context.getSharedPreferences("LOVE", Context.MODE_PRIVATE);
-        final boolean love = sharedPreferences.getBoolean(id+"/"+highlight.getTitle(),false);
+        love = sharedPreferences.getBoolean(id+"/"+highlight.getTitle(),false);
         if (love){
             holder.imgStar.setImageResource(R.drawable.ic_star_2);
         } else {
@@ -187,8 +150,18 @@ public class HighlightAdapter extends BaseAdapter {
 
             }
         });
-
+        view = convertView;
         return convertView;
+    }
+
+    @Override
+    public void checkLove(boolean love) {
+        ViewHolder holder = new ViewHolder();
+        holder.imgStar = (ImageView) view.findViewById(R.id.btn_star);
+        this.love = love;
+        if (love==false){
+            holder.imgStar.setImageResource(R.drawable.ic_star_1);
+        }
     }
 
     public void showDialogLogin() {

@@ -114,4 +114,11 @@ public class VideoFavoriteActivity extends Activity implements View.OnClickListe
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(VideoFavoriteActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
