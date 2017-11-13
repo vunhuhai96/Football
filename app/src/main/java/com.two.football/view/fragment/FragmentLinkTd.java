@@ -100,9 +100,9 @@ public class FragmentLinkTd extends Fragment implements AdapterView.OnItemClickL
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        final String link = "sop://";
+        final String[] link = {"sop://", "sp://", "dp://", "sptv://", "soptv://", "hd://", "hdtv://", "sphd://", "mytv://", "metv://", "metv://", "tvbus://", "bustv://", "stv://", "usp://", "usop://"};
         final int temp = i;
-        if(list.get(i).getLink().contains(link)){
+        if(list.get(i).getLink().contains(String.valueOf(link[temp]))){
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setMessage("Đây là link của Sopcast bạn cần mở app của Sopcast để xem! " + "\n" +
                     "Nếu chưa cài app nhấn OK để cài " + "\n" +
