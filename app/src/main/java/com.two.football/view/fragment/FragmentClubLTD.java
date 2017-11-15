@@ -8,9 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.R;
 import com.two.football.adapter.ClubLTDAdapter;
+import com.two.football.model.Club;
+import com.two.football.model.ClubLTD;
 import com.two.football.model.LTD;
+import com.two.football.view.activity.InfoClubActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +29,14 @@ import java.util.List;
 
 public class FragmentClubLTD extends Fragment {
     private View view;
-    private List<LTD> list;
+    private List<ClubLTD> list;
     private ListView listView;
     private ClubLTDAdapter adapter;
+    private DatabaseReference reference;
+    private String key;
 
     public FragmentClubLTD(){
-
+        reference = FirebaseDatabase.getInstance().getReference();
     }
 
     @Nullable
@@ -34,6 +44,7 @@ public class FragmentClubLTD extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_club_ltd, container, false);
+        key = ((InfoClubActivity) getActivity()).getKey();
         initView();
         return view;
     }
@@ -43,11 +54,35 @@ public class FragmentClubLTD extends Fragment {
 
 
         list = new ArrayList<>();
-        for (int i= 0;i<10;i++){
-            list.add(new LTD());
-        }
 
-        adapter = new ClubLTDAdapter(getContext(), list);
-        listView.setAdapter(adapter);
+        reference.child("Club").child(key).child("ltd").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ClubLTD ltd = dataSnapshot.getValue(ClubLTD.class);
+                list.add(ltd);
+                adapter = new ClubLTDAdapter(getContext(), list);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

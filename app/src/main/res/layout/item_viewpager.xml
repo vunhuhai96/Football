@@ -8,23 +8,26 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="26dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:id="@+id/img_home_logo_home_club"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:padding="5dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_mu"
-            />
+            android:src="@drawable/ic_mu" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/tv_home_name_home_club"
             android:textColor="@android:color/white"
             android:text="MU"/>
 
@@ -40,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ngoại hạng anh"
+            android:id="@+id/tv_name_home_tournament"
             android:textColor="@android:color/white"
             android:textSize="16dp"/>
 
@@ -49,6 +53,7 @@
             android:text="21h00"
             android:gravity="center"
             android:textSize="30dp"
+            android:id="@+id/tv_name_home_time"
             android:textColor="@android:color/white"
             android:layout_marginTop="5dp"/>
 
@@ -61,13 +66,15 @@
         android:padding="26dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/img_home_logo_guest_club"
             android:src="@drawable/ic_chel"
             />
 
@@ -76,6 +83,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@android:color/white"
+            android:id="@+id/tv_home_name_guest_club"
+            android:textStyle="bold"
             android:text="Chelsea"/>
 
     </LinearLayout>

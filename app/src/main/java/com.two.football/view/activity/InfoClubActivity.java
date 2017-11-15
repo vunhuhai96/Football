@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.two.football.R;
 import com.two.football.adapter.InfoClubAdapter;
 
@@ -25,6 +27,7 @@ public class InfoClubActivity extends AppCompatActivity implements View.OnClickL
     private String key;
     private ImageView imgback;
     private TextView tvName;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

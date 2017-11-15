@@ -20,6 +20,7 @@
             android:textColor="@color/background_color"
             android:layout_gravity="center"
             android:textSize="15dp"
+            android:id="@+id/tv_home_ltd_club_fragment"
             android:gravity="center|right"/>
 
         <ImageView
@@ -28,6 +29,7 @@
             android:layout_marginLeft="5dp"
             android:src="@drawable/ic_chel"
             android:padding="8dp"
+            android:id="@+id/img_home_ltd_club"
             android:layout_gravity="center"/>
 
     </TableRow>
@@ -46,6 +48,7 @@
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:textColor="#D50000"
+            android:id="@+id/tv_giai_dau"
             android:layout_gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
@@ -54,6 +57,7 @@
             android:textStyle="bold"
             android:textColor="#D50000"
             android:layout_marginTop="5dp"
+            android:id="@+id/tv_ltd_club_vong"
             android:layout_gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
@@ -62,6 +66,7 @@
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:textColor="#D50000"
+            android:id="@+id/tv_ltd_club_time"
             android:layout_marginBottom="5dp"
             android:layout_gravity="center"/>
 
@@ -79,6 +84,7 @@
             android:layout_height="?attr/actionBarSize"
             android:src="@drawable/ic_mu"
             android:padding="8dp"
+            android:id="@+id/img_guest_ltd_club"
             android:layout_gravity="center"/>
 
         <TextView
@@ -89,6 +95,7 @@
             android:layout_marginLeft="5dp"
             android:layout_gravity="center"
             android:textSize="15dp"
+            android:id="@+id/tv_guest_ltd_club_fragment"
             android:textColor="@color/background_color"
             android:gravity="center|left"/>
 

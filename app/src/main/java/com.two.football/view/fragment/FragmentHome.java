@@ -7,10 +7,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +26,7 @@ import com.two.football.adapter.ClubRecycleAdapter;
 import com.two.football.adapter.HomeVideoAdapter;
 import com.two.football.model.Club;
 import com.two.football.R;
-import com.two.football.model.Match;
+import com.two.football.model.MatchHome;
 import com.two.football.model.Video;
 import com.two.football.view.activity.ClubActivity;
 import com.two.football.adapter.MatchAdapter;
@@ -45,7 +43,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
     private View view;
-    private ArrayList<Match> matches;
+    private ArrayList<MatchHome> matches;
     private ViewPager viewPager;
     private CircleIndicator indicator;
     private ImageView btnLeft, btnRight;
@@ -84,6 +82,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_layout, container, false);
+        mReference = FirebaseDatabase.getInstance().getReference();
         initView();
         initMatch();
         initVideo();
@@ -106,6 +105,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
                 recyclerClub.setLayoutManager(layoutManager);
                 recyclerClub.setAdapter(clubAdapter);
+                indicator.setViewPager(viewPager);
             }
 
             @Override
@@ -132,8 +132,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     public void initVideo(){
         videos = new ArrayList<>();
-
-        mReference = FirebaseDatabase.getInstance().getReference();
         mReference.child("Tournament").child("Premier League").child("videos").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -145,6 +143,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
                 recyclerVideo.setLayoutManager(layoutManager);
                 recyclerVideo.setAdapter(videoAdapter);
+
             }
 
             @Override
@@ -171,11 +170,37 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     private void initMatch() {
         matches = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            matches.add(new Match());
-        }
-        adapter = new MatchAdapter(getContext(), matches);
-        viewPager.setAdapter(adapter);
+        matches.clear();
+        mReference.child("Tournament").child("Premier League").child("ltd").child("0").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                MatchHome matchHome = dataSnapshot.getValue(MatchHome.class);
+                matches.add(matchHome);
+                adapter = new MatchAdapter(getContext(), matches);
+                viewPager.setAdapter(adapter);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         indicator.setViewPager(viewPager);
     }
 
